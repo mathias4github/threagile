@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "deny": [
+      "SearchPlugins",
+      "SuggestPluginInstall"
+    ]
+  },
+  "attribution": {
+    "sessionUrl": true
+  }
+}
