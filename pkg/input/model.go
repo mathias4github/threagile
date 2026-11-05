@@ -118,6 +118,7 @@ func (model *Model) Merge(dir string, includeFilename string) error {
 	}
 
 	var mergeError error
+	riskCategoriesMerged := false // both keys (current and legacy) end up in includedModel.CustomRiskCategories
 	for item := range fileStructure {
 		switch strings.ToLower(item) {
 		case strings.ToLower("includes"):
@@ -231,6 +232,10 @@ func (model *Model) Merge(dir string, includeFilename string) error {
 			}
 
 		case strings.ToLower("custom_risk_categories"), strings.ToLower("individual_risk_categories"):
+			if riskCategoriesMerged {
+				continue
+			}
+			riskCategoriesMerged = true
 			mergeError = model.CustomRiskCategories.Add(includedModel.CustomRiskCategories...)
 			if mergeError != nil {
 				return fmt.Errorf("failed to merge risk categories: %w", mergeError)

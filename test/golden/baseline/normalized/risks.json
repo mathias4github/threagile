@@ -114,7 +114,7 @@
     "most_relevant_technical_asset": "apache-webserver",
     "severity": "medium",
     "synthetic_id": "http-request-smuggling@apache-webserver",
-    "title": "<b>HTTP Request Smuggling</b> risk at <b>Apache Webserver</b> behind <b>Load Balancer</b>"
+    "title": "<b>HTTP Request Smuggling</b> risk at <b>Apache Webserver</b>"
   },
   {
     "category": "http-request-smuggling",
@@ -126,7 +126,7 @@
     "most_relevant_technical_asset": "marketing-cms",
     "severity": "medium",
     "synthetic_id": "http-request-smuggling@marketing-cms",
-    "title": "<b>HTTP Request Smuggling</b> risk at <b>Marketing CMS</b> behind <b>Load Balancer</b>"
+    "title": "<b>HTTP Request Smuggling</b> risk at <b>Marketing CMS</b>"
   },
   {
     "category": "ldap-injection",

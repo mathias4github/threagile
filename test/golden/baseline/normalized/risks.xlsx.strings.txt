@@ -116,8 +116,8 @@
 <t>Git-Repo Code Write Access</t>
 <t>Git-Repo Web-UI Access</t>
 <t>HTTP Parsing Consistency</t>
-<t>HTTP Request Smuggling risk at Apache Webserver behind Load Balancer</t>
-<t>HTTP Request Smuggling risk at Marketing CMS behind Load Balancer</t>
+<t>HTTP Request Smuggling risk at Apache Webserver</t>
+<t>HTTP Request Smuggling risk at Marketing CMS</t>
 <t>HTTP Request Smuggling</t>
 <t>High</t>
 <t>ID</t>
