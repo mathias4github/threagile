@@ -200,9 +200,9 @@ shared_runtimes:
 
 
 
-individual_risk_categories: # used for adding custom manually identified risks
+custom_risk_categories: # used for adding custom manually identified risks
 
-  Some Individual Risk Example:
+  - title: Some Individual Risk Example
     id: something-strange
     description: Some text describing the risk category...
     impact: Some text describing the impact...

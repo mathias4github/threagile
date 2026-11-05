@@ -8,8 +8,23 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
+// riskWithCWE adds the CWE of the risk's category to the JSON output (as risks.xlsx does).
+type riskWithCWE struct {
+	*types.Risk
+	CWE int `json:"cwe,omitempty"`
+}
+
 func WriteRisksJSON(parsedModel *types.Model, filename string) error {
-	jsonBytes, err := json.Marshal(parsedModel.AllRisks())
+	allRisks := parsedModel.AllRisks()
+	risks := make([]riskWithCWE, 0, len(allRisks))
+	for _, risk := range allRisks {
+		entry := riskWithCWE{Risk: risk}
+		if category := parsedModel.GetRiskCategory(risk.CategoryId); category != nil {
+			entry.CWE = category.CWE
+		}
+		risks = append(risks, entry)
+	}
+	jsonBytes, err := json.Marshal(risks)
 	if err != nil {
 		return fmt.Errorf("failed to marshal risks to JSON: %w", err)
 	}

@@ -1,0 +1,915 @@
+[
+  {
+    "category": "accidental-secret-leak",
+    "cwe": 200,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "git-repo",
+    "rating_explanation": [
+      "'Data Breach Probability' is 'probable'",
+      "'Exploitation Impact' is 'high'",
+      "'Exploitation Likelihood' is 'unlikely'",
+      "'Severity' is 'medium'"
+    ],
+    "risk_explanation": [
+      "Risk 'Accidental Secret Leak' has been flagged for technical asset 'git-repo' because",
+      "attributes.sourcecode-repository of technologies of technical asset 'git-repo' is true",
+      "out_of_scope of technical asset 'git-repo' is <nil>, and"
+    ],
+    "severity": "medium",
+    "synthetic_id": "accidental-secret-leak@git-repo",
+    "title": "<b>Accidental Secret Leak(Git)</b> risk at <b>Git Repository</b>: <u>Git Leak Prevention</u>"
+  },
+  {
+    "category": "code-backdooring",
+    "cwe": 912,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "git-repo",
+    "severity": "medium",
+    "synthetic_id": "code-backdooring@git-repo",
+    "title": "<b>Code Backdooring</b> risk at <b>Git Repository</b>"
+  },
+  {
+    "category": "code-backdooring",
+    "cwe": 912,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "jenkins-build-server",
+      "marketing-cms"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "severity": "medium",
+    "synthetic_id": "code-backdooring@jenkins-build-server",
+    "title": "<b>Code Backdooring</b> risk at <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "container-baseimage-backdooring",
+    "cwe": 912,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "apache-webserver",
+    "severity": "medium",
+    "synthetic_id": "container-baseimage-backdooring@apache-webserver",
+    "title": "<b>Container Base Image Backdooring</b> risk at <b>Apache Webserver</b>"
+  },
+  {
+    "category": "container-baseimage-backdooring",
+    "cwe": 912,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "marketing-cms"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "marketing-cms",
+    "severity": "medium",
+    "synthetic_id": "container-baseimage-backdooring@marketing-cms",
+    "title": "<b>Container Base Image Backdooring</b> risk at <b>Marketing CMS</b>"
+  },
+  {
+    "category": "dos-risky-access-across-trust-boundary",
+    "cwe": 400,
+    "most_relevant_communication_link": "apache-webserver>erp-system-traffic",
+    "most_relevant_technical_asset": "erp-system",
+    "risk_status": "in-progress",
+    "synthetic_id": "dos-risky-access-across-trust-boundary@erp-system@apache-webserver@apache-webserver>erp-system-traffic->",
+    "title": "<b>Denial-of-Service</b> risky access of <b>Backoffice ERP System</b> by <b>Apache Webserver</b> via <b>ERP System Traffic</b>"
+  },
+  {
+    "category": "dos-risky-access-across-trust-boundary",
+    "cwe": 400,
+    "most_relevant_communication_link": "backoffice-client>erp-internal-access",
+    "most_relevant_technical_asset": "erp-system",
+    "risk_status": "in-progress",
+    "synthetic_id": "dos-risky-access-across-trust-boundary@erp-system@backoffice-client@backoffice-client>erp-internal-access->",
+    "title": "<b>Denial-of-Service</b> risky access of <b>Backoffice ERP System</b> by <b>Backoffice Client</b> via <b>ERP Internal Access</b>"
+  },
+  {
+    "category": "dos-risky-access-across-trust-boundary",
+    "cwe": 400,
+    "most_relevant_communication_link": "backoffice-client>marketing-cms-editing",
+    "most_relevant_technical_asset": "marketing-cms",
+    "risk_status": "in-progress",
+    "synthetic_id": "dos-risky-access-across-trust-boundary@marketing-cms@backoffice-client@backoffice-client>marketing-cms-editing->",
+    "title": "<b>Denial-of-Service</b> risky access of <b>Marketing CMS</b> by <b>Backoffice Client</b> via <b>Marketing CMS Editing</b>"
+  },
+  {
+    "category": "ldap-injection",
+    "cwe": 90,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "ldap-auth-server"
+    ],
+    "exploitation_impact": "high",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "identity-provider>ldap-credential-check-traffic",
+    "most_relevant_technical_asset": "identity-provider",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "ldap-injection@identity-provider@ldap-auth-server@identity-provider>ldap-credential-check-traffic",
+    "title": "<b>LDAP-Injection</b> risk at <b>Identity Provider</b> against LDAP server <b>LDAP Auth Server</b> via <b>LDAP Credential Check Traffic</b>"
+  },
+  {
+    "category": "ldap-injection",
+    "cwe": 90,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "ldap-auth-server"
+    ],
+    "exploitation_impact": "high",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "marketing-cms>auth-traffic",
+    "most_relevant_technical_asset": "marketing-cms",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "ldap-injection@marketing-cms@ldap-auth-server@marketing-cms>auth-traffic",
+    "title": "<b>LDAP-Injection</b> risk at <b>Marketing CMS</b> against LDAP server <b>LDAP Auth Server</b> via <b>Auth Traffic</b>"
+  },
+  {
+    "category": "missing-authentication",
+    "cwe": 306,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "marketing-cms"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "load-balancer>cms-content-traffic",
+    "most_relevant_technical_asset": "marketing-cms",
+    "severity": "elevated",
+    "synthetic_id": "missing-authentication@load-balancer>cms-content-traffic@load-balancer@marketing-cms",
+    "title": "<b>Missing Authentication</b> covering communication link <b>CMS Content Traffic</b> from <b>Load Balancer</b> to <b>Marketing CMS</b>"
+  },
+  {
+    "category": "missing-authentication",
+    "cwe": 306,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "contract-file-server"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "erp-system>nfs-filesystem-access",
+    "most_relevant_technical_asset": "contract-file-server",
+    "severity": "elevated",
+    "synthetic_id": "missing-authentication@erp-system>nfs-filesystem-access@erp-system@contract-file-server",
+    "title": "<b>Missing Authentication</b> covering communication link <b>NFS Filesystem Access</b> from <b>Backoffice ERP System</b> to <b>Contract File Server</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "marketing-cms"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "load-balancer>cms-content-traffic",
+    "most_relevant_technical_asset": "marketing-cms",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@load-balancer>cms-content-traffic@load-balancer@marketing-cms",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>CMS Content Traffic</b> from <b>Customer Web Client</b> forwarded via <b>Load Balancer</b> to <b>Marketing CMS</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "backend-admin-client>db-update-access",
+    "most_relevant_technical_asset": "sql-database",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@backend-admin-client>db-update-access@backend-admin-client@sql-database",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>DB Update Access</b> from <b>Backend Admin Client</b> to <b>Customer Contract Database</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "backoffice-client>erp-internal-access",
+    "most_relevant_technical_asset": "erp-system",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@backoffice-client>erp-internal-access@backoffice-client@erp-system",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>ERP Internal Access</b> from <b>Backoffice Client</b> to <b>Backoffice ERP System</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "backend-admin-client>erp-web-access",
+    "most_relevant_technical_asset": "erp-system",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@backend-admin-client>erp-web-access@backend-admin-client@erp-system",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>ERP Web Access</b> from <b>Backend Admin Client</b> to <b>Backoffice ERP System</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "external-dev-client>git-repo-code-write-access",
+    "most_relevant_technical_asset": "git-repo",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@external-dev-client>git-repo-code-write-access@external-dev-client@git-repo",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>Git-Repo Code Write Access</b> from <b>External Development Client</b> to <b>Git Repository</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "external-dev-client>git-repo-web-ui-access",
+    "most_relevant_technical_asset": "git-repo",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@external-dev-client>git-repo-web-ui-access@external-dev-client@git-repo",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>Git-Repo Web-UI Access</b> from <b>External Development Client</b> to <b>Git Repository</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "jenkins-build-server"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "external-dev-client>jenkins-web-ui-access",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@external-dev-client>jenkins-web-ui-access@external-dev-client@jenkins-build-server",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>Jenkins Web-UI Access</b> from <b>External Development Client</b> to <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "ldap-auth-server"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "backend-admin-client>user-management-access",
+    "most_relevant_technical_asset": "ldap-auth-server",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@backend-admin-client>user-management-access@backend-admin-client@ldap-auth-server",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>User Management Access</b> from <b>Backend Admin Client</b> to <b>LDAP Auth Server</b>"
+  },
+  {
+    "category": "missing-authentication-second-factor",
+    "cwe": 308,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "load-balancer>web-application-traffic",
+    "most_relevant_technical_asset": "apache-webserver",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "missing-authentication-second-factor@load-balancer>web-application-traffic@load-balancer@apache-webserver",
+    "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>Web Application Traffic</b> from <b>Customer Web Client</b> forwarded via <b>Load Balancer</b> to <b>Apache Webserver</b>"
+  },
+  {
+    "category": "missing-cloud-hardening",
+    "cwe": 1008,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "contract-file-server",
+      "erp-system",
+      "identity-provider",
+      "ldap-auth-server",
+      "load-balancer",
+      "marketing-cms",
+      "sql-database"
+    ],
+    "exploitation_impact": "very-high",
+    "severity": "elevated",
+    "synthetic_id": "missing-cloud-hardening@application-network@aws",
+    "title": "<b>Missing Cloud Hardening (AWS)</b> risk at <b>Application Network</b>: <u>CIS Benchmark for AWS</u>"
+  },
+  {
+    "category": "missing-cloud-hardening",
+    "cwe": 1008,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "very-high",
+    "severity": "elevated",
+    "synthetic_id": "missing-cloud-hardening@apache-webserver@ec2",
+    "title": "<b>Missing Cloud Hardening (EC2)</b> risk at <b>Apache Webserver</b>: <u>CIS Benchmark for Amazon Linux</u>"
+  },
+  {
+    "category": "missing-cloud-hardening",
+    "cwe": 1008,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "contract-file-server",
+      "erp-system",
+      "sql-database"
+    ],
+    "exploitation_impact": "very-high",
+    "severity": "elevated",
+    "synthetic_id": "missing-cloud-hardening@erp-dmz",
+    "title": "<b>Missing Cloud Hardening</b> risk at <b>ERP DMZ</b>"
+  },
+  {
+    "category": "missing-cloud-hardening",
+    "cwe": 1008,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "marketing-cms"
+    ],
+    "exploitation_impact": "very-high",
+    "severity": "elevated",
+    "synthetic_id": "missing-cloud-hardening@web-dmz",
+    "title": "<b>Missing Cloud Hardening</b> risk at <b>Web DMZ</b>"
+  },
+  {
+    "category": "missing-cloud-hardening",
+    "cwe": 1008,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "contract-file-server",
+      "erp-system",
+      "marketing-cms",
+      "sql-database"
+    ],
+    "exploitation_impact": "very-high",
+    "severity": "elevated",
+    "synthetic_id": "missing-cloud-hardening@webapp-virtualization",
+    "title": "<b>Missing Cloud Hardening</b> risk at <b>WebApp and Backoffice Virtualization</b>"
+  },
+  {
+    "category": "missing-cloud-hardening",
+    "cwe": 1008,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "contract-file-server"
+    ],
+    "exploitation_impact": "high",
+    "severity": "medium",
+    "synthetic_id": "missing-cloud-hardening@contract-file-server@s3",
+    "title": "<b>Missing Cloud Hardening (S3)</b> risk at <b>Contract File Server</b>: <u>Security Best Practices for AWS S3</u>"
+  },
+  {
+    "category": "missing-file-validation",
+    "cwe": 434,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "very-likely",
+    "most_relevant_technical_asset": "apache-webserver",
+    "severity": "elevated",
+    "synthetic_id": "missing-file-validation@apache-webserver",
+    "title": "<b>Missing File Validation</b> risk at <b>Apache Webserver</b>"
+  },
+  {
+    "category": "missing-hardening",
+    "cwe": 16,
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "apache-webserver",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "missing-hardening@apache-webserver",
+    "title": "<b>Missing Hardening</b> risk at <b>Apache Webserver</b>"
+  },
+  {
+    "category": "missing-hardening",
+    "cwe": 16,
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "erp-system",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "missing-hardening@erp-system",
+    "title": "<b>Missing Hardening</b> risk at <b>Backoffice ERP System</b>"
+  },
+  {
+    "category": "missing-hardening",
+    "cwe": 16,
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "sql-database",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "missing-hardening@sql-database",
+    "title": "<b>Missing Hardening</b> risk at <b>Customer Contract Database</b>"
+  },
+  {
+    "category": "missing-hardening",
+    "cwe": 16,
+    "data_breach_technical_assets": [
+      "identity-provider"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "identity-provider",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "missing-hardening@identity-provider",
+    "title": "<b>Missing Hardening</b> risk at <b>Identity Provider</b>"
+  },
+  {
+    "category": "missing-hardening",
+    "cwe": 16,
+    "data_breach_technical_assets": [
+      "jenkins-build-server"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "missing-hardening@jenkins-build-server",
+    "title": "<b>Missing Hardening</b> risk at <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "missing-hardening",
+    "cwe": 16,
+    "data_breach_technical_assets": [
+      "ldap-auth-server"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "ldap-auth-server",
+    "risk_status": "mitigated",
+    "severity": "elevated",
+    "synthetic_id": "missing-hardening@ldap-auth-server",
+    "title": "<b>Missing Hardening</b> risk at <b>LDAP Auth Server</b>"
+  },
+  {
+    "category": "missing-identity-propagation",
+    "cwe": 284,
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "apache-webserver>erp-system-traffic",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "medium",
+    "synthetic_id": "missing-identity-propagation@apache-webserver>erp-system-traffic@apache-webserver@erp-system",
+    "title": "<b>Missing End User Identity Propagation</b> over communication link <b>ERP System Traffic</b> from <b>Apache Webserver</b> to <b>Backoffice ERP System</b>"
+  },
+  {
+    "category": "missing-vault",
+    "cwe": 522,
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "medium",
+    "synthetic_id": "missing-vault@erp-system",
+    "title": "<b>Missing Vault (Secret Storage)</b> in the threat model (referencing asset <b>Backoffice ERP System</b> as an example)"
+  },
+  {
+    "category": "mixed-targets-on-shared-runtime",
+    "cwe": 1008,
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "contract-file-server",
+      "erp-system",
+      "marketing-cms",
+      "sql-database"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_shared_runtime": "webapp-virtualization",
+    "severity": "medium",
+    "synthetic_id": "mixed-targets-on-shared-runtime@webapp-virtualization",
+    "title": "<b>Mixed Targets on Shared Runtime</b> named <b>WebApp and Backoffice Virtualization</b> might enable attackers moving from one less valuable target to a more valuable one"
+  },
+  {
+    "category": "path-traversal",
+    "cwe": 22,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "contract-file-server"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "very-likely",
+    "most_relevant_communication_link": "erp-system>nfs-filesystem-access",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "elevated",
+    "synthetic_id": "path-traversal@erp-system@contract-file-server@erp-system>nfs-filesystem-access",
+    "title": "<b>Path-Traversal</b> risk at <b>Backoffice ERP System</b> against filesystem <b>Contract File Server</b> via <b>NFS Filesystem Access</b>"
+  },
+  {
+    "category": "push-instead-of-pull-deployment",
+    "cwe": 1127,
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "jenkins-build-server>application-deployment",
+    "most_relevant_technical_asset": "apache-webserver",
+    "severity": "medium",
+    "synthetic_id": "push-instead-of-pull-deployment@jenkins-build-server",
+    "title": "<b>Push instead of Pull Deployment</b> at <b>Apache Webserver</b> via build pipeline asset <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "push-instead-of-pull-deployment",
+    "cwe": 1127,
+    "data_breach_technical_assets": [
+      "marketing-cms"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "jenkins-build-server>cms-updates",
+    "most_relevant_technical_asset": "marketing-cms",
+    "severity": "medium",
+    "synthetic_id": "push-instead-of-pull-deployment@jenkins-build-server",
+    "title": "<b>Push instead of Pull Deployment</b> at <b>Marketing CMS</b> via build pipeline asset <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "server-side-request-forgery",
+    "cwe": 918,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "marketing-cms"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "apache-webserver>erp-system-traffic",
+    "most_relevant_technical_asset": "apache-webserver",
+    "severity": "elevated",
+    "synthetic_id": "server-side-request-forgery@apache-webserver@erp-system@apache-webserver>erp-system-traffic",
+    "title": "<b>Server-Side Request Forgery (SSRF)</b> risk at <b>Apache Webserver</b> server-side web-requesting the target <b>Backoffice ERP System</b> via <b>ERP System Traffic</b>"
+  },
+  {
+    "category": "server-side-request-forgery",
+    "cwe": 918,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "marketing-cms"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "apache-webserver>auth-credential-check-traffic",
+    "most_relevant_technical_asset": "apache-webserver",
+    "severity": "elevated",
+    "synthetic_id": "server-side-request-forgery@apache-webserver@identity-provider@apache-webserver>auth-credential-check-traffic",
+    "title": "<b>Server-Side Request Forgery (SSRF)</b> risk at <b>Apache Webserver</b> server-side web-requesting the target <b>Identity Provider</b> via <b>Auth Credential Check Traffic</b>"
+  },
+  {
+    "category": "something-strange",
+    "cwe": 693,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "sql-database",
+    "severity": "critical",
+    "synthetic_id": "something-strange@sql-database",
+    "title": "<b>Example Individual Risk</b> at <b>Database</b>"
+  },
+  {
+    "category": "something-strange",
+    "cwe": 693,
+    "exploitation_impact": "very-high",
+    "exploitation_likelihood": "frequent",
+    "most_relevant_technical_asset": "contract-file-server",
+    "severity": "medium",
+    "synthetic_id": "something-strange@contract-file-server",
+    "title": "<b>Example Individual Risk</b> at <b>Contract Filesystem</b>"
+  },
+  {
+    "category": "sql-nosql-injection",
+    "cwe": 89,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "high",
+    "exploitation_likelihood": "very-likely",
+    "most_relevant_communication_link": "erp-system>database-traffic",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "high",
+    "synthetic_id": "sql-nosql-injection@erp-system@sql-database@erp-system>database-traffic",
+    "title": "<b>SQL/NoSQL-Injection</b> risk at <b>Backoffice ERP System</b> against database <b>Customer Contract Database</b> via <b>Database Traffic</b>"
+  },
+  {
+    "category": "unchecked-deployment",
+    "cwe": 1127,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "external-dev-client",
+      "git-repo",
+      "jenkins-build-server"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "external-dev-client",
+    "severity": "medium",
+    "synthetic_id": "unchecked-deployment@external-dev-client",
+    "title": "<b>Unchecked Deployment</b> risk at <b>External Development Client</b>"
+  },
+  {
+    "category": "unchecked-deployment",
+    "cwe": 1127,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "apache-webserver",
+      "jenkins-build-server",
+      "marketing-cms"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "severity": "medium",
+    "synthetic_id": "unchecked-deployment@jenkins-build-server",
+    "title": "<b>Unchecked Deployment</b> risk at <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "unchecked-deployment",
+    "cwe": 1127,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "most_relevant_technical_asset": "git-repo",
+    "synthetic_id": "unchecked-deployment@git-repo",
+    "title": "<b>Unchecked Deployment</b> risk at <b>Git Repository</b>"
+  },
+  {
+    "category": "unencrypted-asset",
+    "cwe": 311,
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "apache-webserver",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-asset@apache-webserver",
+    "title": "<b>Unencrypted Technical Asset</b> named <b>Apache Webserver</b>"
+  },
+  {
+    "category": "unencrypted-asset",
+    "cwe": 311,
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "erp-system",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-asset@erp-system",
+    "title": "<b>Unencrypted Technical Asset</b> named <b>Backoffice ERP System</b> missing end user individual encryption with data-with-end-user-individual-key"
+  },
+  {
+    "category": "unencrypted-asset",
+    "cwe": 311,
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "git-repo",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-asset@git-repo",
+    "title": "<b>Unencrypted Technical Asset</b> named <b>Git Repository</b>"
+  },
+  {
+    "category": "unencrypted-asset",
+    "cwe": 311,
+    "data_breach_technical_assets": [
+      "jenkins-build-server"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-asset@jenkins-build-server",
+    "title": "<b>Unencrypted Technical Asset</b> named <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "unencrypted-asset",
+    "cwe": 311,
+    "data_breach_technical_assets": [
+      "marketing-cms"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "marketing-cms",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-asset@marketing-cms",
+    "title": "<b>Unencrypted Technical Asset</b> named <b>Marketing CMS</b>"
+  },
+  {
+    "category": "unencrypted-asset",
+    "cwe": 311,
+    "data_breach_technical_assets": [
+      "contract-file-server"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "contract-file-server",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-asset@contract-file-server",
+    "title": "<b>Unencrypted Technical Asset</b> named <b>Contract File Server</b>"
+  },
+  {
+    "category": "unencrypted-asset",
+    "cwe": 311,
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "sql-database",
+    "risk_status": "mitigated",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-asset@sql-database",
+    "title": "<b>Unencrypted Technical Asset</b> named <b>Customer Contract Database</b> missing end user individual encryption with data-with-end-user-individual-key"
+  },
+  {
+    "category": "unencrypted-communication",
+    "cwe": 319,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "high",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "load-balancer>web-application-traffic",
+    "most_relevant_technical_asset": "load-balancer",
+    "severity": "elevated",
+    "synthetic_id": "unencrypted-communication@load-balancer>web-application-traffic@load-balancer@apache-webserver",
+    "title": "<b>Unencrypted Communication</b> named <b>Web Application Traffic</b> between <b>Load Balancer</b> and <b>Apache Webserver</b> transferring authentication data (like credentials, token, session-id, etc.)"
+  },
+  {
+    "category": "unencrypted-communication",
+    "cwe": 319,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "ldap-auth-server"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_communication_link": "marketing-cms>auth-traffic",
+    "most_relevant_technical_asset": "marketing-cms",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-communication@marketing-cms>auth-traffic@marketing-cms@ldap-auth-server",
+    "title": "<b>Unencrypted Communication</b> named <b>Auth Traffic</b> between <b>Marketing CMS</b> and <b>LDAP Auth Server</b> transferring authentication data (like credentials, token, session-id, etc.)"
+  },
+  {
+    "category": "unencrypted-communication",
+    "cwe": 319,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_communication_link": "erp-system>database-traffic",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-communication@erp-system>database-traffic@erp-system@sql-database",
+    "title": "<b>Unencrypted Communication</b> named <b>Database Traffic</b> between <b>Backoffice ERP System</b> and <b>Customer Contract Database</b> transferring authentication data (like credentials, token, session-id, etc.)"
+  },
+  {
+    "category": "unencrypted-communication",
+    "cwe": 319,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "contract-file-server"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_communication_link": "erp-system>nfs-filesystem-access",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "medium",
+    "synthetic_id": "unencrypted-communication@erp-system>nfs-filesystem-access@erp-system@contract-file-server",
+    "title": "<b>Unencrypted Communication</b> named <b>NFS Filesystem Access</b> between <b>Backoffice ERP System</b> and <b>Contract File Server</b>"
+  },
+  {
+    "category": "unguarded-access-from-internet",
+    "cwe": 501,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "very-likely",
+    "most_relevant_communication_link": "external-dev-client>git-repo-code-write-access",
+    "most_relevant_technical_asset": "git-repo",
+    "severity": "elevated",
+    "synthetic_id": "unguarded-access-from-internet@git-repo@external-dev-client@external-dev-client>git-repo-code-write-access",
+    "title": "<b>Unguarded Access from Internet</b> of <b>Git Repository</b> by <b>External Development Client</b> via <b>Git-Repo Code Write Access</b>"
+  },
+  {
+    "category": "unguarded-access-from-internet",
+    "cwe": 501,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "git-repo"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "very-likely",
+    "most_relevant_communication_link": "external-dev-client>git-repo-web-ui-access",
+    "most_relevant_technical_asset": "git-repo",
+    "severity": "elevated",
+    "synthetic_id": "unguarded-access-from-internet@git-repo@external-dev-client@external-dev-client>git-repo-web-ui-access",
+    "title": "<b>Unguarded Access from Internet</b> of <b>Git Repository</b> by <b>External Development Client</b> via <b>Git-Repo Web-UI Access</b>"
+  },
+  {
+    "category": "unguarded-access-from-internet",
+    "cwe": 501,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "jenkins-build-server"
+    ],
+    "exploitation_impact": "medium",
+    "exploitation_likelihood": "very-likely",
+    "most_relevant_communication_link": "external-dev-client>jenkins-web-ui-access",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "severity": "elevated",
+    "synthetic_id": "unguarded-access-from-internet@jenkins-build-server@external-dev-client@external-dev-client>jenkins-web-ui-access",
+    "title": "<b>Unguarded Access from Internet</b> of <b>Jenkins Build Server</b> by <b>External Development Client</b> via <b>Jenkins Web-UI Access</b>"
+  },
+  {
+    "category": "untrusted-deserialization",
+    "cwe": 502,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "very-high",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "erp-system",
+    "risk_status": "accepted",
+    "severity": "elevated",
+    "synthetic_id": "untrusted-deserialization@erp-system",
+    "title": "<b>Untrusted Deserialization</b> risk at <b>Backoffice ERP System</b>"
+  },
+  {
+    "category": "untrusted-deserialization",
+    "cwe": 502,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "jenkins-build-server"
+    ],
+    "exploitation_impact": "very-high",
+    "exploitation_likelihood": "likely",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "severity": "elevated",
+    "synthetic_id": "untrusted-deserialization@jenkins-build-server",
+    "title": "<b>Untrusted Deserialization</b> risk at <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "xml-external-entity",
+    "cwe": 611,
+    "data_breach_probability": "probable",
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "high",
+    "exploitation_likelihood": "very-likely",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "high",
+    "synthetic_id": "xml-external-entity@erp-system",
+    "title": "<b>XML External Entity (XXE)</b> risk at <b>Backoffice ERP System</b>"
+  }
+]

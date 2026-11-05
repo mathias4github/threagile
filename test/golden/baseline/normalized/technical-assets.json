@@ -1,0 +1,1006 @@
+{
+  "apache-webserver": {
+    "availability": "critical",
+    "communication_links": [
+      {
+        "authentication": "credentials",
+        "authorization": "technical-user",
+        "data_assets_sent": [
+          "customer-accounts"
+        ],
+        "description": "Link to the identity provider server",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "apache-webserver>auth-credential-check-traffic",
+        "protocol": "https",
+        "source_id": "apache-webserver",
+        "target_id": "identity-provider",
+        "title": "Auth Credential Check Traffic"
+      },
+      {
+        "authentication": "token",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "customer-accounts",
+          "customer-contracts",
+          "customer-operational-data",
+          "internal-business-data"
+        ],
+        "data_assets_sent": [
+          "customer-accounts",
+          "customer-operational-data",
+          "internal-business-data"
+        ],
+        "description": "Link to the ERP system",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "apache-webserver>erp-system-traffic",
+        "protocol": "https",
+        "source_id": "apache-webserver",
+        "target_id": "erp-system",
+        "title": "ERP System Traffic"
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "custom_developed_parts": true,
+    "data_assets_processed": [
+      "client-application-code",
+      "customer-accounts",
+      "customer-contracts",
+      "customer-operational-data",
+      "internal-business-data",
+      "server-application-code"
+    ],
+    "data_assets_stored": [
+      "client-application-code",
+      "server-application-code"
+    ],
+    "data_formats_accepted": [
+      "file",
+      "json"
+    ],
+    "description": "Apache Webserver hosting the API code and client-side code",
+    "id": "apache-webserver",
+    "integrity": "mission-critical",
+    "justification_cia_rating": "The correct configuration and reachability of the web server is mandatory for all customer usages of the portal.\n",
+    "machine": "container",
+    "owner": "Company ABC",
+    "raa": 60.6120919375654,
+    "size": "application",
+    "tags": [
+      "apache",
+      "aws:ec2",
+      "linux"
+    ],
+    "technologies": [
+      {
+        "attributes": {
+          "http_internet_access_ok": true,
+          "less_protected_type": true,
+          "processing_end_user_requests": true,
+          "propagate_identity_to_outgoing_targets": true,
+          "web-server": true,
+          "web_application": true
+        },
+        "description": "A web server",
+        "name": "web-server"
+      }
+    ],
+    "title": "Apache Webserver",
+    "type": "process"
+  },
+  "backend-admin-client": {
+    "availability": "critical",
+    "communication_links": [
+      {
+        "authentication": "client-certificate",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "customer-accounts",
+          "customer-operational-data",
+          "db-dumps",
+          "erp-logs"
+        ],
+        "data_assets_sent": [
+          "db-dumps"
+        ],
+        "description": "Link to the database (JDBC tunneled via SSH)",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "backend-admin-client>db-update-access",
+        "protocol": "ssh",
+        "source_id": "backend-admin-client",
+        "target_id": "sql-database",
+        "title": "DB Update Access",
+        "usage": "devops"
+      },
+      {
+        "authentication": "token",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "erp-logs"
+        ],
+        "data_assets_sent": [
+          "erp-customizing"
+        ],
+        "description": "Link to the ERP system (Web)",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "backend-admin-client>erp-web-access",
+        "protocol": "https",
+        "source_id": "backend-admin-client",
+        "target_id": "erp-system",
+        "title": "ERP Web Access",
+        "usage": "devops"
+      },
+      {
+        "authentication": "credentials",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "customer-accounts"
+        ],
+        "data_assets_sent": [
+          "customer-accounts"
+        ],
+        "description": "Link to the LDAP auth server for managing users",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "backend-admin-client>user-management-access",
+        "protocol": "ldaps",
+        "source_id": "backend-admin-client",
+        "target_id": "ldap-auth-server",
+        "title": "User Management Access",
+        "usage": "devops"
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "customer-accounts",
+      "customer-operational-data",
+      "db-dumps",
+      "erp-customizing",
+      "erp-logs"
+    ],
+    "description": "Backend admin client",
+    "id": "backend-admin-client",
+    "integrity": "critical",
+    "justification_cia_rating": "The client used by Company XYZ to administer the system.\n",
+    "justification_out_of_scope": "Owned and managed by ops provider",
+    "out_of_scope": true,
+    "owner": "Company XYZ",
+    "raa": 1,
+    "size": "component",
+    "technologies": [
+      {
+        "aliases": [
+          "web-browser"
+        ],
+        "attributes": {
+          "browser": true,
+          "client": true,
+          "frontend_related": true,
+          "less_protected_type": true,
+          "propagate_identity_to_outgoing_targets": true
+        },
+        "description": "A web browser",
+        "name": "browser"
+      }
+    ],
+    "title": "Backend Admin Client",
+    "usage": "devops",
+    "used_as_client_by_human": true
+  },
+  "backoffice-client": {
+    "availability": "critical",
+    "communication_links": [
+      {
+        "authentication": "token",
+        "authorization": "end-user-identity-propagation",
+        "data_assets_received": [
+          "customer-contracts",
+          "internal-business-data"
+        ],
+        "data_assets_sent": [
+          "internal-business-data"
+        ],
+        "description": "Link to the ERP system",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "backoffice-client>erp-internal-access",
+        "protocol": "https",
+        "source_id": "backoffice-client",
+        "tags": [
+          "some-erp"
+        ],
+        "target_id": "erp-system",
+        "title": "ERP Internal Access",
+        "vpn": true
+      },
+      {
+        "authentication": "token",
+        "authorization": "end-user-identity-propagation",
+        "data_assets_received": [
+          "marketing-material"
+        ],
+        "data_assets_sent": [
+          "marketing-material"
+        ],
+        "description": "Link to the CMS for editing content",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "backoffice-client>marketing-cms-editing",
+        "protocol": "https",
+        "source_id": "backoffice-client",
+        "target_id": "marketing-cms",
+        "title": "Marketing CMS Editing",
+        "vpn": true
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "customer-contracts",
+      "erp-logs",
+      "internal-business-data",
+      "marketing-material"
+    ],
+    "description": "Backoffice client",
+    "id": "backoffice-client",
+    "integrity": "critical",
+    "justification_cia_rating": "The client used by Company XYZ to administer and use the system.\n",
+    "justification_out_of_scope": "Owned and managed by Company XYZ company",
+    "out_of_scope": true,
+    "owner": "Company XYZ",
+    "raa": 1,
+    "size": "component",
+    "technologies": [
+      {
+        "aliases": [
+          "desktop-system"
+        ],
+        "attributes": {
+          "client": true,
+          "desktop": true,
+          "frontend_related": true,
+          "less_protected_type": true,
+          "propagate_identity_to_outgoing_targets": true
+        },
+        "description": "A desktop system (or laptop)",
+        "name": "desktop"
+      }
+    ],
+    "title": "Backoffice Client",
+    "used_as_client_by_human": true
+  },
+  "contract-file-server": {
+    "availability": "important",
+    "confidentiality": "confidential",
+    "data_assets_processed": [
+      "contract-summaries",
+      "customer-contracts"
+    ],
+    "data_assets_stored": [
+      "contract-summaries",
+      "customer-contracts"
+    ],
+    "data_formats_accepted": [
+      "file"
+    ],
+    "description": "NFS Filesystem for storing the contract PDFs",
+    "id": "contract-file-server",
+    "integrity": "critical",
+    "justification_cia_rating": "Contract data might contain financial data as well as personally identifiable information (PII). The integrity and availability of contract data is required for clearing payment disputes. The filesystem is also required to be available for storing new contracts of freshly generated customers.\n",
+    "machine": "virtual",
+    "owner": "Company ABC",
+    "raa": 33.2657200811359,
+    "size": "component",
+    "tags": [
+      "aws:s3",
+      "linux"
+    ],
+    "technologies": [
+      {
+        "aliases": [
+          "file-storage"
+        ],
+        "attributes": {
+          "backend_related": true,
+          "file-server": true,
+          "file_storage": true,
+          "storing_end_user_data": true
+        },
+        "description": "A file server",
+        "name": "file-server"
+      }
+    ],
+    "title": "Contract File Server",
+    "type": "datastore"
+  },
+  "customer-client": {
+    "availability": "critical",
+    "communication_links": [
+      {
+        "authentication": "session-id",
+        "authorization": "end-user-identity-propagation",
+        "data_assets_received": [
+          "client-application-code",
+          "customer-accounts",
+          "customer-contracts",
+          "customer-operational-data",
+          "marketing-material"
+        ],
+        "data_assets_sent": [
+          "customer-accounts",
+          "customer-operational-data"
+        ],
+        "description": "Link to the load balancer",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "customer-client>customer-traffic",
+        "protocol": "https",
+        "source_id": "customer-client",
+        "target_id": "load-balancer",
+        "title": "Customer Traffic"
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "client-application-code",
+      "customer-accounts",
+      "customer-contracts",
+      "customer-operational-data",
+      "marketing-material"
+    ],
+    "description": "Customer Web Client",
+    "id": "customer-client",
+    "integrity": "critical",
+    "internet": true,
+    "justification_cia_rating": "The client used by the customer to access the system.\n",
+    "justification_out_of_scope": "Owned and managed by end-user customer",
+    "out_of_scope": true,
+    "owner": "Customer",
+    "raa": 1,
+    "size": "component",
+    "technologies": [
+      {
+        "aliases": [
+          "web-browser"
+        ],
+        "attributes": {
+          "browser": true,
+          "client": true,
+          "frontend_related": true,
+          "less_protected_type": true,
+          "propagate_identity_to_outgoing_targets": true
+        },
+        "description": "A web browser",
+        "name": "browser"
+      }
+    ],
+    "title": "Customer Web Client",
+    "used_as_client_by_human": true
+  },
+  "erp-system": {
+    "availability": "mission-critical",
+    "communication_links": [
+      {
+        "authentication": "credentials",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "customer-accounts",
+          "customer-operational-data",
+          "internal-business-data"
+        ],
+        "data_assets_sent": [
+          "customer-accounts",
+          "customer-operational-data",
+          "internal-business-data"
+        ],
+        "description": "Link to the DB system",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "erp-system>database-traffic",
+        "protocol": "jdbc",
+        "source_id": "erp-system",
+        "target_id": "sql-database",
+        "title": "Database Traffic"
+      },
+      {
+        "data_assets_received": [
+          "customer-contracts"
+        ],
+        "data_assets_sent": [
+          "customer-contracts"
+        ],
+        "description": "Link to the file system",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "erp-system>nfs-filesystem-access",
+        "protocol": "nfs",
+        "source_id": "erp-system",
+        "target_id": "contract-file-server",
+        "title": "NFS Filesystem Access"
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "customer-accounts",
+      "customer-contracts",
+      "customer-operational-data",
+      "erp-customizing",
+      "erp-logs",
+      "internal-business-data"
+    ],
+    "data_assets_stored": [
+      "erp-logs"
+    ],
+    "data_formats_accepted": [
+      "file",
+      "serialization",
+      "xml"
+    ],
+    "description": "ERP system",
+    "id": "erp-system",
+    "integrity": "mission-critical",
+    "justification_cia_rating": "The ERP system contains business-relevant sensitive data for the leasing processes and eventually also for other Company XYZ internal processes.\n",
+    "machine": "virtual",
+    "owner": "Company ABC",
+    "raa": 62.062039616154216,
+    "redundant": true,
+    "tags": [
+      "linux"
+    ],
+    "technologies": [
+      {
+        "aliases": [
+          "enterprise-resource-planning"
+        ],
+        "attributes": {
+          "backend_related": true,
+          "erp": true,
+          "high_value_target": true,
+          "processing_end_user_requests": true,
+          "propagate_identity_to_outgoing_targets": true,
+          "storing_end_user_data": true,
+          "web_application": true
+        },
+        "description": "Enterprise-Resource-Planning",
+        "name": "erp"
+      }
+    ],
+    "title": "Backoffice ERP System",
+    "type": "process"
+  },
+  "external-dev-client": {
+    "availability": "important",
+    "communication_links": [
+      {
+        "authentication": "client-certificate",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "client-application-code",
+          "server-application-code"
+        ],
+        "data_assets_sent": [
+          "client-application-code",
+          "server-application-code"
+        ],
+        "description": "Link to the Git repo",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "external-dev-client>git-repo-code-write-access",
+        "protocol": "ssh",
+        "source_id": "external-dev-client",
+        "target_id": "git-repo",
+        "title": "Git-Repo Code Write Access",
+        "usage": "devops"
+      },
+      {
+        "authentication": "token",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "client-application-code",
+          "server-application-code"
+        ],
+        "data_assets_sent": [
+          "client-application-code",
+          "server-application-code"
+        ],
+        "description": "Link to the Git repo",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "external-dev-client>git-repo-web-ui-access",
+        "protocol": "https",
+        "source_id": "external-dev-client",
+        "target_id": "git-repo",
+        "title": "Git-Repo Web-UI Access",
+        "usage": "devops"
+      },
+      {
+        "authentication": "credentials",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "build-job-config"
+        ],
+        "data_assets_sent": [
+          "build-job-config"
+        ],
+        "description": "Link to the Jenkins build server",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "external-dev-client>jenkins-web-ui-access",
+        "protocol": "https",
+        "source_id": "external-dev-client",
+        "target_id": "jenkins-build-server",
+        "title": "Jenkins Web-UI Access",
+        "usage": "devops"
+      }
+    ],
+    "confidentiality": "confidential",
+    "data_assets_processed": [
+      "build-job-config",
+      "client-application-code",
+      "server-application-code"
+    ],
+    "data_assets_stored": [
+      "client-application-code",
+      "server-application-code"
+    ],
+    "data_formats_accepted": [
+      "file"
+    ],
+    "description": "External developer client",
+    "id": "external-dev-client",
+    "integrity": "mission-critical",
+    "internet": true,
+    "justification_cia_rating": "The clients used by external developers to create parts of the application code.\n",
+    "justification_out_of_scope": "Owned and managed by external developers",
+    "multi_tenant": true,
+    "out_of_scope": true,
+    "owner": "External Developers",
+    "raa": 1,
+    "tags": [
+      "linux"
+    ],
+    "technologies": [
+      {
+        "attributes": {
+          "client": true,
+          "development_relevant": true,
+          "devops-client": true,
+          "frontend_related": true,
+          "less_protected_type": true,
+          "propagate_identity_to_outgoing_targets": true
+        },
+        "description": "A client used for DevOps",
+        "name": "devops-client"
+      }
+    ],
+    "title": "External Development Client",
+    "usage": "devops",
+    "used_as_client_by_human": true
+  },
+  "git-repo": {
+    "availability": "important",
+    "confidentiality": "confidential",
+    "data_assets_processed": [
+      "client-application-code",
+      "server-application-code"
+    ],
+    "data_assets_stored": [
+      "client-application-code",
+      "server-application-code"
+    ],
+    "data_formats_accepted": [
+      "file"
+    ],
+    "description": "Git repository server",
+    "id": "git-repo",
+    "integrity": "mission-critical",
+    "justification_cia_rating": "The code repo pipeline might contain sensitive configuration values like backend credentials, certificates etc. and is therefore rated as confidential.\n",
+    "machine": "virtual",
+    "multi_tenant": true,
+    "owner": "Company ABC",
+    "raa": 31.49087221095335,
+    "tags": [
+      "git",
+      "linux"
+    ],
+    "technologies": [
+      {
+        "aliases": [
+          "git"
+        ],
+        "attributes": {
+          "development_relevant": true,
+          "less_protected_type": true,
+          "may_contain_secrets": true,
+          "sourcecode-repository": true
+        },
+        "description": "Git or similar",
+        "name": "sourcecode-repository"
+      }
+    ],
+    "title": "Git Repository",
+    "type": "process",
+    "usage": "devops"
+  },
+  "identity-provider": {
+    "availability": "critical",
+    "communication_links": [
+      {
+        "authentication": "credentials",
+        "authorization": "technical-user",
+        "data_assets_sent": [
+          "customer-accounts"
+        ],
+        "description": "Link to the LDAP server",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "identity-provider>ldap-credential-check-traffic",
+        "protocol": "ldaps",
+        "source_id": "identity-provider",
+        "target_id": "ldap-auth-server",
+        "title": "LDAP Credential Check Traffic"
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "customer-accounts"
+    ],
+    "description": "Identity provider server",
+    "id": "identity-provider",
+    "integrity": "critical",
+    "justification_cia_rating": "The auth data of the application\n",
+    "machine": "virtual",
+    "owner": "Company ABC",
+    "raa": 40.999362954246536,
+    "size": "component",
+    "tags": [
+      "jboss",
+      "keycloak",
+      "linux"
+    ],
+    "technologies": [
+      {
+        "aliases": [
+          "idp"
+        ],
+        "attributes": {
+          "backend_related": true,
+          "high_value_target": true,
+          "identity-provider": true,
+          "identity_related": true,
+          "propagate_identity_to_outgoing_targets": true,
+          "web_application": true
+        },
+        "description": "A authentication provider",
+        "name": "identity-provider"
+      }
+    ],
+    "title": "Identity Provider",
+    "type": "process"
+  },
+  "jenkins-build-server": {
+    "availability": "important",
+    "communication_links": [
+      {
+        "authentication": "client-certificate",
+        "authorization": "technical-user",
+        "data_assets_sent": [
+          "client-application-code",
+          "server-application-code"
+        ],
+        "description": "Link to the Apache webserver",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "jenkins-build-server>application-deployment",
+        "protocol": "ssh",
+        "source_id": "jenkins-build-server",
+        "target_id": "apache-webserver",
+        "title": "Application Deployment",
+        "usage": "devops"
+      },
+      {
+        "authentication": "client-certificate",
+        "authorization": "technical-user",
+        "data_assets_sent": [
+          "marketing-material"
+        ],
+        "description": "Link to the CMS",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "jenkins-build-server>cms-updates",
+        "protocol": "ssh",
+        "source_id": "jenkins-build-server",
+        "target_id": "marketing-cms",
+        "title": "CMS Updates",
+        "usage": "devops"
+      },
+      {
+        "authentication": "client-certificate",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "client-application-code",
+          "server-application-code"
+        ],
+        "description": "Link to the Git repository server",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "jenkins-build-server>git-repo-code-read-access",
+        "protocol": "ssh",
+        "readonly": true,
+        "source_id": "jenkins-build-server",
+        "target_id": "git-repo",
+        "title": "Git Repo Code Read Access",
+        "usage": "devops"
+      }
+    ],
+    "confidentiality": "confidential",
+    "data_assets_processed": [
+      "build-job-config",
+      "client-application-code",
+      "marketing-material",
+      "server-application-code"
+    ],
+    "data_assets_stored": [
+      "build-job-config",
+      "client-application-code",
+      "marketing-material",
+      "server-application-code"
+    ],
+    "data_formats_accepted": [
+      "file",
+      "serialization"
+    ],
+    "description": "Jenkins build-server",
+    "id": "jenkins-build-server",
+    "integrity": "mission-critical",
+    "justification_cia_rating": "The build pipeline might contain sensitive configuration values like backend credentials, certificates etc. and is therefore rated as confidential. The integrity and availability is rated as critical and important due to the risk of reputation damage and application update unavailability when the build pipeline is compromised.\n",
+    "machine": "virtual",
+    "multi_tenant": true,
+    "owner": "Company ABC",
+    "raa": 60.099849550227866,
+    "tags": [
+      "jenkins",
+      "linux"
+    ],
+    "technologies": [
+      {
+        "aliases": [
+          "ci",
+          "continuous-integration"
+        ],
+        "attributes": {
+          "build-pipeline": true,
+          "development_relevant": true,
+          "less_protected_type": true
+        },
+        "description": "A software build pipeline",
+        "name": "build-pipeline"
+      }
+    ],
+    "title": "Jenkins Build Server",
+    "type": "process",
+    "usage": "devops"
+  },
+  "ldap-auth-server": {
+    "availability": "critical",
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "customer-accounts"
+    ],
+    "data_assets_stored": [
+      "customer-accounts"
+    ],
+    "description": "LDAP authentication server",
+    "encryption": "transparent",
+    "id": "ldap-auth-server",
+    "integrity": "critical",
+    "justification_cia_rating": "The auth data of the application\n",
+    "owner": "Company ABC",
+    "raa": 51.34381338742393,
+    "size": "component",
+    "tags": [
+      "linux"
+    ],
+    "technologies": [
+      {
+        "attributes": {
+          "backend_related": true,
+          "identity-store-ldap": true,
+          "identity_related": true,
+          "identity_store": true
+        },
+        "description": "Authentication data as LDAP",
+        "name": "identity-store-ldap"
+      }
+    ],
+    "title": "LDAP Auth Server",
+    "type": "datastore"
+  },
+  "load-balancer": {
+    "availability": "mission-critical",
+    "communication_links": [
+      {
+        "data_assets_received": [
+          "marketing-material"
+        ],
+        "description": "Link to the CMS server",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "load-balancer>cms-content-traffic",
+        "protocol": "http",
+        "readonly": true,
+        "source_id": "load-balancer",
+        "target_id": "marketing-cms",
+        "title": "CMS Content Traffic"
+      },
+      {
+        "authentication": "session-id",
+        "authorization": "end-user-identity-propagation",
+        "data_assets_received": [
+          "client-application-code",
+          "customer-accounts",
+          "customer-contracts",
+          "customer-operational-data"
+        ],
+        "data_assets_sent": [
+          "customer-accounts",
+          "customer-operational-data"
+        ],
+        "description": "Link to the web server",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "load-balancer>web-application-traffic",
+        "protocol": "http",
+        "source_id": "load-balancer",
+        "target_id": "apache-webserver",
+        "title": "Web Application Traffic"
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "client-application-code",
+      "customer-accounts",
+      "customer-contracts",
+      "customer-operational-data",
+      "internal-business-data",
+      "marketing-material"
+    ],
+    "description": "Load Balancer (HA-Proxy)",
+    "id": "load-balancer",
+    "integrity": "mission-critical",
+    "justification_cia_rating": "The correct configuration and reachability of the load balancer is mandatory for all customer and Company XYZ usages of the portal and ERP system.\n",
+    "owner": "Company ABC",
+    "raa": 9.952491809545325,
+    "size": "component",
+    "technologies": [
+      {
+        "aliases": [
+          "lb"
+        ],
+        "attributes": {
+          "close_to_high_value_targets_tolerated": true,
+          "frontend_related": true,
+          "load-balancer": true,
+          "no_authentication_required": true,
+          "no_storage_at_rest": true,
+          "propagate_identity_to_outgoing_targets": true,
+          "traffic_forwarding": true
+        },
+        "description": "A load balancer directing incoming requests to available internal infrastructure",
+        "name": "load-balancer"
+      }
+    ],
+    "title": "Load Balancer",
+    "type": "process"
+  },
+  "marketing-cms": {
+    "availability": "critical",
+    "communication_links": [
+      {
+        "authentication": "credentials",
+        "authorization": "technical-user",
+        "data_assets_received": [
+          "customer-accounts"
+        ],
+        "data_assets_sent": [
+          "customer-accounts"
+        ],
+        "description": "Link to the LDAP auth server",
+        "diagram_tweak_constraint": true,
+        "diagram_tweak_weight": 1,
+        "id": "marketing-cms>auth-traffic",
+        "protocol": "ldap",
+        "readonly": true,
+        "source_id": "marketing-cms",
+        "target_id": "ldap-auth-server",
+        "title": "Auth Traffic"
+      }
+    ],
+    "confidentiality": "strictly-confidential",
+    "custom_developed_parts": true,
+    "data_assets_processed": [
+      "customer-accounts",
+      "marketing-material"
+    ],
+    "data_assets_stored": [
+      "marketing-material"
+    ],
+    "description": "CMS for the marketing content",
+    "id": "marketing-cms",
+    "integrity": "critical",
+    "justification_cia_rating": "The correct configuration and reachability of the web server is mandatory for all customer usages of the portal.\n",
+    "machine": "container",
+    "owner": "Company ABC",
+    "raa": 22.55383688062901,
+    "size": "application",
+    "tags": [
+      "linux"
+    ],
+    "technologies": [
+      {
+        "aliases": [
+          "content-management-system"
+        ],
+        "attributes": {
+          "cms": true,
+          "frontend_related": true,
+          "less_protected_type": true,
+          "propagate_identity_to_outgoing_targets": true,
+          "web_application": true
+        },
+        "description": "Content Management System",
+        "name": "cms"
+      }
+    ],
+    "title": "Marketing CMS",
+    "type": "process"
+  },
+  "sql-database": {
+    "availability": "mission-critical",
+    "confidentiality": "strictly-confidential",
+    "data_assets_processed": [
+      "customer-accounts",
+      "customer-operational-data",
+      "db-dumps",
+      "erp-logs",
+      "internal-business-data"
+    ],
+    "data_assets_stored": [
+      "customer-accounts",
+      "customer-operational-data",
+      "internal-business-data"
+    ],
+    "description": "The database behind the ERP system",
+    "encryption": "data-with-symmetric-shared-key",
+    "id": "sql-database",
+    "integrity": "mission-critical",
+    "justification_cia_rating": "The ERP system's database contains business-relevant sensitive data for the leasing processes and eventually also for other Company XYZ internal processes.\n",
+    "machine": "virtual",
+    "owner": "Company ABC",
+    "raa": 100,
+    "size": "component",
+    "tags": [
+      "linux",
+      "mysql"
+    ],
+    "technologies": [
+      {
+        "aliases": [
+          "db"
+        ],
+        "attributes": {
+          "backend_related": true,
+          "database": true,
+          "storing_end_user_data": true,
+          "vulnerable_to_query_injection": true
+        },
+        "description": "A database",
+        "name": "database"
+      }
+    ],
+    "title": "Customer Contract Database",
+    "type": "datastore"
+  }
+}
