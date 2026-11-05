@@ -55,7 +55,11 @@ func ptBoundary(id string, boundaryType types.TrustBoundaryType) *types.TrustBou
 
 // ptProcess makes the asset process a data asset with the given ratings.
 func ptProcess(model *types.Model, asset *types.TechnicalAsset, confidentiality types.Confidentiality, integrity types.Criticality) {
-	dataAsset := &types.DataAsset{Id: "da-" + asset.Id, Title: "da-" + asset.Id, Confidentiality: confidentiality, Integrity: integrity}
+	ptProcessWithAvailability(model, asset, confidentiality, integrity, types.Archive)
+}
+
+func ptProcessWithAvailability(model *types.Model, asset *types.TechnicalAsset, confidentiality types.Confidentiality, integrity types.Criticality, availability types.Criticality) {
+	dataAsset := &types.DataAsset{Id: "da-" + asset.Id, Title: "da-" + asset.Id, Confidentiality: confidentiality, Integrity: integrity, Availability: availability}
 	model.DataAssets[dataAsset.Id] = dataAsset
 	asset.DataAssetsProcessed = append(asset.DataAssetsProcessed, dataAsset.Id)
 }

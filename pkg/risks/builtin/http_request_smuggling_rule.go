@@ -61,7 +61,7 @@ func (r *HttpRequestSmugglingRule) GenerateRisks(input *types.Model) ([]*types.R
 			}
 			likelihood := types.Unlikely
 			risks = append(risks, newAssetRisk(r.Category().ID,
-				"<b>HTTP Request Smuggling</b> risk at <b>"+technicalAsset.Title+"</b> behind <b>"+source.Title+"</b>",
+				"<b>HTTP Request Smuggling</b> risk at <b>"+technicalAsset.Title+"</b>",
 				likelihood, impactByCIA(input, technicalAsset), technicalAsset, types.Improbable))
 			break
 		}

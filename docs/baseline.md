@@ -80,10 +80,14 @@ tauchten erst nach `git fetch origin` auf (ebenso `test/builtin-rule-unit-tests`
 Zwei Läufe hintereinander sind normalisiert identisch (geprüft). PNG/PDF/AsciiDoc wurden nicht aufgenommen.
 
 ## Offen
-- `go.mod` nicht tidy → `master` baut nicht (siehe oben). Fix in 0b, Schritt 1.
-- Nicht-deterministische Reihenfolge in JSON/DOT/Excel-Ausgabe (nur dokumentiert, nicht gefixt).
+- ~~`go.mod` nicht tidy → `master` baut nicht~~ – behoben in Phase 0b.
+- ~~Dockerfile klont Upstream statt lokalem Stand~~ – behoben in Phase 0b; `docker build` weiterhin **nicht verifiziert** (kein Docker-Daemon in den Sessions).
+- Nicht-deterministische Reihenfolge in JSON/DOT/Excel-Ausgabe (Map-Iteration, z. B. `pkg/model/parse.go:233`) – nur dokumentiert; Golden-Vergleich daher normalisiert.
 - Lauf endet mit Log-Zeile `logo image path does not exist: report/threagile-logo.png` (Exit-Code 0; Pfad relativ zum Arbeitsverzeichnis) – nur beobachtet.
-- Dockerfile klont Upstream statt lokalem Stand; Docker-Build hier nicht verifizierbar.
+- `risks.json`: Risiken mit Severity `low` haben kein Feld `severity` (`omitempty` auf Enum-Wert 0 in `pkg/types/risk.go`); im Beispielmodell 5 Risiken. Kandidat für einen eigenen Fix (Verhaltensänderung des JSON-Formats).
+- Server-Modus (`pkg/server/model.go`, `readModel`) parst Modelle direkt per `yaml.Unmarshal`, nicht über `input.Model.Load`: der Legacy-Schlüssel `individual_risk_categories` bleibt beim Speichern erhalten, wird in den Server-Listen der Custom-Kategorien aber nicht angezeigt (Analyse über `Load` übernimmt ihn).
+- `server/static/js/edit-model.js` und `support/live-templates.txt` erzeugen noch `individual_risk_categories` (wird dank #130-Fix gelesen, erzeugt aber eine Deprecation-Warnung).
+- Script-Engine (`pkg/risks/script/script.go`) nutzt intern weiterhin den Schlüssel `individual_risk_categories` (eigenes Format, nicht vom #130-Fix betroffen).
 
 ---
 
@@ -108,3 +112,7 @@ Unter den direkten Abhängigkeiten gab es **keinen** verfügbaren Major-Sprung (
 - `jung-kurt/gofpdf`, `wcharczuk/go-chart`, `mpvl/unique`: unmaintained, keine Updates.
 - GitHub-Actions-Versionen (`checkout@v4`, `setup-go@v5`, `codeql-action@v4`, `golangci-lint-action@v8` usw.): **nicht angehoben**, da neue Tags in dieser Session nicht abfragbar waren (kein Zugriff auf die Action-Repos). `setup-go` nutzt bereits `go-version-file: go.mod`, ist also mit go.mod synchron.
 - `docker build .` und Container-Test mit Beispielmodell: **nicht ausgeführt** (kein Docker-Daemon). Dockerfile-Änderung ist ungetestet. Als Ersatz wurde die Binary mit App-Dir-Layout wie im Image gegen das Beispielmodell geprüft.
+
+## Review-Nachtrag (CI)
+- `golangci-lint` v2.11 (in `.github/workflows/golangci-lint-action.yml` gepinnt) bricht mit Go 1.27 ab („export data version 5 is greater than maximum supported version 2“). Workflow auf v2.15.0 mit `install-mode: goinstall` umgestellt; lokal mit go1.27.3 gebaut: **0 issues** auf dem gesamten Code.
+- Die übrigen Action-Versionen sind unverändert (Tags in den Sessions nicht abfragbar); im Fork laufen derzeit keine Workflows, daher ist auch der Workflow-Lauf selbst nicht verifiziert.

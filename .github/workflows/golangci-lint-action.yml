@@ -22,4 +22,6 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v8
         with:
-          version: v2.11
+          # v2.11 cannot read Go 1.27 export data; build the linter with the go.mod toolchain
+          version: v2.15.0
+          install-mode: goinstall

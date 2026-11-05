@@ -68,7 +68,7 @@ func (r *XmlEntityExpansionDosRule) GenerateRisks(input *types.Model) ([]*types.
 			likelihood = types.Likely
 		}
 		impact := types.LowImpact
-		if !technicalAsset.Redundant && (technicalAsset.Availability == types.Critical || technicalAsset.Availability == types.MissionCritical) {
+		if !technicalAsset.Redundant && input.HighestProcessedAvailability(technicalAsset) >= types.Critical {
 			impact = types.MediumImpact
 		}
 		risks = append(risks, newAssetRisk(r.Category().ID,

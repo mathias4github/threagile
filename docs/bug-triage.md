@@ -1,6 +1,6 @@
 # Bug-Triage (Phase 0c)
 
-Quelle: `docs/reference/upstream-issues.json` (43 offene Upstream-Issues). Stand Code: `master` + Phase 0b (PR 2, noch nicht gemergt).
+Quelle: `docs/reference/upstream-issues.json` (43 offene Upstream-Issues). Stand Code bei der Triage: `master` + Phase 0b. Fixes #130 und #96 sind über PR 2 in `master` gemergt.
 Geprüft wurde am Code bzw. mit Minimal-Modell; Anhänge (z. B. das Zip aus #164) liegen nicht vor.
 
 ## REPRODUZIERBAR
@@ -39,7 +39,7 @@ Nur #130 und #96 bearbeiten (je eigener Branch/Session: `fix/130-custom-risk-cat
 
 ## Bearbeitung
 
-### #130 – erledigt (Branch-Stand: `claude/modest-babbage-1pgomq`)
+### #130 – erledigt (gemergt mit PR 2)
 Golden-Diff gegen Baseline (normalisiert), alle Abweichungen folgen direkt aus dem Fix:
 - Das Beispielmodell enthält die Custom-Risikokategorie `something-strange` mit 2 identifizierten Risiken (`…@sql-database` critical, `…@contract-file-server` medium). Sie wurden bisher ignoriert und erscheinen jetzt in `risks.json`/`risks.xlsx`; die Stats ändern sich entsprechend (critical unchecked 0→1, medium unchecked +1).
 - `data-asset-diagram`: „Customer Contract Database“ wird wegen des critical-Risikos rot (`#FF2600`) statt grau (`#444444`) eingefärbt.
@@ -51,3 +51,6 @@ Golden-Diff gegen Baseline (normalisiert), alle Abweichungen folgen direkt aus d
 
 ### Hinweis zur Baseline
 Der Phase-0a-Stand von `test/golden/baseline` ist durch #130 und #96 überholt. Bei Bedarf entspricht der 0a-Stand dem heutigen ohne die zwei `something-strange`-Risiken und ohne `cwe`. Außerdem fehlten in PR 1 die meisten Golden-Dateien wegen `.gitignore`-Mustern (jetzt behoben).
+
+### Nachtrag Review
+- #130: Eine Include-Datei mit beiden Schlüsseln (`custom_risk_categories` und `individual_risk_categories`) brach mit „duplicate item“ ab, weil die Kategorien zweimal gemergt wurden. Behoben (je Datei nur einmal mergen), Test `TestMergeIncludeWithBothRiskCategoryKeys`.

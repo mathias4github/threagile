@@ -42,3 +42,25 @@ func TestHttpRequestSmugglingNoRisksWithoutForwardingSourceOrOutOfScopeOrNonWebP
 		assert.Empty(t, risks, name)
 	}
 }
+
+func TestHttpRequestSmugglingTitleDoesNotDependOnLinkOrder(t *testing.T) {
+	build := func(reversed bool) *types.Model {
+		lb := ptAsset("lb", ptTech(types.LoadBalancer, types.IsTrafficForwarding))
+		proxy := ptAsset("proxy", ptTech(types.ReverseProxy, types.IsTrafficForwarding))
+		web := ptAsset("web", ptTech(types.WebServer, "web_application"))
+		links := []*types.CommunicationLink{ptLink("l1", "lb", "web", types.HTTPS), ptLink("l2", "proxy", "web", types.HTTPS)}
+		if reversed {
+			links[0], links[1] = links[1], links[0]
+		}
+		return ptModel([]*types.TechnicalAsset{lb, proxy, web}, links, nil)
+	}
+
+	first, err := NewHttpRequestSmugglingRule().GenerateRisks(build(false))
+	require.NoError(t, err)
+	second, err := NewHttpRequestSmugglingRule().GenerateRisks(build(true))
+	require.NoError(t, err)
+
+	require.Len(t, first, 1)
+	require.Len(t, second, 1)
+	assert.Equal(t, first[0].Title, second[0].Title)
+}
