@@ -1,0 +1,305 @@
+<t>0</t>
+<t>100</t>
+<t>10</t>
+<t>1</t>
+<t>2020-01-04</t>
+<t>2020-01-05</t>
+<t>23</t>
+<t>31</t>
+<t>33</t>
+<t>41</t>
+<t>51</t>
+<t>60</t>
+<t>61</t>
+<t>62</t>
+<t></t>
+<t>Accepted</t>
+<t>Accidental Secret Leak(Git) risk at Git Repository: Git Leak Prevention</t>
+<t>Accidental Secret Leak</t>
+<t>Action</t>
+<t>Anti-DoS Measures</t>
+<t>Apache Webserver</t>
+<t>Application Deployment</t>
+<t>Apply DevSecOps best-practices and use scanning tools to identify vulnerabilities in source- or byte-code,dependencies, container layers, and optionally also via dynamic scans against running test systems.</t>
+<t>Apply an authentication method to the technical asset protecting highly sensitive data via two-factor authentication for human users.</t>
+<t>Apply an authentication method to the technical asset. To protect highly sensitive data consider the use of two-factor authentication for human users.</t>
+<t>Apply anti-DoS techniques like throttling and/or per-client load blocking with quotas. Also for maintenance access routes consider applying a VPN instead of public reachable interfaces. Generally applying redundancy on the targeted technical asset reduces the risk of DoS.</t>
+<t>Apply encryption to the technical asset.</t>
+<t>Apply hardening of all XML parser instances in order to stay safe from XML External Entity (XXE) vulnerabilities. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
+<t>Apply hardening of all cloud components and services, taking special care to follow the individual risk descriptions (which depend on the cloud provider tags in the model). &lt;br&gt;&lt;br&gt;For &lt;b&gt;Amazon Web Services (AWS)&lt;/b&gt;: Follow the &lt;i&gt;CIS Benchmark for Amazon Web Services&lt;/i&gt; (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;PacBot&#34;, &#34;CloudSploit&#34;, &#34;CloudMapper&#34;, &#34;ScoutSuite&#34;, or &#34;Prowler AWS CIS Benchmark Tool&#34;&lt;/i&gt;). &lt;br&gt;For EC2 and other servers running Amazon Linux, follow the &lt;i&gt;CIS Benchmark for Amazon Linux&lt;/i&gt; and switch to IMDSv2. &lt;br&gt;For S3 buckets follow the &lt;i&gt;Security Best Practices for Amazon S3&lt;/i&gt; at &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html&#34;&gt;https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html&lt;/a&gt; to avoid accidental leakage. &lt;br&gt;Also take a look at some of these tools: &lt;a href=&#34;https://github.com/toniblyx/my-arsenal-of-aws-security-tools&#34;&gt;https://github.com/toniblyx/my-arsenal-of-aws-security-tools&lt;/a&gt; &lt;br&gt;&lt;br&gt;For &lt;b&gt;Microsoft Azure&lt;/b&gt;: Follow the &lt;i&gt;CIS Benchmark for Microsoft Azure&lt;/i&gt; (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;CloudSploit&#34; or &#34;ScoutSuite&#34;&lt;/i&gt;).&lt;br&gt;&lt;br&gt;For &lt;b&gt;Google Cloud Platform&lt;/b&gt;: Follow the &lt;i&gt;CIS Benchmark for Google Cloud Computing Platform&lt;/i&gt; (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;CloudSploit&#34; or &#34;ScoutSuite&#34;&lt;/i&gt;). &lt;br&gt;&lt;br&gt;For &lt;b&gt;Oracle Cloud Platform&lt;/b&gt;: Follow the hardening best practices (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;CloudSploit&#34;&lt;/i&gt;).</t>
+<t>Apply hardening of all container infrastructures (see for example the &lt;i&gt;CIS-Benchmarks for Docker and Kubernetes&lt;/i&gt; and the &lt;i&gt;Docker Bench for Security&lt;/i&gt;). Use only trusted base images of the original vendors, verify digital signatures and apply image creation best practices. Also consider using Google&#39;s &lt;i&gt;Distroless&lt;/i&gt; base images or otherwise very small base images. Regularly execute container image scans with tools checking the layers for vulnerable components.</t>
+<t>Apply transport layer encryption to the communication link.</t>
+<t>Architecture</t>
+<t>Are recommendations from the linked cheat sheet and referenced ASVS chapter applied?</t>
+<t>Are recommendations from the linked cheat sheet and referenced ASVS/CSVS applied?</t>
+<t>Auth Credential Check Traffic</t>
+<t>Auth Traffic</t>
+<t>Authentication of Incoming Requests</t>
+<t>Authentication with Second Factor (2FA)</t>
+<t>Backoffice ERP System</t>
+<t>Before accessing the file cross-check that it resides in the expected folder and is of the expected type and filename/suffix. Try to use a mapping if possible instead of directly accessing by a filename which is (partly or fully) provided by the caller. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
+<t>Build Pipeline Hardening</t>
+<t>Business Side</t>
+<t>CMS Content Traffic</t>
+<t>CMS Updates</t>
+<t>CWE-1008</t>
+<t>CWE-1127</t>
+<t>CWE-16</t>
+<t>CWE-200</t>
+<t>CWE-22</t>
+<t>CWE-284</t>
+<t>CWE-306</t>
+<t>CWE-308</t>
+<t>CWE-311</t>
+<t>CWE-319</t>
+<t>CWE-400</t>
+<t>CWE-434</t>
+<t>CWE-501</t>
+<t>CWE-502</t>
+<t>CWE-522</t>
+<t>CWE-611</t>
+<t>CWE-89</t>
+<t>CWE-90</t>
+<t>CWE-912</t>
+<t>CWE-918</t>
+<t>CWE</t>
+<t>Check</t>
+<t>Checked by</t>
+<t>Cloud Hardening</t>
+<t>Code Backdooring risk at Git Repository</t>
+<t>Code Backdooring risk at Jenkins Build Server</t>
+<t>Code Backdooring</t>
+<t>Communication Link</t>
+<t>Consider using a Vault (Secret Storage) to securely store and access config secrets (like credentials, private keys, client certificates, etc.).</t>
+<t>Container Base Image Backdooring risk at Apache Webserver</t>
+<t>Container Base Image Backdooring risk at Marketing CMS</t>
+<t>Container Base Image Backdooring</t>
+<t>Container Infrastructure Hardening</t>
+<t>Contract File Server</t>
+<t>Customer Contract Database</t>
+<t>DB Update Access</t>
+<t>Database Traffic</t>
+<t>Date</t>
+<t>Denial of Service</t>
+<t>Denial-of-Service risky access of Backoffice ERP System by Apache Webserver via ERP System Traffic</t>
+<t>Denial-of-Service risky access of Backoffice ERP System by Backoffice Client via ERP Internal Access</t>
+<t>Denial-of-Service risky access of Marketing CMS by Backoffice Client via Marketing CMS Editing</t>
+<t>Development</t>
+<t>DoS-risky Access Across Trust-Boundary</t>
+<t>ERP Internal Access</t>
+<t>ERP System Traffic</t>
+<t>ERP Web Access</t>
+<t>Elevated</t>
+<t>Elevation of Privilege</t>
+<t>Encapsulate the asset behind a guarding service, application, or reverse-proxy. For admin maintenance a bastion-host should be used as a jump-server. For file transfer a store-and-forward-host should be used as an indirect file exchange platform.</t>
+<t>Encapsulation of Technical Asset</t>
+<t>Encryption of Communication Links</t>
+<t>Encryption of Technical Asset</t>
+<t>Establish measures preventing accidental check-in or package-in of secrets into sourcecode repositories and artifact registries. This starts by using good .gitignore and .dockerignore files, but does not stop there. See for example tools like &lt;i&gt;\&#34;git-secrets\&#34;&lt;/i&gt; or &lt;i&gt;\&#34;Talisman\&#34;&lt;/i&gt; to have check-in preventive measures for secrets. Consider also to regularly scan your repositories for secrets accidentally checked-in using scanning tools like &lt;i&gt;&#34;gitleaks&#34;&lt;/i&gt; or &lt;i&gt;&#34;gitrob&#34;&lt;/i&gt;.</t>
+<t>External Development Client</t>
+<t>File Validation</t>
+<t>Filter by file extension and discard (if feasible) the name provided. Whitelist the accepted file types and determine the mime-type on the server-side (for example via &#34;Apache Tika&#34; or similar checks). If the file is retrievable by end users and/or backoffice employees, consider performing scans for popular malware (if the files can be retrieved much later than they were uploaded, also apply a fresh malware scan during retrieval to scan with newer signatures of popular malware). Also enforce limits on maximum file size to avoid denial-of-service like scenarios.</t>
+<t>Function</t>
+<t>GetAttribute a Vault (Secret Storage) in place?</t>
+<t>Git Repository</t>
+<t>Git-Repo Code Write Access</t>
+<t>Git-Repo Web-UI Access</t>
+<t>High</t>
+<t>ID</t>
+<t>Identified Risk</t>
+<t>Identity Propagation and Resource-based Authorization</t>
+<t>Identity Provider</t>
+<t>Impact</t>
+<t>In Progress</t>
+<t>Information Disclosure</t>
+<t>Jenkins Build Server</t>
+<t>Jenkins Web-UI Access</t>
+<t>John Doe</t>
+<t>Justification</t>
+<t>LDAP Auth Server</t>
+<t>LDAP Credential Check Traffic</t>
+<t>LDAP-Injection Prevention</t>
+<t>LDAP-Injection risk at Identity Provider against LDAP server LDAP Auth Server via LDAP Credential Check Traffic</t>
+<t>LDAP-Injection risk at Marketing CMS against LDAP server LDAP Auth Server via Auth Traffic</t>
+<t>LDAP-Injection</t>
+<t>Likelihood</t>
+<t>Likely</t>
+<t>Load Balancer</t>
+<t>Low</t>
+<t>Marketing CMS Editing</t>
+<t>Marketing CMS</t>
+<t>Medium</t>
+<t>Missing Authentication covering communication link CMS Content Traffic from Load Balancer to Marketing CMS</t>
+<t>Missing Authentication covering communication link NFS Filesystem Access from Backoffice ERP System to Contract File Server</t>
+<t>Missing Authentication</t>
+<t>Missing Cloud Hardening (AWS) risk at Application Network: CIS Benchmark for AWS</t>
+<t>Missing Cloud Hardening (EC2) risk at Apache Webserver: CIS Benchmark for Amazon Linux</t>
+<t>Missing Cloud Hardening (S3) risk at Contract File Server: Security Best Practices for AWS S3</t>
+<t>Missing Cloud Hardening risk at ERP DMZ</t>
+<t>Missing Cloud Hardening risk at Web DMZ</t>
+<t>Missing Cloud Hardening risk at WebApp and Backoffice Virtualization</t>
+<t>Missing Cloud Hardening</t>
+<t>Missing End User Identity Propagation over communication link ERP System Traffic from Apache Webserver to Backoffice ERP System</t>
+<t>Missing File Validation risk at Apache Webserver</t>
+<t>Missing File Validation</t>
+<t>Missing Hardening risk at Apache Webserver</t>
+<t>Missing Hardening risk at Backoffice ERP System</t>
+<t>Missing Hardening risk at Customer Contract Database</t>
+<t>Missing Hardening risk at Identity Provider</t>
+<t>Missing Hardening risk at Jenkins Build Server</t>
+<t>Missing Hardening risk at LDAP Auth Server</t>
+<t>Missing Hardening</t>
+<t>Missing Identity Propagation</t>
+<t>Missing Two-Factor Authentication (2FA)</t>
+<t>Missing Two-Factor Authentication covering communication link CMS Content Traffic from Customer Web Client forwarded via Load Balancer to Marketing CMS</t>
+<t>Missing Two-Factor Authentication covering communication link DB Update Access from Backend Admin Client to Customer Contract Database</t>
+<t>Missing Two-Factor Authentication covering communication link ERP Internal Access from Backoffice Client to Backoffice ERP System</t>
+<t>Missing Two-Factor Authentication covering communication link ERP Web Access from Backend Admin Client to Backoffice ERP System</t>
+<t>Missing Two-Factor Authentication covering communication link Git-Repo Code Write Access from External Development Client to Git Repository</t>
+<t>Missing Two-Factor Authentication covering communication link Git-Repo Web-UI Access from External Development Client to Git Repository</t>
+<t>Missing Two-Factor Authentication covering communication link Jenkins Web-UI Access from External Development Client to Jenkins Build Server</t>
+<t>Missing Two-Factor Authentication covering communication link User Management Access from Backend Admin Client to LDAP Auth Server</t>
+<t>Missing Two-Factor Authentication covering communication link Web Application Traffic from Customer Web Client forwarded via Load Balancer to Apache Webserver</t>
+<t>Missing Vault (Secret Storage) in the threat model (referencing asset Backoffice ERP System as an example)</t>
+<t>Missing Vault (Secret Storage)</t>
+<t>Mitigated</t>
+<t>Mitigation</t>
+<t>Mixed Targets on Shared Runtime named WebApp and Backoffice Virtualization might enable attackers moving from one less valuable target to a more valuable one</t>
+<t>Mixed Targets on Shared Runtime</t>
+<t>NFS Filesystem Access</t>
+<t>Operations</t>
+<t>Path-Traversal Prevention</t>
+<t>Path-Traversal risk at Backoffice ERP System against filesystem Contract File Server via NFS Filesystem Access</t>
+<t>Path-Traversal</t>
+<t>Prevention of Deserialization of Untrusted Data</t>
+<t>Push instead of Pull Deployment at Apache Webserver via build pipeline asset Jenkins Build Server</t>
+<t>Push instead of Pull Deployment at Marketing CMS via build pipeline asset Jenkins Build Server</t>
+<t>Push instead of Pull Deployment</t>
+<t>RAA %</t>
+<t>Reduce the attack surface of backdooring the build pipeline by not directly exposing the build pipeline components on the public internet and also not exposing it in front of unmanaged (out-of-scope) developer clients.Also consider the use of code signing to prevent code modifications.</t>
+<t>Risk Category</t>
+<t>Risk accepted as tolerable</t>
+<t>Runtime Separation</t>
+<t>SQL/NoSQL-Injection Prevention</t>
+<t>SQL/NoSQL-Injection risk at Backoffice ERP System against database Customer Contract Database via Database Traffic</t>
+<t>SQL/NoSQL-Injection</t>
+<t>SSRF Prevention</t>
+<t>STRIDE</t>
+<t>Server-Side Request Forgery (SSRF) risk at Apache Webserver server-side web-requesting the target Backoffice ERP System via ERP System Traffic</t>
+<t>Server-Side Request Forgery (SSRF) risk at Apache Webserver server-side web-requesting the target Identity Provider via Auth Credential Check Traffic</t>
+<t>Server-Side Request Forgery (SSRF)</t>
+<t>Severity</t>
+<t>Spoofing</t>
+<t>Status</t>
+<t>System Hardening</t>
+<t>Tampering</t>
+<t>Technical Asset</t>
+<t>The hardening measures are being implemented and checked</t>
+<t>The hardening measures were implemented and checked</t>
+<t>Ticket</t>
+<t>Try to apply all hardening best practices (like CIS benchmarks, OWASP recommendations, vendor recommendations, DevSec Hardening Framework, DBSAT for Oracle databases, and others).</t>
+<t>Try to avoid constructing the outgoing target URL with caller controllable values. Alternatively use a mapping (whitelist) when accessing outgoing URLs instead of creating them including caller controllable values. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
+<t>Try to avoid the deserialization of untrusted data (even of data within the same trust-boundary as long as it is sent across a remote connection) in order to stay safe from Untrusted Deserialization vulnerabilities. Alternatively a strict whitelisting approach of the classes/types/values to deserialize might help as well. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
+<t>Try to prefer pull-based deployments (like GitOps scenarios offer) over push-based deployments to reduce the attack surface of the production system.</t>
+<t>Try to use libraries that properly encode LDAP meta characters in searches and queries to access the LDAP server in order to stay safe from LDAP-Injection vulnerabilities. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
+<t>Try to use parameter binding to be safe from injection vulnerabilities. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
+<t>Unchecked Deployment risk at External Development Client</t>
+<t>Unchecked Deployment risk at Git Repository</t>
+<t>Unchecked Deployment risk at Jenkins Build Server</t>
+<t>Unchecked Deployment</t>
+<t>Unchecked</t>
+<t>Unencrypted Communication named Auth Traffic between Marketing CMS and LDAP Auth Server transferring authentication data (like credentials, token, session-id, etc.)</t>
+<t>Unencrypted Communication named Database Traffic between Backoffice ERP System and Customer Contract Database transferring authentication data (like credentials, token, session-id, etc.)</t>
+<t>Unencrypted Communication named NFS Filesystem Access between Backoffice ERP System and Contract File Server</t>
+<t>Unencrypted Communication named Web Application Traffic between Load Balancer and Apache Webserver transferring authentication data (like credentials, token, session-id, etc.)</t>
+<t>Unencrypted Communication</t>
+<t>Unencrypted Technical Asset named Apache Webserver</t>
+<t>Unencrypted Technical Asset named Backoffice ERP System missing end user individual encryption with data-with-end-user-individual-key</t>
+<t>Unencrypted Technical Asset named Contract File Server</t>
+<t>Unencrypted Technical Asset named Customer Contract Database missing end user individual encryption with data-with-end-user-individual-key</t>
+<t>Unencrypted Technical Asset named Git Repository</t>
+<t>Unencrypted Technical Asset named Jenkins Build Server</t>
+<t>Unencrypted Technical Asset named Marketing CMS</t>
+<t>Unencrypted Technical Assets</t>
+<t>Unguarded Access From Internet</t>
+<t>Unguarded Access from Internet of Git Repository by External Development Client via Git-Repo Code Write Access</t>
+<t>Unguarded Access from Internet of Git Repository by External Development Client via Git-Repo Web-UI Access</t>
+<t>Unguarded Access from Internet of Jenkins Build Server by External Development Client via Jenkins Web-UI Access</t>
+<t>Unlikely</t>
+<t>Untrusted Deserialization risk at Backoffice ERP System</t>
+<t>Untrusted Deserialization risk at Jenkins Build Server</t>
+<t>Untrusted Deserialization</t>
+<t>Use separate runtime environments for running different target components or apply similar separation styles to prevent load- or breach-related problems originating from one more attacker-facing asset impacts also the other more critical rated backend/datastore assets.</t>
+<t>User Management Access</t>
+<t>Vault (Secret Storage)</t>
+<t>Very High</t>
+<t>Very Likely</t>
+<t>Web Application Traffic</t>
+<t>When processing requests for end users if possible authorize in the backend against the propagated identity of the end user. This can be achieved in passing JWTs or similar tokens and checking them in the backend services. For DevOps usages apply at least a technical-user authorization.</t>
+<t>XML External Entity (XXE) risk at Backoffice ERP System</t>
+<t>XML External Entity (XXE)</t>
+<t>XML Parser Hardening</t>
+<t>XYZ-1234</t>
+<t>XYZ-5678</t>
+<t>accidental-secret-leak@git-repo</t>
+<t>code-backdooring@git-repo</t>
+<t>code-backdooring@jenkins-build-server</t>
+<t>container-baseimage-backdooring@apache-webserver</t>
+<t>container-baseimage-backdooring@marketing-cms</t>
+<t>dos-risky-access-across-trust-boundary@erp-system@apache-webserver@apache-webserver&gt;erp-system-traffic-&gt;</t>
+<t>dos-risky-access-across-trust-boundary@erp-system@backoffice-client@backoffice-client&gt;erp-internal-access-&gt;</t>
+<t>dos-risky-access-across-trust-boundary@marketing-cms@backoffice-client@backoffice-client&gt;marketing-cms-editing-&gt;</t>
+<t>ldap-injection@identity-provider@ldap-auth-server@identity-provider&gt;ldap-credential-check-traffic</t>
+<t>ldap-injection@marketing-cms@ldap-auth-server@marketing-cms&gt;auth-traffic</t>
+<t>missing-authentication-second-factor@backend-admin-client&gt;db-update-access@backend-admin-client@sql-database</t>
+<t>missing-authentication-second-factor@backend-admin-client&gt;erp-web-access@backend-admin-client@erp-system</t>
+<t>missing-authentication-second-factor@backend-admin-client&gt;user-management-access@backend-admin-client@ldap-auth-server</t>
+<t>missing-authentication-second-factor@backoffice-client&gt;erp-internal-access@backoffice-client@erp-system</t>
+<t>missing-authentication-second-factor@external-dev-client&gt;git-repo-code-write-access@external-dev-client@git-repo</t>
+<t>missing-authentication-second-factor@external-dev-client&gt;git-repo-web-ui-access@external-dev-client@git-repo</t>
+<t>missing-authentication-second-factor@external-dev-client&gt;jenkins-web-ui-access@external-dev-client@jenkins-build-server</t>
+<t>missing-authentication-second-factor@load-balancer&gt;cms-content-traffic@load-balancer@marketing-cms</t>
+<t>missing-authentication-second-factor@load-balancer&gt;web-application-traffic@load-balancer@apache-webserver</t>
+<t>missing-authentication@erp-system&gt;nfs-filesystem-access@erp-system@contract-file-server</t>
+<t>missing-authentication@load-balancer&gt;cms-content-traffic@load-balancer@marketing-cms</t>
+<t>missing-cloud-hardening@apache-webserver@ec2</t>
+<t>missing-cloud-hardening@application-network@aws</t>
+<t>missing-cloud-hardening@contract-file-server@s3</t>
+<t>missing-cloud-hardening@erp-dmz</t>
+<t>missing-cloud-hardening@web-dmz</t>
+<t>missing-cloud-hardening@webapp-virtualization</t>
+<t>missing-file-validation@apache-webserver</t>
+<t>missing-hardening@apache-webserver</t>
+<t>missing-hardening@erp-system</t>
+<t>missing-hardening@identity-provider</t>
+<t>missing-hardening@jenkins-build-server</t>
+<t>missing-hardening@ldap-auth-server</t>
+<t>missing-hardening@sql-database</t>
+<t>missing-identity-propagation@apache-webserver&gt;erp-system-traffic@apache-webserver@erp-system</t>
+<t>missing-vault@erp-system</t>
+<t>mixed-targets-on-shared-runtime@webapp-virtualization</t>
+<t>path-traversal@erp-system@contract-file-server@erp-system&gt;nfs-filesystem-access</t>
+<t>push-instead-of-pull-deployment@jenkins-build-server</t>
+<t>server-side-request-forgery@apache-webserver@erp-system@apache-webserver&gt;erp-system-traffic</t>
+<t>server-side-request-forgery@apache-webserver@identity-provider@apache-webserver&gt;auth-credential-check-traffic</t>
+<t>sql-nosql-injection@erp-system@sql-database@erp-system&gt;database-traffic</t>
+<t>unchecked-deployment@external-dev-client</t>
+<t>unchecked-deployment@git-repo</t>
+<t>unchecked-deployment@jenkins-build-server</t>
+<t>unencrypted-asset@apache-webserver</t>
+<t>unencrypted-asset@contract-file-server</t>
+<t>unencrypted-asset@erp-system</t>
+<t>unencrypted-asset@git-repo</t>
+<t>unencrypted-asset@jenkins-build-server</t>
+<t>unencrypted-asset@marketing-cms</t>
+<t>unencrypted-asset@sql-database</t>
+<t>unencrypted-communication@erp-system&gt;database-traffic@erp-system@sql-database</t>
+<t>unencrypted-communication@erp-system&gt;nfs-filesystem-access@erp-system@contract-file-server</t>
+<t>unencrypted-communication@load-balancer&gt;web-application-traffic@load-balancer@apache-webserver</t>
+<t>unencrypted-communication@marketing-cms&gt;auth-traffic@marketing-cms@ldap-auth-server</t>
+<t>unguarded-access-from-internet@git-repo@external-dev-client@external-dev-client&gt;git-repo-code-write-access</t>
+<t>unguarded-access-from-internet@git-repo@external-dev-client@external-dev-client&gt;git-repo-web-ui-access</t>
+<t>unguarded-access-from-internet@jenkins-build-server@external-dev-client@external-dev-client&gt;jenkins-web-ui-access</t>
+<t>untrusted-deserialization@erp-system</t>
+<t>untrusted-deserialization@jenkins-build-server</t>
+<t>xml-external-entity@erp-system</t>

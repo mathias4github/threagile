@@ -1,0 +1,67 @@
+<t>Apache Webserver</t>
+<t>Application Deployment</t>
+<t>Application Network</t>
+<t>Auth Credential Check Traffic</t>
+<t>Auth Handling Environment</t>
+<t>Auth Traffic</t>
+<t>Backend Admin Client</t>
+<t>Backoffice Client</t>
+<t>Backoffice ERP System</t>
+<t>Build Job Config</t>
+<t>CMS Content Traffic</t>
+<t>CMS Updates</t>
+<t>Client Application Code</t>
+<t>Contract File Server</t>
+<t>Customer Accounts</t>
+<t>Customer Contract Database</t>
+<t>Customer Contract Summaries</t>
+<t>Customer Contracts</t>
+<t>Customer Operational Data</t>
+<t>Customer Traffic</t>
+<t>Customer Web Client</t>
+<t>DB Update Access</t>
+<t>Database Customizing and Dumps</t>
+<t>Database Traffic</t>
+<t>Dev Network</t>
+<t>ERP Customizing Data</t>
+<t>ERP DMZ</t>
+<t>ERP Internal Access</t>
+<t>ERP Logs</t>
+<t>ERP System Traffic</t>
+<t>ERP Web Access</t>
+<t>Element</t>
+<t>External Development Client</t>
+<t>Git Repo Code Read Access</t>
+<t>Git Repository</t>
+<t>Git-Repo Code Write Access</t>
+<t>Git-Repo Web-UI Access</t>
+<t>Identity Provider</t>
+<t>Jenkins Build Server</t>
+<t>Jenkins Web-UI Access</t>
+<t>LDAP Auth Server</t>
+<t>LDAP Credential Check Traffic</t>
+<t>Load Balancer</t>
+<t>Marketing CMS Editing</t>
+<t>Marketing CMS</t>
+<t>Marketing Material</t>
+<t>NFS Filesystem Access</t>
+<t>Server Application Code</t>
+<t>Some Internal Business Data</t>
+<t>User Management Access</t>
+<t>Web Application Traffic</t>
+<t>Web DMZ</t>
+<t>WebApp and Backoffice Virtualization</t>
+<t>X</t>
+<t>apache</t>
+<t>aws:ec2</t>
+<t>aws:s3</t>
+<t>aws</t>
+<t>git</t>
+<t>jboss</t>
+<t>jenkins</t>
+<t>keycloak</t>
+<t>linux</t>
+<t>mysql</t>
+<t>oracle</t>
+<t>some-erp</t>
+<t>vmware</t>
