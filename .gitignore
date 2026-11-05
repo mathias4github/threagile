@@ -36,3 +36,6 @@ stats.json
 /config.yaml
 /tmp/
 /threagile.yaml
+
+# golden reference files must be tracked despite the output patterns above
+!/test/golden/**
