@@ -61,7 +61,7 @@
 <t>CWE-522</t>
 <t>CWE-611</t>
 <t>CWE-693</t>
-<t>CWE-776</t>
+<t>CWE-770</t>
 <t>CWE-89</t>
 <t>CWE-90</t>
 <t>CWE-912</t>

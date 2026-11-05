@@ -17,17 +17,20 @@ func impactByCIA(input *types.Model, asset *types.TechnicalAsset) types.RiskExpl
 	return types.LowImpact
 }
 
-// boundaryIdOf returns the id of the trust boundary directly containing the asset ("" if none).
-func boundaryIdOf(input *types.Model, assetId string) string {
-	boundary := input.DirectContainingTrustBoundaryMappedByTechnicalAssetId[assetId]
-	if boundary == nil {
-		return ""
-	}
-	return boundary.Id
-}
+// isWebApplicationAttribute is the technology attribute shared by web-application, web-server and application-server.
+const isWebApplicationAttribute = "web_application"
 
-func isAcrossAnyTrustBoundary(input *types.Model, link *types.CommunicationLink) bool {
-	return boundaryIdOf(input, link.SourceId) != boundaryIdOf(input, link.TargetId)
+// networkBoundaryIdOf returns the id of the nearest network trust boundary around the asset
+// (walking up through nested non-network boundaries), or "" if the asset is in no network boundary.
+func networkBoundaryIdOf(input *types.Model, assetId string) string {
+	boundary := input.DirectContainingTrustBoundaryMappedByTechnicalAssetId[assetId]
+	for depth := 0; boundary != nil && depth < 100; depth++ {
+		if boundary.Type.IsNetworkBoundary() {
+			return boundary.Id
+		}
+		boundary = input.FindParentTrustBoundary(boundary)
+	}
+	return ""
 }
 
 func newAssetRisk(ruleId string, title string, likelihood types.RiskExploitationLikelihood, impact types.RiskExploitationImpact,

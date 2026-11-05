@@ -222,3 +222,11 @@ Golden-Diff gegen die Baseline (normalisiert): 63 → 68 Risiken – nur Zusätz
 | `missing-clickjacking-protection` | 0 – Web-Anwendungen werden im Beispiel nicht von einem als Mensch-Client markierten Asset erreicht, das die Bedingung erfüllt |
 
 Die nicht angeschlagenen Regeln sind ausschließlich durch Unit-Tests belegt. Beim Lauf traten keine Panics auf.
+
+### Nachtrag Regel-Review
+Detailprüfung aller zehn Regeln (Bedingungen, Texte, Referenzen) mit folgenden Korrekturen:
+- **Trust-Boundary-Semantik** (`xml-entity-expansion-dos`, `audit-log-manipulation`, `llm-prompt-injection`, `shared-datastore-tampering`): „über eine Trust-Boundary“ bedeutet jetzt wie in den Bestandsregeln „über eine *Netzwerk*-Boundary“ (`isAcrossTrustBoundaryNetworkOnly`); eine Execution-Environment-Boundary innerhalb desselben Netzes zählt nicht mehr als fremd (vorher Fehlalarme).
+- **`ai-sensitive-data-exposure`**: Empfänger-Heuristik korrigiert. Vorher galt ein ausgehender Link zu einem eigenen internet-exponierten Asset als Abfluss (falsch); jetzt: Cloud-Boundary, ausgehender Link zu Out-of-Scope-Asset (Drittanbieter, pytm LLM03) oder Ausgabe an menschliche Clients bzw. Aufrufer aus anderem Netz (pytm LLM08).
+- **Metadaten**: `audit-log-manipulation` ASVS-Kapitel auf die 4.0-Bezeichnung „V7 – Error Handling and Logging“ (alle anderen Regeln nutzen 4.0-Namen); `xml-schema-poisoning` CWE-91 → CWE-15 (Mapping von CAPEC-146, wie auch pytm referenziert); `xml-entity-expansion-dos` CWE-776 → CWE-770 (Regel deckt alle Ressourcen-Erschöpfungsvarianten ab, nicht nur Entity Expansion); `missing-clickjacking-protection` STRIDE Tampering → Spoofing (wie Schwesterregel CSRF); Referenzen für `http-request-smuggling` und `mail-command-injection` auf die passenden WSTG-Testkapitel (die bisherige HTTP-Headers-Cheat-Sheet war thematisch daneben, für Smuggling gibt es kein Cheat Sheet).
+- **Konvention**: alle zehn Regeln iterieren jetzt über `SortedTechnicalAssetIDs()` wie die Bestandsregeln (deterministische Reihenfolge).
+- Golden-Diff: nur `cwe` des XML-DoS-Risikos; weiterhin 68 Risiken.

@@ -924,7 +924,7 @@
   },
   {
     "category": "xml-entity-expansion-dos",
-    "cwe": 776,
+    "cwe": 770,
     "data_breach_technical_assets": [
       "erp-system"
     ],

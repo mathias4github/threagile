@@ -17,7 +17,7 @@ func (*AuditLogManipulationRule) Category() *types.RiskCategory {
 		Description: "Monitoring and logging components that accept data from sources in other trust boundaries can be fed with forged or injected entries. " +
 			"A compromised source can also flood the component or hide its own traces.",
 		Impact:     "If this risk is unmitigated, attackers might forge, suppress or inject log entries and thereby cover their tracks or mislead incident response.",
-		ASVS:       "V16 - Security Logging and Error Handling",
+		ASVS:       "V7 - Error Handling and Logging Verification Requirements",
 		CheatSheet: "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html",
 		Action:     "Log Integrity Protection",
 		Mitigation: "Accept log data only through authenticated channels with append-only permissions, neutralize control characters in logged values, add integrity " +
@@ -25,7 +25,7 @@ func (*AuditLogManipulationRule) Category() *types.RiskCategory {
 		Check:                      "Is log ingestion authenticated and append-only and are log entries protected against modification?",
 		Function:                   types.Operations,
 		STRIDE:                     types.Repudiation,
-		DetectionLogic:             "In-scope monitoring technical assets with write access from in-scope technical assets located in another trust boundary.",
+		DetectionLogic:             "In-scope monitoring technical assets with write access from in-scope technical assets located in another network trust boundary.",
 		RiskAssessment:             "The risk rating depends on the integrity rating of the monitoring asset and of the data assets processed.",
 		FalsePositives:             "Log pipelines with authenticated, append-only ingestion and integrity protection can be considered as false positives after individual review.",
 		ModelFailurePossibleReason: false,
@@ -39,13 +39,14 @@ func (*AuditLogManipulationRule) SupportedTags() []string {
 
 func (r *AuditLogManipulationRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope || !technicalAsset.Technologies.GetAttribute(types.Monitoring) {
 			continue
 		}
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || incomingFlow.Readonly || !isAcrossAnyTrustBoundary(input, incomingFlow) {
+			if source == nil || source.OutOfScope || incomingFlow.Readonly || !isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {
 				continue
 			}
 			impact := types.LowImpact

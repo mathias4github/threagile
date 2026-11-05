@@ -24,7 +24,7 @@ func (*MissingClickjackingProtectionRule) Category() *types.RiskCategory {
 			"directive (and optionally X-Frame-Options). Additionally use SameSite cookies and re-authentication for critical actions.",
 		Check:          "Do all responses carry a restrictive frame-ancestors policy?",
 		Function:       types.Development,
-		STRIDE:         types.Tampering,
+		STRIDE:         types.Spoofing,
 		DetectionLogic: "In-scope web applications accessed via web protocols by clients used by humans.",
 		RiskAssessment: "The risk rating depends on the sensitivity of the web application itself and of the data assets processed.",
 		FalsePositives: "Applications that already send a restrictive frame policy for all responses, or that offer no state-changing or sensitive functionality, " +
@@ -40,11 +40,12 @@ func (*MissingClickjackingProtectionRule) SupportedTags() []string {
 
 func (r *MissingClickjackingProtectionRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope {
 			continue
 		}
-		if !technicalAsset.Technologies.GetAttribute(types.WebApplication, "web_application") {
+		if !technicalAsset.Technologies.GetAttribute(types.WebApplication, isWebApplicationAttribute) {
 			continue
 		}
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {

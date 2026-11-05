@@ -25,12 +25,12 @@ func (*XmlEntityExpansionDosRule) Category() *types.RiskCategory {
 		Check:          "Are DTDs disabled and are size, depth and expansion limits configured for XML processing?",
 		Function:       types.Development,
 		STRIDE:         types.DenialOfService,
-		DetectionLogic: "In-scope technical assets accepting XML data or offering SOAP web services that are accessed from the internet or across a trust boundary.",
+		DetectionLogic: "In-scope technical assets accepting XML data or offering SOAP web services that are accessed from the internet or across a network trust boundary.",
 		RiskAssessment: "The risk rating depends on the availability rating of the technical asset and of the data assets processed; redundancy lowers the impact.",
 		FalsePositives: "XML processing with hardened parsers and enforced resource limits, or assets only reachable by trusted callers in the same trust boundary, " +
 			"can be considered as false positives after individual review.",
 		ModelFailurePossibleReason: false,
-		CWE:                        776,
+		CWE:                        770,
 	}
 }
 
@@ -40,7 +40,8 @@ func (*XmlEntityExpansionDosRule) SupportedTags() []string {
 
 func (r *XmlEntityExpansionDosRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope {
 			continue
 		}
@@ -56,7 +57,7 @@ func (r *XmlEntityExpansionDosRule) GenerateRisks(input *types.Model) ([]*types.
 		exposed := technicalAsset.Internet
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source != nil && !source.OutOfScope && isAcrossAnyTrustBoundary(input, incomingFlow) {
+			if source != nil && !source.OutOfScope && isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {
 				exposed = true
 			}
 		}
