@@ -45,6 +45,18 @@ There are a lot of built in rules.
 - Server-Side Request Forgery (SSRF);
 - Service Registry Poisoning;
 - Unencrypted Technical Assets;
-- Unnecessary Technical Asset.
+- Unnecessary Technical Asset;
+- HTTP Request Smuggling;
+- Mail Command Injection;
+- Missing Clickjacking Protection;
+- Shared Datastore Tampering;
+- XML Entity Expansion and Oversized Payload DoS;
+- Prompt Injection and Jailbreaking;
+- Sensitive Data Exposure through AI Component;
+- Client Reverse Engineering;
+- Audit Log Manipulation;
+- XML Schema Poisoning.
+
+The last ten rules are derived from threat patterns of [OWASP pytm](https://github.com/OWASP/pytm) (see `docs/pytm-mapping.md`).
 
 Also there is available creation of [custom risk rules](./custom-risk-rules.md).
