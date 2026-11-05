@@ -19,7 +19,7 @@ func (*MailCommandInjectionRule) Category() *types.RiskCategory {
 		Impact: "If this risk is unmitigated, attackers might be able to send mails in the name of the system, read or alter mailboxes of other users, " +
 			"or execute unintended mail server commands.",
 		ASVS:       "V5 - Validation, Sanitization and Encoding Verification Requirements",
-		CheatSheet: "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html",
+		CheatSheet: "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/10-Testing_for_IMAP_SMTP_Injection",
 		Action:     "Mail Injection Prevention",
 		Mitigation: "Never build protocol commands or headers from caller-controlled values by string concatenation. Reject line breaks in values used for headers, " +
 			"use mail libraries with structured APIs, and validate recipients and mailbox names against an allow-list. When a third-party product is used instead of " +
@@ -27,7 +27,7 @@ func (*MailCommandInjectionRule) Category() *types.RiskCategory {
 		Check:          "Are values used in mail commands and headers validated and are line breaks rejected?",
 		Function:       types.Development,
 		STRIDE:         types.Tampering,
-		DetectionLogic: "In-scope clients accessing mail servers via typical SMTP or IMAP access protocols.",
+		DetectionLogic: "In-scope technical assets accessed by in-scope callers via SMTP or IMAP protocols (encrypted or not).",
 		RiskAssessment: "The risk rating depends on the sensitivity of the mail server itself and of the data assets processed.",
 		FalsePositives: "Mail submission with fixed recipients and header values not consisting of parts controllable by the caller can be considered " +
 			"as false positives after individual review.",
@@ -42,7 +42,8 @@ func (*MailCommandInjectionRule) SupportedTags() []string {
 
 func (r *MailCommandInjectionRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope {
 			continue
 		}

@@ -29,7 +29,7 @@ func (*XmlSchemaPoisoningRule) Category() *types.RiskCategory {
 		RiskAssessment:             "The risk rating depends on the integrity rating of the technical asset and of the data assets processed.",
 		FalsePositives:             "XML interfaces using fixed local schemas and rejecting DTD and schema references can be considered as false positives after individual review.",
 		ModelFailurePossibleReason: false,
-		CWE:                        91,
+		CWE:                        15,
 	}
 }
 
@@ -39,7 +39,8 @@ func (*XmlSchemaPoisoningRule) SupportedTags() []string {
 
 func (r *XmlSchemaPoisoningRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope {
 			continue
 		}

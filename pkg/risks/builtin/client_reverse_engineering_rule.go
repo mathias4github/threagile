@@ -40,7 +40,8 @@ func (*ClientReverseEngineeringRule) SupportedTags() []string {
 
 func (r *ClientReverseEngineeringRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope || !technicalAsset.CustomDevelopedParts {
 			continue
 		}

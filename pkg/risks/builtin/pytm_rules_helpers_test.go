@@ -41,8 +41,24 @@ func ptModel(assets []*types.TechnicalAsset, links []*types.CommunicationLink, b
 	}
 	for assetId, boundary := range boundaries {
 		model.DirectContainingTrustBoundaryMappedByTechnicalAssetId[assetId] = boundary
+		ptRegisterBoundary(model, boundary)
 	}
 	return model
+}
+
+// ptRegisterBoundary makes the boundary known to the model so that parent lookups work.
+func ptRegisterBoundary(model *types.Model, boundary *types.TrustBoundary) {
+	if model.TrustBoundaries == nil {
+		model.TrustBoundaries = make(map[string]*types.TrustBoundary)
+	}
+	model.TrustBoundaries[boundary.Id] = boundary
+}
+
+// ptNest declares child as nested inside parent (parent needs no directly contained asset).
+func ptNest(model *types.Model, parent *types.TrustBoundary, child *types.TrustBoundary) {
+	parent.TrustBoundariesNested = append(parent.TrustBoundariesNested, child.Id)
+	ptRegisterBoundary(model, parent)
+	ptRegisterBoundary(model, child)
 }
 
 func ptLink(id, source, target string, protocol types.Protocol) *types.CommunicationLink {

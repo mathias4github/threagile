@@ -19,7 +19,7 @@ func (*HttpRequestSmugglingRule) Category() *types.RiskCategory {
 		Impact: "If this risk is unmitigated, attackers might bypass filtering and access controls of the front-end, poison shared connections or caches, " +
 			"and hijack requests of other users.",
 		ASVS:       "V13 - API and Web Service Verification Requirements",
-		CheatSheet: "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html",
+		CheatSheet: "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/15-Testing_for_HTTP_Splitting_Smuggling",
 		Action:     "HTTP Parsing Consistency",
 		Mitigation: "Use current versions of front-end and back-end components that parse HTTP identically and reject ambiguous requests. Prefer HTTP/2 or later " +
 			"end-to-end between the components, disable connection reuse towards the back-end where possible, and normalize or reject conflicting length headers at the front-end.",
@@ -41,11 +41,12 @@ func (*HttpRequestSmugglingRule) SupportedTags() []string {
 
 func (r *HttpRequestSmugglingRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope {
 			continue
 		}
-		if !technicalAsset.Technologies.GetAttribute(types.WebApplication, "web_application", types.IsWebService) {
+		if !technicalAsset.Technologies.GetAttribute(types.WebApplication, isWebApplicationAttribute, types.IsWebService) {
 			continue
 		}
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {

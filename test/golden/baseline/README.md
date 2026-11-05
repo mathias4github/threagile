@@ -22,3 +22,4 @@ DOT- und Excel-Zeilen schwankt). Maßgeblich ist daher `normalized/` (erzeugt vo
 | Fix #96 | 65 | Feld `cwe` in `risks.json` |
 | Phase 2 (pytm-Regeln) | 68 | +2 `http-request-smuggling`, +1 `xml-entity-expansion-dos` |
 | Review-Fixes | 68 | Titel von `http-request-smuggling` ohne Forwarder-Namen |
+| Regel-Review | 68 | `xml-entity-expansion-dos`: CWE 776 → 770 |

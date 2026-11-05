@@ -26,7 +26,7 @@ func (*LlmPromptInjectionRule) Category() *types.RiskCategory {
 		Check:          "Are input and output filtered and is the AI component limited to the minimum of capabilities and data?",
 		Function:       types.Development,
 		STRIDE:         types.Tampering,
-		DetectionLogic: "In-scope AI technical assets receiving input from internet-facing assets, human-operated clients or assets in other trust boundaries.",
+		DetectionLogic: "In-scope AI technical assets receiving input from internet-facing assets, human-operated clients or assets in other network trust boundaries.",
 		RiskAssessment: "The risk rating depends on the sensitivity of the AI asset itself and of the data assets processed; direct access by humans or from the " +
 			"internet raises the likelihood.",
 		FalsePositives: "AI components only fed by fully trusted, fixed input without any influence of users or external content can be considered " +
@@ -42,7 +42,8 @@ func (*LlmPromptInjectionRule) SupportedTags() []string {
 
 func (r *LlmPromptInjectionRule) GenerateRisks(input *types.Model) ([]*types.Risk, error) {
 	risks := make([]*types.Risk, 0)
-	for _, technicalAsset := range input.TechnicalAssets {
+	for _, id := range input.SortedTechnicalAssetIDs() {
+		technicalAsset := input.TechnicalAssets[id]
 		if technicalAsset.OutOfScope || !technicalAsset.Technologies.GetAttribute(types.AI) {
 			continue
 		}
@@ -54,7 +55,7 @@ func (r *LlmPromptInjectionRule) GenerateRisks(input *types.Model) ([]*types.Ris
 				continue
 			}
 			direct := source.Internet || source.UsedAsClientByHuman
-			if direct || isAcrossAnyTrustBoundary(input, incomingFlow) {
+			if direct || isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {
 				found = true
 			}
 			if direct {
