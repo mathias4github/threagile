@@ -51,3 +51,26 @@ func TestPytmRulesNestedBoundaryInSameNetworkIsNotAcross(t *testing.T) {
 		assert.Empty(t, risks, rule.Category().ID)
 	}
 }
+
+// Out-of-scope callers (browsers, external clients, foreign proxies) are the attack path and must not
+// suppress risks of the in-scope target. Only mail-command-injection keeps skipping them, because there
+// the vulnerable code is in the caller (like ldap-injection).
+func TestPytmRulesOutOfScopeCallerStillCreatesRisk(t *testing.T) {
+	client := ptAsset("client", ptTech(types.Browser))
+	client.Internet, client.UsedAsClientByHuman, client.OutOfScope = true, true, true
+	proxy := ptAsset("proxy", ptTech(types.ReverseProxy, types.IsTrafficForwarding))
+	proxy.OutOfScope = true
+	web := ptAsset("web", ptTech(types.WebApplication))
+	web.DataFormatsAccepted = []types.DataFormat{types.XML}
+	llm := ptAsset("llm", ptTech(types.AI))
+	xmlLink := ptLink("l1", "client", "web", types.HTTPS)
+	xmlLink.Authorization = types.NoneAuthorization
+	model := ptModel([]*types.TechnicalAsset{client, proxy, web, llm},
+		[]*types.CommunicationLink{xmlLink, ptLink("l2", "proxy", "web", types.HTTPS), ptLink("l3", "client", "llm", types.HTTPS)}, nil)
+
+	for _, rule := range []types.RiskRule{NewMissingClickjackingProtectionRule(), NewHttpRequestSmugglingRule(), NewXmlSchemaPoisoningRule(), NewLlmPromptInjectionRule()} {
+		risks, err := rule.GenerateRisks(model)
+		assert.NoError(t, err, rule.Category().ID)
+		assert.Len(t, risks, 1, rule.Category().ID)
+	}
+}
