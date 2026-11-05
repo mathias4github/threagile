@@ -41,6 +41,7 @@ type Model struct { // TODO: Eventually remove this and directly use ParsedModel
 	TrustBoundaries                               map[string]TrustBoundary  `yaml:"trust_boundaries,omitempty" json:"trust_boundaries,omitempty"`
 	SharedRuntimes                                map[string]SharedRuntime  `yaml:"shared_runtimes,omitempty" json:"shared_runtimes,omitempty"`
 	CustomRiskCategories                          RiskCategories            `yaml:"custom_risk_categories,omitempty" json:"custom_risk_categories,omitempty"`
+	LegacyIndividualRiskCategories                yaml.Node                 `yaml:"individual_risk_categories,omitempty" json:"-"`
 	RiskTracking                                  map[string]RiskTracking   `yaml:"risk_tracking,omitempty" json:"risk_tracking,omitempty"`
 	DiagramTweakNodesep                           int                       `yaml:"diagram_tweak_nodesep,omitempty" json:"diagram_tweak_nodesep,omitempty"`
 	DiagramTweakRanksep                           int                       `yaml:"diagram_tweak_ranksep,omitempty" json:"diagram_tweak_ranksep,omitempty"`
@@ -78,6 +79,11 @@ func (model *Model) Load(inputFilename string) error {
 		log.Fatal("Unable to parse model yaml: ", unmarshalError)
 	}
 
+	legacyError := model.adoptLegacyRiskCategories()
+	if legacyError != nil {
+		log.Fatal("Unable to parse individual_risk_categories: ", legacyError)
+	}
+
 	for _, includeFile := range model.Includes {
 		mergeError := model.Merge(filepath.Dir(inputFilename), includeFile)
 		if mergeError != nil {
@@ -104,6 +110,11 @@ func (model *Model) Merge(dir string, includeFilename string) error {
 	unmarshalError := yaml.Unmarshal(modelYaml, &includedModel)
 	if unmarshalError != nil {
 		return fmt.Errorf("unable to parse model yaml: %w", unmarshalError)
+	}
+
+	legacyError := includedModel.adoptLegacyRiskCategories()
+	if legacyError != nil {
+		return fmt.Errorf("unable to parse individual_risk_categories: %w", legacyError)
 	}
 
 	var mergeError error
@@ -219,7 +230,7 @@ func (model *Model) Merge(dir string, includeFilename string) error {
 				return fmt.Errorf("failed to merge shared runtimes: %w", mergeError)
 			}
 
-		case strings.ToLower("custom_risk_categories"):
+		case strings.ToLower("custom_risk_categories"), strings.ToLower("individual_risk_categories"):
 			mergeError = model.CustomRiskCategories.Add(includedModel.CustomRiskCategories...)
 			if mergeError != nil {
 				return fmt.Errorf("failed to merge risk categories: %w", mergeError)
@@ -274,4 +285,55 @@ func (model *Model) AddTagToModelInput(tag string, dryRun bool, changes *[]strin
 
 func NormalizeTag(tag string) string {
 	return strings.TrimSpace(strings.ToLower(tag))
+}
+
+// adoptLegacyRiskCategories moves risk categories given under the former key
+// "individual_risk_categories" into CustomRiskCategories (see issue #130).
+// The former format was a map keyed by the category title; a list is accepted as well.
+func (model *Model) adoptLegacyRiskCategories() error {
+	node := model.LegacyIndividualRiskCategories
+	model.LegacyIndividualRiskCategories = yaml.Node{}
+
+	var legacy RiskCategories
+	switch node.Kind {
+	case 0:
+		return nil
+
+	case yaml.MappingNode:
+		var byTitle map[string]*RiskCategory
+		if err := node.Decode(&byTitle); err != nil {
+			return err
+		}
+		titles := make([]string, 0, len(byTitle))
+		for title := range byTitle {
+			titles = append(titles, title)
+		}
+		sort.Strings(titles)
+		for _, title := range titles {
+			category := byTitle[title]
+			if category == nil {
+				continue
+			}
+			if category.Title == "" {
+				category.Title = title
+			}
+			legacy = append(legacy, category)
+		}
+
+	case yaml.SequenceNode:
+		if err := node.Decode(&legacy); err != nil {
+			return err
+		}
+
+	default:
+		if node.Tag == "!!null" {
+			return nil
+		}
+		return fmt.Errorf("unexpected yaml node kind %d", node.Kind)
+	}
+
+	if len(legacy) > 0 {
+		log.Println("WARNING: \"individual_risk_categories\" is deprecated, please rename it to \"custom_risk_categories\"")
+	}
+	return model.CustomRiskCategories.Add(legacy...)
 }

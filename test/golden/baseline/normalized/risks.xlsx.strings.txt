@@ -58,11 +58,13 @@
 <t>CWE-502</t>
 <t>CWE-522</t>
 <t>CWE-611</t>
+<t>CWE-693</t>
 <t>CWE-89</t>
 <t>CWE-90</t>
 <t>CWE-912</t>
 <t>CWE-918</t>
 <t>CWE</t>
+<t>Check if XYZ...</t>
 <t>Check</t>
 <t>Checked by</t>
 <t>Cloud Hardening</t>
@@ -76,6 +78,7 @@
 <t>Container Base Image Backdooring</t>
 <t>Container Infrastructure Hardening</t>
 <t>Contract File Server</t>
+<t>Critical</t>
 <t>Customer Contract Database</t>
 <t>DB Update Access</t>
 <t>Database Traffic</t>
@@ -96,9 +99,12 @@
 <t>Encryption of Communication Links</t>
 <t>Encryption of Technical Asset</t>
 <t>Establish measures preventing accidental check-in or package-in of secrets into sourcecode repositories and artifact registries. This starts by using good .gitignore and .dockerignore files, but does not stop there. See for example tools like &lt;i&gt;\&#34;git-secrets\&#34;&lt;/i&gt; or &lt;i&gt;\&#34;Talisman\&#34;&lt;/i&gt; to have check-in preventive measures for secrets. Consider also to regularly scan your repositories for secrets accidentally checked-in using scanning tools like &lt;i&gt;&#34;gitleaks&#34;&lt;/i&gt; or &lt;i&gt;&#34;gitrob&#34;&lt;/i&gt;.</t>
+<t>Example Individual Risk at Contract Filesystem</t>
+<t>Example Individual Risk at Database</t>
 <t>External Development Client</t>
 <t>File Validation</t>
 <t>Filter by file extension and discard (if feasible) the name provided. Whitelist the accepted file types and determine the mime-type on the server-side (for example via &#34;Apache Tika&#34; or similar checks). If the file is retrievable by end users and/or backoffice employees, consider performing scans for popular malware (if the files can be retrieved much later than they were uploaded, also apply a fresh malware scan during retrieval to scan with newer signatures of popular malware). Also enforce limits on maximum file size to avoid denial-of-service like scenarios.</t>
+<t>Frequent</t>
 <t>Function</t>
 <t>GetAttribute a Vault (Secret Storage) in place?</t>
 <t>Git Repository</t>
@@ -177,6 +183,7 @@
 <t>Push instead of Pull Deployment</t>
 <t>RAA %</t>
 <t>Reduce the attack surface of backdooring the build pipeline by not directly exposing the build pipeline components on the public internet and also not exposing it in front of unmanaged (out-of-scope) developer clients.Also consider the use of code signing to prevent code modifications.</t>
+<t>Repudiation</t>
 <t>Risk Category</t>
 <t>Risk accepted as tolerable</t>
 <t>Runtime Separation</t>
@@ -189,6 +196,9 @@
 <t>Server-Side Request Forgery (SSRF) risk at Apache Webserver server-side web-requesting the target Identity Provider via Auth Credential Check Traffic</t>
 <t>Server-Side Request Forgery (SSRF)</t>
 <t>Severity</t>
+<t>Some Individual Risk Example</t>
+<t>Some text describing the action...</t>
+<t>Some text describing the mitigation...</t>
 <t>Spoofing</t>
 <t>Status</t>
 <t>System Hardening</t>
@@ -282,6 +292,8 @@
 <t>push-instead-of-pull-deployment@jenkins-build-server</t>
 <t>server-side-request-forgery@apache-webserver@erp-system@apache-webserver&gt;erp-system-traffic</t>
 <t>server-side-request-forgery@apache-webserver@identity-provider@apache-webserver&gt;auth-credential-check-traffic</t>
+<t>something-strange@contract-file-server</t>
+<t>something-strange@sql-database</t>
 <t>sql-nosql-injection@erp-system@sql-database@erp-system&gt;database-traffic</t>
 <t>unchecked-deployment@external-dev-client</t>
 <t>unchecked-deployment@git-repo</t>

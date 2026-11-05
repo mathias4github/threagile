@@ -34,3 +34,14 @@ Geprüft wurde am Code bzw. mit Minimal-Modell; Anhänge (z. B. das Zip aus #164
 
 ## Vorschlag
 Nur #130 und #96 bearbeiten (je eigener Branch/Session: `fix/130-custom-risk-categories`, `fix/96-risks-json-cwe`). #164 erst nach Bereitstellung des Zips.
+
+---
+
+## Bearbeitung
+
+### #130 – erledigt (Branch-Stand: `claude/modest-babbage-1pgomq`)
+Golden-Diff gegen Baseline (normalisiert), alle Abweichungen folgen direkt aus dem Fix:
+- Das Beispielmodell enthält die Custom-Risikokategorie `something-strange` mit 2 identifizierten Risiken (`…@sql-database` critical, `…@contract-file-server` medium). Sie wurden bisher ignoriert und erscheinen jetzt in `risks.json`/`risks.xlsx`; die Stats ändern sich entsprechend (critical unchecked 0→1, medium unchecked +1).
+- `data-asset-diagram`: „Customer Contract Database“ wird wegen des critical-Risikos rot (`#FF2600`) statt grau (`#444444`) eingefärbt.
+- Alle übrigen Risiken (62), Technical Assets und das Data-Flow-Diagramm sind identisch.
+→ `test/golden/baseline` wird mit diesem Stand neu erzeugt (siehe `test/golden/baseline/README.md`).
