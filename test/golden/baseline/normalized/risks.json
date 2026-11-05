@@ -105,6 +105,30 @@
     "title": "<b>Denial-of-Service</b> risky access of <b>Marketing CMS</b> by <b>Backoffice Client</b> via <b>Marketing CMS Editing</b>"
   },
   {
+    "category": "http-request-smuggling",
+    "cwe": 444,
+    "data_breach_technical_assets": [
+      "apache-webserver"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "apache-webserver",
+    "severity": "medium",
+    "synthetic_id": "http-request-smuggling@apache-webserver",
+    "title": "<b>HTTP Request Smuggling</b> risk at <b>Apache Webserver</b> behind <b>Load Balancer</b>"
+  },
+  {
+    "category": "http-request-smuggling",
+    "cwe": 444,
+    "data_breach_technical_assets": [
+      "marketing-cms"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "marketing-cms",
+    "severity": "medium",
+    "synthetic_id": "http-request-smuggling@marketing-cms",
+    "title": "<b>HTTP Request Smuggling</b> risk at <b>Marketing CMS</b> behind <b>Load Balancer</b>"
+  },
+  {
     "category": "ldap-injection",
     "cwe": 90,
     "data_breach_probability": "probable",
@@ -897,6 +921,16 @@
     "severity": "elevated",
     "synthetic_id": "untrusted-deserialization@jenkins-build-server",
     "title": "<b>Untrusted Deserialization</b> risk at <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "xml-entity-expansion-dos",
+    "cwe": 776,
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "most_relevant_technical_asset": "erp-system",
+    "synthetic_id": "xml-entity-expansion-dos@erp-system",
+    "title": "<b>XML Entity Expansion and Oversized Payload DoS</b> risk at <b>Backoffice ERP System</b>"
   },
   {
     "category": "xml-external-entity",

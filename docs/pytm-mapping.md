@@ -189,3 +189,34 @@ TAG-BASIERTE Regeln (12 Vorschläge, Tags siehe Tabelle) sind bewusst nicht Teil
 
 - Zusammenfassung mehrerer SIDs je Regel (siehe oben) – Vorschlag so umsetzen.
 - Regeln 6/7 (KI) hängen an der Technologie `ai`; Fehlalarmrate hängt von der Modellierung ab.
+
+## 7. Umsetzungsstand (Phase 2)
+
+Umgesetzt (Branch `claude/modest-babbage-1pgomq`, je ein Commit `feat(rules): add <id> (ported from pytm <SID>)`), jeweils mit Positiv- und Negativtests in `pkg/risks/builtin/*_rule_test.go`:
+
+| Prio | Regel-ID | pytm-SIDs |
+|---|---|---|
+| 1 | `http-request-smuggling` | INP04, INP36, INP37 |
+| 2 | `mail-command-injection` | INP15 |
+| 3 | `missing-clickjacking-protection` | INP20 |
+| 4 | `shared-datastore-tampering` | AC02 |
+| 5 | `xml-entity-expansion-dos` | DO03, DO04, DO05, INP22, INP34 |
+| 6 | `llm-prompt-injection` | LLM01, LLM07 |
+| 7 | `ai-sensitive-data-exposure` | LLM03, LLM08 |
+| 8 | `client-reverse-engineering` | HA02, HA04 |
+| 9 | `audit-log-manipulation` | DE04 |
+| 10 | `xml-schema-poisoning` | AC04 |
+
+Nicht umgesetzt: `json-hijacking` (SC01, veraltetes Angriffsmuster) sowie alle TAG-BASIERTEN Vorschläge. Bestehende Regeln wurden nicht verändert.
+
+### Kurzbericht: Anschlag auf dem Beispielmodell
+Golden-Diff gegen die Baseline (normalisiert): 63 → 68 Risiken – nur Zusätze; alle bestehenden Risiken, Technical Assets und beide Diagramme unverändert.
+
+| Regel | Treffer im Beispielmodell |
+|---|---|
+| `http-request-smuggling` | 2 (`apache-webserver`, `marketing-cms` hinter dem Load Balancer) |
+| `xml-entity-expansion-dos` | 1 (`erp-system`, akzeptiert XML, erreichbar von anderer Boundary) |
+| übrige 7 Regeln | 0 – das Beispielmodell enthält keine Mail-Links, KI-Assets, Mobile-/Desktop-/IoT-Clients, Monitoring-Assets, schreibenden Mehrfachzugriffe auf Datastores über Boundaries hinweg bzw. XML-Links ohne Autorisierung |
+| `missing-clickjacking-protection` | 0 – Web-Anwendungen werden im Beispiel nicht von einem als Mensch-Client markierten Asset erreicht, das die Bedingung erfüllt |
+
+Die nicht angeschlagenen Regeln sind ausschließlich durch Unit-Tests belegt. Beim Lauf traten keine Panics auf.

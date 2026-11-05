@@ -30,6 +30,7 @@
 <t>Apply hardening of all container infrastructures (see for example the &lt;i&gt;CIS-Benchmarks for Docker and Kubernetes&lt;/i&gt; and the &lt;i&gt;Docker Bench for Security&lt;/i&gt;). Use only trusted base images of the original vendors, verify digital signatures and apply image creation best practices. Also consider using Google&#39;s &lt;i&gt;Distroless&lt;/i&gt; base images or otherwise very small base images. Regularly execute container image scans with tools checking the layers for vulnerable components.</t>
 <t>Apply transport layer encryption to the communication link.</t>
 <t>Architecture</t>
+<t>Are DTDs disabled and are size, depth and expansion limits configured for XML processing?</t>
 <t>Are recommendations from the linked cheat sheet and referenced ASVS chapter applied?</t>
 <t>Are recommendations from the linked cheat sheet and referenced ASVS/CSVS applied?</t>
 <t>Auth Credential Check Traffic</t>
@@ -54,11 +55,13 @@
 <t>CWE-319</t>
 <t>CWE-400</t>
 <t>CWE-434</t>
+<t>CWE-444</t>
 <t>CWE-501</t>
 <t>CWE-502</t>
 <t>CWE-522</t>
 <t>CWE-611</t>
 <t>CWE-693</t>
+<t>CWE-776</t>
 <t>CWE-89</t>
 <t>CWE-90</t>
 <t>CWE-912</t>
@@ -88,6 +91,8 @@
 <t>Denial-of-Service risky access of Backoffice ERP System by Backoffice Client via ERP Internal Access</t>
 <t>Denial-of-Service risky access of Marketing CMS by Backoffice Client via Marketing CMS Editing</t>
 <t>Development</t>
+<t>Disable entity expansion and DTD processing where not needed, and configure limits for document size, nesting depth, number of elements, attribute size and entity expansion count in the XML or SOAP stack. Enforce request size limits and timeouts already at the front-end.</t>
+<t>Do front-end and back-end reject ambiguous or malformed HTTP messages in the same way?</t>
 <t>DoS-risky Access Across Trust-Boundary</t>
 <t>ERP Internal Access</t>
 <t>ERP System Traffic</t>
@@ -110,6 +115,10 @@
 <t>Git Repository</t>
 <t>Git-Repo Code Write Access</t>
 <t>Git-Repo Web-UI Access</t>
+<t>HTTP Parsing Consistency</t>
+<t>HTTP Request Smuggling risk at Apache Webserver behind Load Balancer</t>
+<t>HTTP Request Smuggling risk at Marketing CMS behind Load Balancer</t>
+<t>HTTP Request Smuggling</t>
 <t>High</t>
 <t>ID</t>
 <t>Identified Risk</t>
@@ -239,6 +248,7 @@
 <t>Untrusted Deserialization risk at Backoffice ERP System</t>
 <t>Untrusted Deserialization risk at Jenkins Build Server</t>
 <t>Untrusted Deserialization</t>
+<t>Use current versions of front-end and back-end components that parse HTTP identically and reject ambiguous requests. Prefer HTTP/2 or later end-to-end between the components, disable connection reuse towards the back-end where possible, and normalize or reject conflicting length headers at the front-end.</t>
 <t>Use separate runtime environments for running different target components or apply similar separation styles to prevent load- or breach-related problems originating from one more attacker-facing asset impacts also the other more critical rated backend/datastore assets.</t>
 <t>User Management Access</t>
 <t>Vault (Secret Storage)</t>
@@ -246,9 +256,12 @@
 <t>Very Likely</t>
 <t>Web Application Traffic</t>
 <t>When processing requests for end users if possible authorize in the backend against the propagated identity of the end user. This can be achieved in passing JWTs or similar tokens and checking them in the backend services. For DevOps usages apply at least a technical-user authorization.</t>
+<t>XML Entity Expansion and Oversized Payload DoS risk at Backoffice ERP System</t>
+<t>XML Entity Expansion and Oversized Payload DoS</t>
 <t>XML External Entity (XXE) risk at Backoffice ERP System</t>
 <t>XML External Entity (XXE)</t>
 <t>XML Parser Hardening</t>
+<t>XML Resource Limits</t>
 <t>XYZ-1234</t>
 <t>XYZ-5678</t>
 <t>accidental-secret-leak@git-repo</t>
@@ -259,6 +272,8 @@
 <t>dos-risky-access-across-trust-boundary@erp-system@apache-webserver@apache-webserver&gt;erp-system-traffic-&gt;</t>
 <t>dos-risky-access-across-trust-boundary@erp-system@backoffice-client@backoffice-client&gt;erp-internal-access-&gt;</t>
 <t>dos-risky-access-across-trust-boundary@marketing-cms@backoffice-client@backoffice-client&gt;marketing-cms-editing-&gt;</t>
+<t>http-request-smuggling@apache-webserver</t>
+<t>http-request-smuggling@marketing-cms</t>
 <t>ldap-injection@identity-provider@ldap-auth-server@identity-provider&gt;ldap-credential-check-traffic</t>
 <t>ldap-injection@marketing-cms@ldap-auth-server@marketing-cms&gt;auth-traffic</t>
 <t>missing-authentication-second-factor@backend-admin-client&gt;db-update-access@backend-admin-client@sql-database</t>
@@ -314,4 +329,5 @@
 <t>unguarded-access-from-internet@jenkins-build-server@external-dev-client@external-dev-client&gt;jenkins-web-ui-access</t>
 <t>untrusted-deserialization@erp-system</t>
 <t>untrusted-deserialization@jenkins-build-server</t>
+<t>xml-entity-expansion-dos@erp-system</t>
 <t>xml-external-entity@erp-system</t>
