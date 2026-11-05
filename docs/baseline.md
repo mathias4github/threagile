@@ -64,7 +64,10 @@ Vollständige Liste (67): `docs/baseline-outdated-modules.txt`. Direkte Abhängi
 Aufgefallen: `jung-kurt/gofpdf` (v1.16.2), `wcharczuk/go-chart`, `mpvl/unique` sind unmaintained (keine Updates); `aws-sdk-go` und `golang/protobuf` sind als deprecated markiert (nur indirekt).
 
 ## Upstream-Test-Branches
-`upstream-test-builtin-rules` und `upstream-test-script-engine` existieren in dieser Session **nicht** (weder lokal noch auf `origin`). Nichts zu prüfen.
+`upstream-test-builtin-rules` und `upstream-test-script-engine` waren in der Session zunächst nicht sichtbar und
+tauchten erst nach `git fetch origin` auf (ebenso `test/builtin-rule-unit-tests`, `test/script-engine-unit-tests`).
+`git log master..origin/<branch>` ist für alle vier **leer**: der Inhalt ist bereits in `master`. Kein Merge nötig.
+(Korrektur: die erste Fassung dieses Dokuments behauptete fälschlich, die Branches existierten nicht.)
 
 ## Golden Files
 `test/golden/baseline/` (Rohdateien + `normalized/` + README). Erzeugt mit dem Beispielmodell
