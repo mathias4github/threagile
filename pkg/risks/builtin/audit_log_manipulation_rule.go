@@ -25,7 +25,7 @@ func (*AuditLogManipulationRule) Category() *types.RiskCategory {
 		Check:                      "Is log ingestion authenticated and append-only and are log entries protected against modification?",
 		Function:                   types.Operations,
 		STRIDE:                     types.Repudiation,
-		DetectionLogic:             "In-scope monitoring technical assets with write access from in-scope technical assets located in another network trust boundary.",
+		DetectionLogic:             "In-scope monitoring technical assets with write access from technical assets located in another network trust boundary.",
 		RiskAssessment:             "The risk rating depends on the integrity rating of the monitoring asset and of the data assets processed.",
 		FalsePositives:             "Log pipelines with authenticated, append-only ingestion and integrity protection can be considered as false positives after individual review.",
 		ModelFailurePossibleReason: false,
@@ -46,7 +46,7 @@ func (r *AuditLogManipulationRule) GenerateRisks(input *types.Model) ([]*types.R
 		}
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || incomingFlow.Readonly || !isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {
+			if source == nil || incomingFlow.Readonly || !isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {
 				continue
 			}
 			impact := types.LowImpact

@@ -26,7 +26,7 @@ func (*SharedDatastoreTamperingRule) Category() *types.RiskCategory {
 		Check:          "Is write access to the datastore separated per trust boundary and is data read from it validated?",
 		Function:       types.Architecture,
 		STRIDE:         types.Tampering,
-		DetectionLogic: "In-scope datastores with write access from in-scope technical assets located in at least two different network trust boundaries.",
+		DetectionLogic: "In-scope datastores with write access from technical assets located in at least two different network trust boundaries.",
 		RiskAssessment: "The risk rating depends on the integrity rating of the datastore and of the data assets processed.",
 		FalsePositives: "Datastores with strictly partitioned write permissions per writer (separate schemas or accounts) can be considered as false positives " +
 			"after individual review.",
@@ -49,7 +49,7 @@ func (r *SharedDatastoreTamperingRule) GenerateRisks(input *types.Model) ([]*typ
 		writerBoundaries := make(map[string]bool)
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || incomingFlow.Readonly {
+			if source == nil || incomingFlow.Readonly {
 				continue
 			}
 			writerBoundaries[networkBoundaryIdOf(input, incomingFlow.SourceId)] = true

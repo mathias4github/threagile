@@ -25,7 +25,7 @@ func (*MissingClickjackingProtectionRule) Category() *types.RiskCategory {
 		Check:          "Do all responses carry a restrictive frame-ancestors policy?",
 		Function:       types.Development,
 		STRIDE:         types.Spoofing,
-		DetectionLogic: "In-scope web applications accessed via web protocols by clients used by humans.",
+		DetectionLogic: "In-scope web applications accessed via web protocols by clients used by humans (in scope or not).",
 		RiskAssessment: "The risk rating depends on the sensitivity of the web application itself and of the data assets processed.",
 		FalsePositives: "Applications that already send a restrictive frame policy for all responses, or that offer no state-changing or sensitive functionality, " +
 			"can be considered as false positives after individual review.",
@@ -50,7 +50,7 @@ func (r *MissingClickjackingProtectionRule) GenerateRisks(input *types.Model) ([
 		}
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || !source.UsedAsClientByHuman {
+			if source == nil || !source.UsedAsClientByHuman {
 				continue
 			}
 			if !incomingFlow.Protocol.IsPotentialWebAccessProtocol() {

@@ -65,6 +65,16 @@ func GetBuiltInRiskRules() types.RiskRules {
 		builtin.NewMissingClickjackingProtectionRule(),
 		builtin.NewMailCommandInjectionRule(),
 		builtin.NewHttpRequestSmugglingRule(),
+		builtin.NewMissingBruteForceProtectionRule(),
+		builtin.NewMissingAuthorizationRule(),
+		builtin.NewMissingMonitoringRule(),
+		builtin.NewSensitiveDataInLogsRule(),
+		builtin.NewMissingRedundancyRule(),
+		builtin.NewInternetExposedDatastoreRule(),
+		builtin.NewWeakSessionManagementRule(),
+		builtin.NewOsCommandInjectionRule(),
+		builtin.NewHardcodedCredentialsRule(),
+		builtin.NewLlmExcessiveAgencyRule(),
 	} {
 		rules[rule.Category().ID] = rule
 	}

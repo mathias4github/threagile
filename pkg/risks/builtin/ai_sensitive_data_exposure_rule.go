@@ -92,7 +92,7 @@ func (r *AiSensitiveDataExposureRule) usesThirdParty(input *types.Model, technic
 func (r *AiSensitiveDataExposureRule) hasLessTrustedConsumer(input *types.Model, technicalAsset *types.TechnicalAsset) bool {
 	for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 		source := input.TechnicalAssets[incomingFlow.SourceId]
-		if source == nil || source.OutOfScope {
+		if source == nil {
 			continue
 		}
 		if source.UsedAsClientByHuman || isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {

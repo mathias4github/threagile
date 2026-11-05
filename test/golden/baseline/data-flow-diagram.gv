@@ -294,15 +294,15 @@ color="#CC0000"
 
   513618175 -> 2943509451 [ color="#CC0000"  style="solid" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="ldaps" fontcolor="#AF780E"  ];
 
-  212448500 -> 3786194998 [ color="#999999"  style="dashed" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="ssh" fontcolor="#CC0000"  ];
-
   212448500 -> 3786194998 [ color="#999999"  style="dashed" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="https" fontcolor="#CC0000"  ];
 
   212448500 -> 3672894744 [ color="#999999"  style="dashed" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="https" fontcolor="#AF780E"  ];
 
-  2252878724 -> 4009840091 [ color="#CC0000"  style="solid" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="jdbc" fontcolor="#AF780E"  ];
+  212448500 -> 3786194998 [ color="#999999"  style="dashed" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="ssh" fontcolor="#CC0000"  ];
 
   2252878724 -> 3681547760 [ color="#AF780E"  style="solid" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="nfs" fontcolor="#AF780E"  ];
+
+  2252878724 -> 4009840091 [ color="#CC0000"  style="solid" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="jdbc" fontcolor="#AF780E"  ];
 
   2219774459 -> 219064102 [ color="#CC0000"  style="solid" penwidth="2.500000" arrowtail="dot" arrowhead="normal" dir="forward" arrowsize="2.0"  weight="1"  constraint=true  xlabel="https" fontcolor="#AF780E"  ];
 

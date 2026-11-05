@@ -19,7 +19,7 @@ func TestXmlSchemaPoisoningUnauthorizedCallerOfXmlAssetCreatesRisk(t *testing.T)
 
 	require.NoError(t, err)
 	require.Len(t, risks, 1)
-	assert.Equal(t, "xml-schema-poisoning@caller@svc@caller>l", risks[0].SyntheticId)
+	assert.Equal(t, "xml-schema-poisoning@caller@svc@l", risks[0].SyntheticId)
 }
 
 func TestXmlSchemaPoisoningNoRiskWhenAuthorizedOrNoXml(t *testing.T) {

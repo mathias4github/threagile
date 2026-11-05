@@ -3,7 +3,7 @@
 Stand nach Phase 3 und Regel-Review (52 Built-in-Regeln). Methode: Abgleich der vorhandenen Regeln mit
 (a) den nicht portierten pytm-Mustern (`docs/pytm-mapping.md`), (b) OWASP Top 10 2021 und ASVS-4.0-Kapiteln,
 (c) den offenen Upstream-Issues (`docs/bug-triage.md`), (d) typischen Cloud- und KI-Architekturen.
-Nur Vorschläge, nichts davon ist umgesetzt.
+**Stand nach Freigabe: alle zehn Vorschläge (Abschnitte 2 und 3) sind umgesetzt** (Regeln in `pkg/risks/builtin/`, Tests in `proposed_rules_test.go`). Abweichungen von den ursprünglichen Bedingungen siehe Abschnitt 5.
 
 ## 1. Abdeckung OWASP Top 10 (2021) durch die vorhandenen Regeln
 
@@ -52,3 +52,12 @@ Die Tags müssten in `SupportedTags()` der jeweiligen Regel registriert werden, 
 - Generische „fehlende Eingabevalidierung“ (pytm INP10/14/25 u. a.): nicht modellierbar, würde für jedes Asset feuern.
 - Veraltete Komponenten (A06): keine Versions- oder Patch-Daten im Modell; `unchecked-deployment` adressiert den Prozess.
 - Sprach-/Produkt-spezifische Muster (PHP Remote File Inclusion, Format-String, Buffer Overflow): nur per Tag und mit geringem Zusatznutzen gegenüber `missing-hardening`.
+
+## 5. Umsetzung – Abweichungen und Ergebnis
+
+- **Out-of-Scope-Aufrufer** werden bei keiner der Regeln übersprungen (Browser und externe Clients sind in Modellen meist out of scope, bleiben aber der Angriffspfad). Einzige Ausnahme bleibt `mail-command-injection`, weil dort der Aufrufer den verwundbaren Code hält (wie `ldap-injection`).
+- `missing-monitoring` wählt das Beispiel-Asset nach den verarbeiteten Daten (nicht nur nach dem Asset-Rating) und gilt als `model_failure_possible_reason`, ebenso `missing-redundancy`.
+- `missing-authorization` nutzt dasselbe Kriterium wie `missing-identity-propagation` zur Abgrenzung (`processing_end_user_requests`), damit sich beide nicht überschneiden.
+- `hardcoded-credentials` referenziert bevorzugt das Asset, das das Datenasset **speichert**, sonst ein verarbeitendes; ID `hardcoded-credentials@<data-asset>`.
+- `llm-excessive-agency`: CWE-250 (Execution with Unnecessary Privilege) statt 1427.
+- Beispielmodell: 68 → 77 Risiken, ausschließlich Zusätze: 2× `missing-brute-force-protection` (External Dev Client → Jenkins aus dem Internet; Admin-Client → LDAP), 2× `missing-clickjacking-protection` (durch die Out-of-Scope-Korrektur), 1× `missing-monitoring`, 2× `missing-redundancy` (Datenbank, Load Balancer), 2× `shared-datastore-tampering` (Datenbank und LDAP werden aus mehreren Netzen beschrieben). Die tag-basierten Regeln und `sensitive-data-in-logs`, `internet-exposed-datastore`, `missing-authorization` feuern im Beispiel nicht (keine Tags, kein Monitoring-Asset, kein internet-exponierter Datastore, alle authentifizierten Links autorisiert).

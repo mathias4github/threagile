@@ -17,7 +17,9 @@
 <t>Accidental Secret Leak(Git) risk at Git Repository: Git Leak Prevention</t>
 <t>Accidental Secret Leak</t>
 <t>Action</t>
+<t>Add a central logging and monitoring component (log management, SIEM, intrusion detection) that receives security events from the relevant technical assets, define alerting rules and an incident response process, and protect the collected logs against modification.</t>
 <t>Anti-DoS Measures</t>
+<t>Anti-Framing Headers</t>
 <t>Apache Webserver</t>
 <t>Application Deployment</t>
 <t>Apply DevSecOps best-practices and use scanning tools to identify vulnerabilities in source- or byte-code,dependencies, container layers, and optionally also via dynamic scans against running test systems.</t>
@@ -28,9 +30,11 @@
 <t>Apply hardening of all XML parser instances in order to stay safe from XML External Entity (XXE) vulnerabilities. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
 <t>Apply hardening of all cloud components and services, taking special care to follow the individual risk descriptions (which depend on the cloud provider tags in the model). &lt;br&gt;&lt;br&gt;For &lt;b&gt;Amazon Web Services (AWS)&lt;/b&gt;: Follow the &lt;i&gt;CIS Benchmark for Amazon Web Services&lt;/i&gt; (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;PacBot&#34;, &#34;CloudSploit&#34;, &#34;CloudMapper&#34;, &#34;ScoutSuite&#34;, or &#34;Prowler AWS CIS Benchmark Tool&#34;&lt;/i&gt;). &lt;br&gt;For EC2 and other servers running Amazon Linux, follow the &lt;i&gt;CIS Benchmark for Amazon Linux&lt;/i&gt; and switch to IMDSv2. &lt;br&gt;For S3 buckets follow the &lt;i&gt;Security Best Practices for Amazon S3&lt;/i&gt; at &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html&#34;&gt;https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html&lt;/a&gt; to avoid accidental leakage. &lt;br&gt;Also take a look at some of these tools: &lt;a href=&#34;https://github.com/toniblyx/my-arsenal-of-aws-security-tools&#34;&gt;https://github.com/toniblyx/my-arsenal-of-aws-security-tools&lt;/a&gt; &lt;br&gt;&lt;br&gt;For &lt;b&gt;Microsoft Azure&lt;/b&gt;: Follow the &lt;i&gt;CIS Benchmark for Microsoft Azure&lt;/i&gt; (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;CloudSploit&#34; or &#34;ScoutSuite&#34;&lt;/i&gt;).&lt;br&gt;&lt;br&gt;For &lt;b&gt;Google Cloud Platform&lt;/b&gt;: Follow the &lt;i&gt;CIS Benchmark for Google Cloud Computing Platform&lt;/i&gt; (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;CloudSploit&#34; or &#34;ScoutSuite&#34;&lt;/i&gt;). &lt;br&gt;&lt;br&gt;For &lt;b&gt;Oracle Cloud Platform&lt;/b&gt;: Follow the hardening best practices (see also the automated checks of cloud audit tools like &lt;i&gt;&#34;CloudSploit&#34;&lt;/i&gt;).</t>
 <t>Apply hardening of all container infrastructures (see for example the &lt;i&gt;CIS-Benchmarks for Docker and Kubernetes&lt;/i&gt; and the &lt;i&gt;Docker Bench for Security&lt;/i&gt;). Use only trusted base images of the original vendors, verify digital signatures and apply image creation best practices. Also consider using Google&#39;s &lt;i&gt;Distroless&lt;/i&gt; base images or otherwise very small base images. Regularly execute container image scans with tools checking the layers for vulnerable components.</t>
+<t>Apply rate limiting and progressive delays per account and per source, lock or step-up authentication after repeated failures, check new passwords against breached password lists, alert on unusual login failure rates, and offer a second factor for sensitive accounts.</t>
 <t>Apply transport layer encryption to the communication link.</t>
 <t>Architecture</t>
 <t>Are DTDs disabled and are size, depth and expansion limits configured for XML processing?</t>
+<t>Are failed logins rate limited per account and source and are breached passwords rejected?</t>
 <t>Are recommendations from the linked cheat sheet and referenced ASVS chapter applied?</t>
 <t>Are recommendations from the linked cheat sheet and referenced ASVS/CSVS applied?</t>
 <t>Auth Credential Check Traffic</t>
@@ -39,20 +43,24 @@
 <t>Authentication with Second Factor (2FA)</t>
 <t>Backoffice ERP System</t>
 <t>Before accessing the file cross-check that it resides in the expected folder and is of the expected type and filename/suffix. Try to use a mapping if possible instead of directly accessing by a filename which is (partly or fully) provided by the caller. When a third-party product is used instead of custom developed software, check if the product applies the proper mitigation and ensure a reasonable patch-level.</t>
+<t>Brute-Force Protection</t>
 <t>Build Pipeline Hardening</t>
 <t>Business Side</t>
 <t>CMS Content Traffic</t>
 <t>CMS Updates</t>
 <t>CWE-1008</t>
+<t>CWE-1021</t>
 <t>CWE-1127</t>
 <t>CWE-16</t>
 <t>CWE-200</t>
 <t>CWE-22</t>
 <t>CWE-284</t>
 <t>CWE-306</t>
+<t>CWE-307</t>
 <t>CWE-308</t>
 <t>CWE-311</t>
 <t>CWE-319</t>
+<t>CWE-345</t>
 <t>CWE-400</t>
 <t>CWE-434</t>
 <t>CWE-444</t>
@@ -62,6 +70,7 @@
 <t>CWE-611</t>
 <t>CWE-693</t>
 <t>CWE-770</t>
+<t>CWE-778</t>
 <t>CWE-89</t>
 <t>CWE-90</t>
 <t>CWE-912</t>
@@ -84,6 +93,7 @@
 <t>Critical</t>
 <t>Customer Contract Database</t>
 <t>DB Update Access</t>
+<t>Data Ownership and Write Separation</t>
 <t>Database Traffic</t>
 <t>Date</t>
 <t>Denial of Service</t>
@@ -92,8 +102,10 @@
 <t>Denial-of-Service risky access of Marketing CMS by Backoffice Client via Marketing CMS Editing</t>
 <t>Development</t>
 <t>Disable entity expansion and DTD processing where not needed, and configure limits for document size, nesting depth, number of elements, attribute size and entity expansion count in the XML or SOAP stack. Enforce request size limits and timeouts already at the front-end.</t>
+<t>Do all responses carry a restrictive frame-ancestors policy?</t>
 <t>Do front-end and back-end reject ambiguous or malformed HTTP messages in the same way?</t>
 <t>DoS-risky Access Across Trust-Boundary</t>
+<t>Does the asset survive the loss of a single instance or failure domain?</t>
 <t>ERP Internal Access</t>
 <t>ERP System Traffic</t>
 <t>ERP Web Access</t>
@@ -109,12 +121,14 @@
 <t>External Development Client</t>
 <t>File Validation</t>
 <t>Filter by file extension and discard (if feasible) the name provided. Whitelist the accepted file types and determine the mime-type on the server-side (for example via &#34;Apache Tika&#34; or similar checks). If the file is retrievable by end users and/or backoffice employees, consider performing scans for popular malware (if the files can be retrieved much later than they were uploaded, also apply a fresh malware scan during retrieval to scan with newer signatures of popular malware). Also enforce limits on maximum file size to avoid denial-of-service like scenarios.</t>
+<t>Forbid embedding of the application into foreign pages by sending a Content-Security-Policy header with a restrictive frame-ancestors directive (and optionally X-Frame-Options). Additionally use SameSite cookies and re-authentication for critical actions.</t>
 <t>Frequent</t>
 <t>Function</t>
 <t>GetAttribute a Vault (Secret Storage) in place?</t>
 <t>Git Repository</t>
 <t>Git-Repo Code Write Access</t>
 <t>Git-Repo Web-UI Access</t>
+<t>Give each writing component its own schema, collection or datastore and only read-only access to the data of others. Validate data read from shared stores as if it were untrusted input, and use integrity protection for security-relevant records.</t>
 <t>HTTP Parsing Consistency</t>
 <t>HTTP Request Smuggling risk at Apache Webserver</t>
 <t>HTTP Request Smuggling risk at Marketing CMS</t>
@@ -127,6 +141,8 @@
 <t>Impact</t>
 <t>In Progress</t>
 <t>Information Disclosure</t>
+<t>Is there a security monitoring component in place and do the sensitive assets send their security events to it?</t>
+<t>Is write access to the datastore separated per trust boundary and is data read from it validated?</t>
 <t>Jenkins Build Server</t>
 <t>Jenkins Web-UI Access</t>
 <t>John Doe</t>
@@ -147,6 +163,12 @@
 <t>Missing Authentication covering communication link CMS Content Traffic from Load Balancer to Marketing CMS</t>
 <t>Missing Authentication covering communication link NFS Filesystem Access from Backoffice ERP System to Contract File Server</t>
 <t>Missing Authentication</t>
+<t>Missing Brute-Force Protection covering communication link Jenkins Web-UI Access from External Development Client to Jenkins Build Server</t>
+<t>Missing Brute-Force Protection covering communication link User Management Access from Backend Admin Client to LDAP Auth Server</t>
+<t>Missing Brute-Force Protection</t>
+<t>Missing Clickjacking Protection risk at Backoffice ERP System</t>
+<t>Missing Clickjacking Protection risk at Marketing CMS</t>
+<t>Missing Clickjacking Protection</t>
 <t>Missing Cloud Hardening (AWS) risk at Application Network: CIS Benchmark for AWS</t>
 <t>Missing Cloud Hardening (EC2) risk at Apache Webserver: CIS Benchmark for Amazon Linux</t>
 <t>Missing Cloud Hardening (S3) risk at Contract File Server: Security Best Practices for AWS S3</t>
@@ -165,6 +187,11 @@
 <t>Missing Hardening risk at LDAP Auth Server</t>
 <t>Missing Hardening</t>
 <t>Missing Identity Propagation</t>
+<t>Missing Redundancy (Single Point of Failure) risk at Customer Contract Database</t>
+<t>Missing Redundancy (Single Point of Failure) risk at Load Balancer</t>
+<t>Missing Redundancy (Single Point of Failure)</t>
+<t>Missing Security Monitoring in the threat model (referencing asset Backoffice ERP System as an example)</t>
+<t>Missing Security Monitoring</t>
 <t>Missing Two-Factor Authentication (2FA)</t>
 <t>Missing Two-Factor Authentication covering communication link CMS Content Traffic from Customer Web Client forwarded via Load Balancer to Marketing CMS</t>
 <t>Missing Two-Factor Authentication covering communication link DB Update Access from Backend Admin Client to Customer Contract Database</t>
@@ -192,19 +219,25 @@
 <t>Push instead of Pull Deployment</t>
 <t>RAA %</t>
 <t>Reduce the attack surface of backdooring the build pipeline by not directly exposing the build pipeline components on the public internet and also not exposing it in front of unmanaged (out-of-scope) developer clients.Also consider the use of code signing to prevent code modifications.</t>
+<t>Redundancy</t>
 <t>Repudiation</t>
 <t>Risk Category</t>
 <t>Risk accepted as tolerable</t>
+<t>Run mission critical assets redundantly (clustering, replication, multiple instances across failure domains), automate failover, and test recovery regularly. Mark the asset as redundant in the model once this is in place.</t>
 <t>Runtime Separation</t>
 <t>SQL/NoSQL-Injection Prevention</t>
 <t>SQL/NoSQL-Injection risk at Backoffice ERP System against database Customer Contract Database via Database Traffic</t>
 <t>SQL/NoSQL-Injection</t>
 <t>SSRF Prevention</t>
 <t>STRIDE</t>
+<t>Security Monitoring</t>
 <t>Server-Side Request Forgery (SSRF) risk at Apache Webserver server-side web-requesting the target Backoffice ERP System via ERP System Traffic</t>
 <t>Server-Side Request Forgery (SSRF) risk at Apache Webserver server-side web-requesting the target Identity Provider via Auth Credential Check Traffic</t>
 <t>Server-Side Request Forgery (SSRF)</t>
 <t>Severity</t>
+<t>Shared Datastore Tampering risk at Customer Contract Database</t>
+<t>Shared Datastore Tampering risk at LDAP Auth Server</t>
+<t>Shared Datastore Tampering</t>
 <t>Some Individual Risk Example</t>
 <t>Some text describing the action...</t>
 <t>Some text describing the mitigation...</t>
@@ -287,6 +320,10 @@
 <t>missing-authentication-second-factor@load-balancer&gt;web-application-traffic@load-balancer@apache-webserver</t>
 <t>missing-authentication@erp-system&gt;nfs-filesystem-access@erp-system@contract-file-server</t>
 <t>missing-authentication@load-balancer&gt;cms-content-traffic@load-balancer@marketing-cms</t>
+<t>missing-brute-force-protection@backend-admin-client@ldap-auth-server@backend-admin-client&gt;user-management-access</t>
+<t>missing-brute-force-protection@external-dev-client@jenkins-build-server@external-dev-client&gt;jenkins-web-ui-access</t>
+<t>missing-clickjacking-protection@erp-system</t>
+<t>missing-clickjacking-protection@marketing-cms</t>
 <t>missing-cloud-hardening@apache-webserver@ec2</t>
 <t>missing-cloud-hardening@application-network@aws</t>
 <t>missing-cloud-hardening@contract-file-server@s3</t>
@@ -301,12 +338,17 @@
 <t>missing-hardening@ldap-auth-server</t>
 <t>missing-hardening@sql-database</t>
 <t>missing-identity-propagation@apache-webserver&gt;erp-system-traffic@apache-webserver@erp-system</t>
+<t>missing-monitoring@erp-system</t>
+<t>missing-redundancy@load-balancer</t>
+<t>missing-redundancy@sql-database</t>
 <t>missing-vault@erp-system</t>
 <t>mixed-targets-on-shared-runtime@webapp-virtualization</t>
 <t>path-traversal@erp-system@contract-file-server@erp-system&gt;nfs-filesystem-access</t>
 <t>push-instead-of-pull-deployment@jenkins-build-server</t>
 <t>server-side-request-forgery@apache-webserver@erp-system@apache-webserver&gt;erp-system-traffic</t>
 <t>server-side-request-forgery@apache-webserver@identity-provider@apache-webserver&gt;auth-credential-check-traffic</t>
+<t>shared-datastore-tampering@ldap-auth-server</t>
+<t>shared-datastore-tampering@sql-database</t>
 <t>something-strange@contract-file-server</t>
 <t>something-strange@sql-database</t>
 <t>sql-nosql-injection@erp-system@sql-database@erp-system&gt;database-traffic</t>
