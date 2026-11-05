@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func sharedStoreModel(readonlyOfSecond bool, secondBoundary string) *types.Model {
 	store := ptAsset("db", ptTech(types.Database))
 	store.Type = types.Datastore

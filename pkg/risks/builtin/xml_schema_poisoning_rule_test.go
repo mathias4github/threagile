@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestXmlSchemaPoisoningUnauthorizedCallerOfXmlAssetCreatesRisk(t *testing.T) {
 	target := ptAsset("svc", ptTech(types.WebApplication))
 	target.DataFormatsAccepted = []types.DataFormat{types.XML}

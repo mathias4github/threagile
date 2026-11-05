@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestXmlEntityExpansionDosInternetFacingXmlAssetCreatesRisk(t *testing.T) {
 	service := ptAsset("svc", ptTech(types.WebApplication))
 	service.Internet = true

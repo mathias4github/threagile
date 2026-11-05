@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestHttpRequestSmugglingProxyToWebServerCreatesRisk(t *testing.T) {
 	proxy := ptAsset("proxy", ptTech(types.ReverseProxy, types.IsTrafficForwarding))
 	web := ptAsset("web", ptTech(types.WebServer, "web_application"))

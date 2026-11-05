@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestAuditLogManipulationWriteFromOtherBoundaryCreatesRisk(t *testing.T) {
 	monitoring := ptAsset("log", ptTech(types.Monitoring))
 	app := ptAsset("app", ptTech(types.WebApplication))

@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestMailCommandInjectionSmtpLinkCreatesRisk(t *testing.T) {
 	app := ptAsset("app", ptTech(types.WebApplication))
 	mail := ptAsset("mail", ptTech(types.MailServer))

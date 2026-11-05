@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestLlmPromptInjectionHumanClientCreatesLikelyRisk(t *testing.T) {
 	user := ptAsset("user", ptTech(types.Browser))
 	user.UsedAsClientByHuman = true

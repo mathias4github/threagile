@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestAiSensitiveDataExposureCloudBoundaryCreatesRisk(t *testing.T) {
 	llm := ptAsset("llm", ptTech(types.AI))
 	model := ptModel([]*types.TechnicalAsset{llm}, nil, map[string]*types.TrustBoundary{"llm": ptBoundary("cloud", types.NetworkCloudProvider)})

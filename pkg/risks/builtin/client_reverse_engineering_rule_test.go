@@ -8,7 +8,6 @@ import (
 	"github.com/threagile/threagile/pkg/types"
 )
 
-
 func TestClientReverseEngineeringSensitiveCustomMobileAppCreatesRisk(t *testing.T) {
 	app := ptAsset("app", ptTech(types.MobileApp))
 	app.CustomDevelopedParts = true

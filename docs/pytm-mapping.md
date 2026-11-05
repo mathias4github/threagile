@@ -190,7 +190,7 @@ TAG-BASIERTE Regeln (12 Vorschläge, Tags siehe Tabelle) sind bewusst nicht Teil
 - Zusammenfassung mehrerer SIDs je Regel (siehe oben) – Vorschlag so umsetzen.
 - Regeln 6/7 (KI) hängen an der Technologie `ai`; Fehlalarmrate hängt von der Modellierung ab.
 
-## 7. Umsetzungsstand (Phase 2)
+## 7. Umsetzungsstand
 
 Umgesetzt (Branch `claude/modest-babbage-1pgomq`, je ein Commit `feat(rules): add <id> (ported from pytm <SID>)`), jeweils mit Positiv- und Negativtests in `pkg/risks/builtin/*_rule_test.go`:
 
