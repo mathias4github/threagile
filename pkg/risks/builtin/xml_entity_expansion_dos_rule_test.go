@@ -53,3 +53,18 @@ func TestXmlEntityExpansionDosSoapAcrossBoundaryCreatesRiskWithLowerImpactWhenRe
 	require.Len(t, risks, 1)
 	assert.Equal(t, types.LowImpact, risks[0].ExploitationImpact)
 }
+
+func TestXmlEntityExpansionDosImpactUsesAvailabilityOfProcessedData(t *testing.T) {
+	service := ptAsset("svc", ptTech(types.WebApplication))
+	service.Internet = true
+	service.DataFormatsAccepted = []types.DataFormat{types.XML}
+	service.Availability = types.Operational
+	model := ptModel([]*types.TechnicalAsset{service}, nil, nil)
+	ptProcessWithAvailability(model, service, types.Public, types.Operational, types.Critical)
+
+	risks, err := NewXmlEntityExpansionDosRule().GenerateRisks(model)
+
+	require.NoError(t, err)
+	require.Len(t, risks, 1)
+	assert.Equal(t, types.MediumImpact, risks[0].ExploitationImpact)
+}

@@ -77,3 +77,17 @@ func TestLoadCustomRiskCategoriesUnchanged(t *testing.T) {
 		t.Fatalf("unexpected categories: %+v", model.CustomRiskCategories)
 	}
 }
+
+// An include file carrying both the new and the legacy key must merge each category once.
+func TestMergeIncludeWithBothRiskCategoryKeys(t *testing.T) {
+	dir := t.TempDir()
+	writeModel(t, dir, "inc.yaml", "custom_risk_categories:\n  - id: a\n    title: A\n"+legacyRiskCategoryYaml)
+
+	model := new(Model).Defaults()
+	if err := model.Merge(dir, "inc.yaml"); err != nil {
+		t.Fatalf("merge failed: %v", err)
+	}
+	if len(model.CustomRiskCategories) != 2 {
+		t.Fatalf("expected 2 custom risk categories, got %d", len(model.CustomRiskCategories))
+	}
+}
