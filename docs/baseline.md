@@ -112,3 +112,7 @@ Unter den direkten Abhängigkeiten gab es **keinen** verfügbaren Major-Sprung (
 - `jung-kurt/gofpdf`, `wcharczuk/go-chart`, `mpvl/unique`: unmaintained, keine Updates.
 - GitHub-Actions-Versionen (`checkout@v4`, `setup-go@v5`, `codeql-action@v4`, `golangci-lint-action@v8` usw.): **nicht angehoben**, da neue Tags in dieser Session nicht abfragbar waren (kein Zugriff auf die Action-Repos). `setup-go` nutzt bereits `go-version-file: go.mod`, ist also mit go.mod synchron.
 - `docker build .` und Container-Test mit Beispielmodell: **nicht ausgeführt** (kein Docker-Daemon). Dockerfile-Änderung ist ungetestet. Als Ersatz wurde die Binary mit App-Dir-Layout wie im Image gegen das Beispielmodell geprüft.
+
+## Review-Nachtrag (CI)
+- `golangci-lint` v2.11 (in `.github/workflows/golangci-lint-action.yml` gepinnt) bricht mit Go 1.27 ab („export data version 5 is greater than maximum supported version 2“). Workflow auf v2.15.0 mit `install-mode: goinstall` umgestellt; lokal mit go1.27.3 gebaut: **0 issues** auf dem gesamten Code.
+- Die übrigen Action-Versionen sind unverändert (Tags in den Sessions nicht abfragbar); im Fork laufen derzeit keine Workflows, daher ist auch der Workflow-Lauf selbst nicht verifiziert.
