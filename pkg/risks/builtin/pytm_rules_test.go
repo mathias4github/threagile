@@ -65,8 +65,10 @@ func TestPytmRulesOutOfScopeCallerStillCreatesRisk(t *testing.T) {
 	llm := ptAsset("llm", ptTech(types.AI))
 	xmlLink := ptLink("l1", "client", "web", types.HTTPS)
 	xmlLink.Authorization = types.NoneAuthorization
+	proxyLink := ptLink("l2", "proxy", "web", types.HTTPS)
+	proxyLink.Authorization = types.TechnicalUser // only the client link is unauthorized
 	model := ptModel([]*types.TechnicalAsset{client, proxy, web, llm},
-		[]*types.CommunicationLink{xmlLink, ptLink("l2", "proxy", "web", types.HTTPS), ptLink("l3", "client", "llm", types.HTTPS)}, nil)
+		[]*types.CommunicationLink{xmlLink, proxyLink, ptLink("l3", "client", "llm", types.HTTPS)}, nil)
 
 	for _, rule := range []types.RiskRule{NewMissingClickjackingProtectionRule(), NewHttpRequestSmugglingRule(), NewXmlSchemaPoisoningRule(), NewLlmPromptInjectionRule()} {
 		risks, err := rule.GenerateRisks(model)

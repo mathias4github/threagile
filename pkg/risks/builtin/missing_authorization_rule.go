@@ -27,7 +27,7 @@ func (*MissingAuthorizationRule) Category() *types.RiskCategory {
 		Function: types.Architecture,
 		STRIDE:   types.ElevationOfPrivilege,
 		DetectionLogic: "In-scope technical assets processing sensitive data that do not usually process end user requests (datastores, queues, internal services) " +
-			"with incoming authenticated communication links without any authorization from in-scope callers. End user facing assets are covered by the " +
+			"with incoming authenticated communication links without any authorization. End user facing assets are covered by the " +
 			"missing identity propagation rule.",
 		RiskAssessment: "The risk rating depends on the sensitivity of the technical asset itself and of the data assets processed.",
 		FalsePositives: "Callers that legitimately need full access to the target (for example a single owning application of a datastore) can be considered " +
@@ -53,7 +53,7 @@ func (r *MissingAuthorizationRule) GenerateRisks(input *types.Model) ([]*types.R
 		}
 		for _, incomingFlow := range sortedIncomingLinks(input, technicalAsset.Id) {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope {
+			if source == nil {
 				continue
 			}
 			if incomingFlow.Authentication == types.NoneAuthentication || incomingFlow.Authorization != types.NoneAuthorization {

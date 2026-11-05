@@ -26,7 +26,7 @@ func (*HttpRequestSmugglingRule) Category() *types.RiskCategory {
 		Check:          "Do front-end and back-end reject ambiguous or malformed HTTP messages in the same way?",
 		Function:       types.Operations,
 		STRIDE:         types.Tampering,
-		DetectionLogic: "In-scope web servers or web applications receiving web traffic forwarded by an in-scope reverse proxy, load balancer, gateway or WAF.",
+		DetectionLogic: "In-scope web servers or web applications receiving web traffic forwarded by a reverse proxy, load balancer, gateway or WAF.",
 		RiskAssessment: "The risk rating depends on the sensitivity of the receiving technical asset and of the data assets processed.",
 		FalsePositives: "Setups where the front-end and the back-end are the same product with identical parsing, or where the back-end only accepts requests over an " +
 			"authenticated, non-shared channel, can be considered as false positives after individual review.",
@@ -51,7 +51,7 @@ func (r *HttpRequestSmugglingRule) GenerateRisks(input *types.Model) ([]*types.R
 		}
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope {
+			if source == nil {
 				continue
 			}
 			if !source.Technologies.GetAttribute(types.IsTrafficForwarding, types.Gateway) {

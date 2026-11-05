@@ -51,7 +51,7 @@ func TestMissingBruteForceProtectionInternetCredentialsLoginCreatesLikelyRisk(t 
 
 	require.NoError(t, err)
 	require.Len(t, risks, 1)
-	assert.Equal(t, "missing-brute-force-protection@client@app@client>login", risks[0].SyntheticId)
+	assert.Equal(t, "missing-brute-force-protection@client@app@login", risks[0].SyntheticId)
 	assert.Equal(t, types.Likely, risks[0].ExploitationLikelihood)
 }
 
@@ -97,7 +97,7 @@ func TestMissingAuthorizationAuthenticatedUnauthorizedAccessToSensitiveDatastore
 
 	require.NoError(t, err)
 	require.Len(t, risks, 1)
-	assert.Equal(t, "missing-authorization@app@target@app>l", risks[0].SyntheticId)
+	assert.Equal(t, "missing-authorization@app@target@l", risks[0].SyntheticId)
 }
 
 func TestMissingAuthorizationNoRiskWhenAuthorizedUnauthenticatedInsensitiveOrEndUserFacing(t *testing.T) {

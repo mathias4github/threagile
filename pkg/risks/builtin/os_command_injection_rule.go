@@ -25,7 +25,7 @@ func (*OsCommandInjectionRule) Category() *types.RiskCategory {
 		Check:    "Are OS commands built without a shell and with validated, parameterized arguments?",
 		Function: types.Development,
 		STRIDE:   types.ElevationOfPrivilege,
-		DetectionLogic: "In-scope custom developed technical assets tagged with executes-os-commands that are called by in-scope assets which are internet-facing, " +
+		DetectionLogic: "In-scope custom developed technical assets tagged with executes-os-commands that are called by assets which are internet-facing, " +
 			"used by humans or located in another network trust boundary.",
 		RiskAssessment:             "The risk rating depends on the sensitivity of the technical asset itself and of the data assets processed; the impact is at least medium.",
 		FalsePositives:             "Components executing only fixed commands without any caller-controlled part can be considered as false positives after individual review.",
@@ -47,7 +47,7 @@ func (r *OsCommandInjectionRule) GenerateRisks(input *types.Model) ([]*types.Ris
 		}
 		for _, incomingFlow := range sortedIncomingLinks(input, technicalAsset.Id) {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || !isUntrustedCaller(input, source, incomingFlow) {
+			if source == nil || !isUntrustedCaller(input, source, incomingFlow) {
 				continue
 			}
 			impact := impactByCIA(input, technicalAsset)

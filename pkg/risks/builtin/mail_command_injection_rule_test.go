@@ -17,8 +17,9 @@ func TestMailCommandInjectionSmtpLinkCreatesRisk(t *testing.T) {
 
 	require.NoError(t, err)
 	require.Len(t, risks, 1)
-	assert.Equal(t, "mail-command-injection@app@mail@app>send", risks[0].SyntheticId)
+	assert.Equal(t, "mail-command-injection@app@mail@send", risks[0].SyntheticId)
 	assert.Equal(t, types.Likely, risks[0].ExploitationLikelihood)
+	assert.Equal(t, "app", risks[0].MostRelevantTechnicalAssetId, "the caller holds the injectable code")
 }
 
 func TestMailCommandInjectionNoRiskForOtherProtocolOrOutOfScopeSource(t *testing.T) {

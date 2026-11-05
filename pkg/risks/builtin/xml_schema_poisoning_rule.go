@@ -25,7 +25,7 @@ func (*XmlSchemaPoisoningRule) Category() *types.RiskCategory {
 		Check:                      "Are only trusted, locally stored schemas used and are callers authorized?",
 		Function:                   types.Development,
 		STRIDE:                     types.Tampering,
-		DetectionLogic:             "In-scope technical assets accepting XML that are called by in-scope assets via communication links without authorization.",
+		DetectionLogic:             "In-scope technical assets accepting XML that are called via communication links without authorization.",
 		RiskAssessment:             "The risk rating depends on the integrity rating of the technical asset and of the data assets processed.",
 		FalsePositives:             "XML interfaces using fixed local schemas and rejecting DTD and schema references can be considered as false positives after individual review.",
 		ModelFailurePossibleReason: false,
@@ -55,7 +55,7 @@ func (r *XmlSchemaPoisoningRule) GenerateRisks(input *types.Model) ([]*types.Ris
 		}
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || incomingFlow.Authorization != types.NoneAuthorization {
+			if source == nil || incomingFlow.Authorization != types.NoneAuthorization {
 				continue
 			}
 			impact := types.LowImpact

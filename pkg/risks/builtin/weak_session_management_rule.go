@@ -25,7 +25,7 @@ func (*WeakSessionManagementRule) Category() *types.RiskCategory {
 		Check:          "Are session identifiers random, rotated on login, transported only over TLS and invalidated on logout and timeout?",
 		Function:       types.Development,
 		STRIDE:         types.Spoofing,
-		DetectionLogic: "In-scope technical assets tagged with session-tokens that are accessed via web protocols by in-scope clients used by humans.",
+		DetectionLogic: "In-scope technical assets tagged with session-tokens that are accessed via web protocols by clients used by humans.",
 		RiskAssessment: "The risk rating depends on the sensitivity of the technical asset itself and of the data assets processed.",
 		FalsePositives: "Assets whose session handling is fully provided by a hardened framework or identity provider with the settings above can be considered " +
 			"as false positives after individual review.",
@@ -47,7 +47,7 @@ func (r *WeakSessionManagementRule) GenerateRisks(input *types.Model) ([]*types.
 		}
 		for _, incomingFlow := range sortedIncomingLinks(input, technicalAsset.Id) {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || !source.UsedAsClientByHuman || !incomingFlow.Protocol.IsPotentialWebAccessProtocol() {
+			if source == nil || !source.UsedAsClientByHuman || !incomingFlow.Protocol.IsPotentialWebAccessProtocol() {
 				continue
 			}
 			risks = append(risks, newAssetRisk(r.Category().ID,

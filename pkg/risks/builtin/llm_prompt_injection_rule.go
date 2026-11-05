@@ -51,7 +51,7 @@ func (r *LlmPromptInjectionRule) GenerateRisks(input *types.Model) ([]*types.Ris
 		likelihood := types.Unlikely
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope {
+			if source == nil {
 				continue
 			}
 			direct := source.Internet || source.UsedAsClientByHuman

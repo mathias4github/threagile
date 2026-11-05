@@ -57,7 +57,7 @@ func (r *XmlEntityExpansionDosRule) GenerateRisks(input *types.Model) ([]*types.
 		exposed := technicalAsset.Internet
 		for _, incomingFlow := range input.IncomingTechnicalCommunicationLinksMappedByTargetId[technicalAsset.Id] {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source != nil && !source.OutOfScope && isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {
+			if source != nil && isAcrossTrustBoundaryNetworkOnly(input, incomingFlow) {
 				exposed = true
 			}
 		}

@@ -25,7 +25,7 @@ func (*MissingBruteForceProtectionRule) Category() *types.RiskCategory {
 		Check:          "Are failed logins rate limited per account and source and are breached passwords rejected?",
 		Function:       types.Development,
 		STRIDE:         types.Spoofing,
-		DetectionLogic: "In-scope technical assets with incoming communication links authenticated by credentials from in-scope callers that are internet-facing or used by humans.",
+		DetectionLogic: "In-scope technical assets with incoming communication links authenticated by credentials from callers that are internet-facing or used by humans.",
 		RiskAssessment: "The risk rating depends on the sensitivity of the technical asset itself and of the data assets processed; internet-facing callers raise the likelihood.",
 		FalsePositives: "Logins protected by a central identity provider with built-in lockout and rate limiting, or technical accounts with random high-entropy " +
 			"secrets, can be considered as false positives after individual review.",
@@ -47,7 +47,7 @@ func (r *MissingBruteForceProtectionRule) GenerateRisks(input *types.Model) ([]*
 		}
 		for _, incomingFlow := range sortedIncomingLinks(input, technicalAsset.Id) {
 			source := input.TechnicalAssets[incomingFlow.SourceId]
-			if source == nil || source.OutOfScope || incomingFlow.Authentication != types.Credentials {
+			if source == nil || incomingFlow.Authentication != types.Credentials {
 				continue
 			}
 			if !source.Internet && !source.UsedAsClientByHuman {
