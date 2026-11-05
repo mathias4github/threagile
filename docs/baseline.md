@@ -84,3 +84,27 @@ Zwei Läufe hintereinander sind normalisiert identisch (geprüft). PNG/PDF/Ascii
 - Nicht-deterministische Reihenfolge in JSON/DOT/Excel-Ausgabe (nur dokumentiert, nicht gefixt).
 - Lauf endet mit Log-Zeile `logo image path does not exist: report/threagile-logo.png` (Exit-Code 0; Pfad relativ zum Arbeitsverzeichnis) – nur beobachtet.
 - Dockerfile klont Upstream statt lokalem Stand; Docker-Build hier nicht verifizierbar.
+
+---
+
+# Phase 0b – Ergebnis (Dependencies/Toolchain)
+
+## Angehoben
+- `go.mod`: tidy (master baute vorher nicht), `go 1.26.0` → `go 1.27.3` (aktuelle stabile Version laut go.dev).
+- Alle Minor/Patch-Updates via `go get -u ./...` (u. a. gin 1.12.0, cobra 1.10.2, excelize 2.11.1, x/crypto 0.58.0, x/net 0.62.0, x/text 0.43.0).
+- Dockerfile: `golang:1.27`, `alpine:3.23` gepinnt; Clone-Stage entfernt, es wird der lokale Quellstand gebaut.
+- Nach jedem Schritt: Build, Test, Beispielmodell, normalisierter Golden-Diff → jeweils **GOLDEN OK** (keine Abweichung bei Risiken, Assets, Stats, DOT, Excel).
+
+## govulncheck danach
+„Your code is affected by 0 vulnerabilities“ (Vorher: 39). Vollständige Ausgabe: `docs/deps-govulncheck-after.txt`.
+Rest: GO-2026-5932 (`x/crypto/openpgp`, unmaintained) – Modul wird required, das Paket aber nicht importiert/aufgerufen; kein Fix verfügbar.
+
+## Major-Updates
+Unter den direkten Abhängigkeiten gab es **keinen** verfügbaren Major-Sprung (Pfad-Major); daher keine Einzel-Commits nötig.
+
+## Zurückgestellt
+- Verbleibende Updates in `docs/deps-outdated-after.txt` sind ausschließlich indirekte Module (u. a. jackc/pgx v4, dd-trace-go v1, grpc, aws-sdk-go) – von transitiven, teils unmaintainten Abhängigkeiten festgehalten (go-chart-Umfeld); kein Direkt-Update möglich ohne Ersatz der Bibliothek.
+- `gopkg.in/yaml.v3` ist archiviert; Nachfolger `go.yaml.in/yaml/v3` (liegt bereits indirekt im Graph). Migration wäre ein Import-Wechsel im ganzen Repo → eigene Entscheidung, nicht in 0b.
+- `jung-kurt/gofpdf`, `wcharczuk/go-chart`, `mpvl/unique`: unmaintained, keine Updates.
+- GitHub-Actions-Versionen (`checkout@v4`, `setup-go@v5`, `codeql-action@v4`, `golangci-lint-action@v8` usw.): **nicht angehoben**, da neue Tags in dieser Session nicht abfragbar waren (kein Zugriff auf die Action-Repos). `setup-go` nutzt bereits `go-version-file: go.mod`, ist also mit go.mod synchron.
+- `docker build .` und Container-Test mit Beispielmodell: **nicht ausgeführt** (kein Docker-Daemon). Dockerfile-Änderung ist ungetestet. Als Ersatz wurde die Binary mit App-Dir-Layout wie im Image gegen das Beispielmodell geprüft.
