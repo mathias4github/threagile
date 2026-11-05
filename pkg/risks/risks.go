@@ -55,6 +55,7 @@ func GetBuiltInRiskRules() types.RiskRules {
 		builtin.NewWrongCommunicationLinkContentRule(),
 		builtin.NewWrongTrustBoundaryContentRule(),
 		builtin.NewXmlExternalEntityRule(),
+		builtin.NewXmlSchemaPoisoningRule(),
 		builtin.NewAuditLogManipulationRule(),
 		builtin.NewClientReverseEngineeringRule(),
 		builtin.NewAiSensitiveDataExposureRule(),
