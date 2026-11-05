@@ -1,0 +1,888 @@
+=== Symbol Results ===
+
+Vulnerability #1: GO-2026-6809
+    Distrust compromised intermediate certificates in crypto/x509
+  More info: https://pkg.go.dev/vuln/GO-2026-6809
+  Standard library
+    Found in: crypto/x509@go1.26
+    Fixed in: crypto/x509@go1.26.10
+    Example traces found:
+      #1: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.Verify
+
+Vulnerability #2: GO-2026-6688
+    Mutually-referencing array formulas recurse unboundedly, causing a fatal
+    stack overflow in github.com/xuri/excelize
+  More info: https://pkg.go.dev/vuln/GO-2026-6688
+  Module: github.com/xuri/excelize/v2
+    Found in: github.com/xuri/excelize/v2@v2.9.0
+    Fixed in: github.com/xuri/excelize/v2@v2.11.1-0.20260911060113-ea12859e43c6
+    Example traces found:
+      #1: pkg/report/excel-column.go:50:66: report.ExcelColumns.FindColumnIndexByTitle calls excelize.ColumnNameToNumber
+      #2: pkg/report/excel.go:329:46: report.WriteTagsExcelToFile calls excelize.ColumnNumberToName
+      #3: pkg/report/excel.go:313:73: report.WriteTagsExcelToFile calls excelize.CoordinatesToCellName
+      #4: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls excelize.ErrSheetNotExist.Error
+      #5: pkg/report/excel.go:246:24: report.WriteRisksExcelToFile calls excelize.File.AutoFilter
+      #6: pkg/report/excel.go:284:23: report.WriteTagsExcelToFile calls excelize.File.DeleteSheet
+      #7: pkg/report/excel.go:173:46: report.WriteRisksExcelToFile calls excelize.File.GetCellStyle
+      #8: pkg/report/excel.go:154:34: report.WriteRisksExcelToFile calls excelize.File.GetCols
+      #9: pkg/report/excel.go:175:52: report.WriteRisksExcelToFile calls excelize.File.GetStyle
+      #10: pkg/report/excel.go:283:33: report.WriteTagsExcelToFile calls excelize.File.NewSheet
+      #11: pkg/report/excel-style.go:57:47: report.styleCreator.NewStyle calls excelize.File.NewStyle
+      #12: pkg/report/excel.go:385:20: report.WriteTagsExcelToFile calls excelize.File.SaveAs
+      #13: pkg/report/excel.go:384:22: report.WriteTagsExcelToFile calls excelize.File.SetActiveSheet
+      #14: pkg/report/excel.go:376:26: report.WriteTagsExcelToFile calls excelize.File.SetCellStyle
+      #15: pkg/report/excel.go:305:26: report.WriteTagsExcelToFile calls excelize.File.SetCellValue
+      #16: pkg/report/excel.go:217:43: report.WriteRisksExcelToFile calls excelize.File.SetColVisible
+      #17: pkg/report/excel.go:324:25: report.WriteTagsExcelToFile calls excelize.File.SetColWidth
+      #18: pkg/report/excel.go:265:26: report.WriteTagsExcelToFile calls excelize.File.SetDocProps
+      #19: pkg/report/excel.go:292:29: report.WriteTagsExcelToFile calls excelize.File.SetHeaderFooter
+      #20: pkg/report/excel.go:287:27: report.WriteTagsExcelToFile calls excelize.File.SetPageLayout
+      #21: pkg/report/excel.go:226:31: report.WriteRisksExcelToFile calls excelize.File.SetPanes
+      #22: pkg/report/excel.go:263:27: report.WriteTagsExcelToFile calls excelize.NewFile
+      #23: pkg/input/model.go:276:26: input.NormalizeTag calls strings.TrimSpace, which eventually calls excelize.SplitCellName
+      #24: pkg/input/model.go:276:26: input.NormalizeTag calls strings.TrimSpace, which eventually calls excelize.escapeSheetName
+      #25: pkg/report/report.go:1413:23: report.pdfReporter.embedPieChart calls chart.PieChart.Render, which eventually calls excelize.hslModel
+      #26: pkg/report/excel-column.go:4:2: report.init calls excelize.init
+      #27: pkg/types/model.go:476:12: types.Model.SortByRiskCategoryHighestContainingRiskSeveritySortStillAtRisk calls sort.Slice, which eventually calls excelize.mergeExpandedCols
+      #28: pkg/types/model.go:476:12: types.Model.SortByRiskCategoryHighestContainingRiskSeveritySortStillAtRisk calls sort.Slice, which eventually calls excelize.prepare
+
+Vulnerability #3: GO-2026-6684
+    Excelize Decrypt: unrecoverable panics on malformed OLE/CFB encrypted
+    workbooks in github.com/xuri/excelize
+  More info: https://pkg.go.dev/vuln/GO-2026-6684
+  Module: github.com/xuri/excelize/v2
+    Found in: github.com/xuri/excelize/v2@v2.9.0
+    Fixed in: github.com/xuri/excelize/v2@v2.11.1-0.20260915055537-22f76f9acb94
+    Example traces found:
+      #1: pkg/report/excel.go:385:20: report.WriteTagsExcelToFile calls excelize.File.SaveAs
+
+Vulnerability #4: GO-2026-6617
+    HTTP/2 server crash due to HPACK encoder race in net/http
+  More info: https://pkg.go.dev/vuln/GO-2026-6617
+  Module: golang.org/x/net
+    Found in: golang.org/x/net@v0.51.0
+    Fixed in: golang.org/x/net@v0.60.0
+    Example traces found:
+      #1: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ConnectionError.Error
+      #2: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ErrCode.String
+      #3: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameHeader.String
+      #4: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameType.String
+      #5: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameWriteRequest.String
+      #6: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls http2.Server.ServeConn
+      #7: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.Setting.String
+      #8: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.SettingID.String
+      #9: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.StreamError.Error
+      #10: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.bufferedWriterTimeoutWriter.Write
+      #11: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.chunkWriter.Write
+      #12: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.connError.Error
+      #13: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.duplicatePseudoHeaderError.Error
+      #14: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldNameError.Error
+      #15: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldValueError.Error
+      #16: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.pseudoHeaderError.Error
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.requestBody.Close
+      #18: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http2.requestBody.Read
+      #19: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http2.responseWriter.Write
+      #20: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.responseWriter.WriteHeader
+      #21: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http2.responseWriter.WriteString
+      #22: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.writeData.String
+
+  Standard library
+    Found in: net/http@go1.26
+    Fixed in: net/http@go1.26.9
+    Example traces found:
+      #1: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #2: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #4: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #5: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #6: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #7: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #8: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #9: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #10: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #11: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #12: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #13: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #14: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #15: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #16: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #18: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #19: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #20: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #21: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #22: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #23: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #24: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #25: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #26: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #27: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #28: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #29: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #30: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #31: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #32: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #33: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #34: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #35: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #36: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #37: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #38: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #39: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #40: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #41: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #42: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #43: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #44: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #45: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #46: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #47: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #48: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #49: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #50: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #51: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #52: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #53: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #54: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #55: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #56: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #57: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #58: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #59: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #60: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #61: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #62: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #63: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #64: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #65: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #66: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #67: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #68: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #69: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #70: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #71: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #72: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #73: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #74: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #75: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #76: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #77: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #78: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #79: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #80: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #81: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+      #82: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+
+Vulnerability #5: GO-2026-6613
+    HTTP/1 server connection desynchronization after 2xx CONNECT response in
+    net/http
+  More info: https://pkg.go.dev/vuln/GO-2026-6613
+  Standard library
+    Found in: net/http@go1.26
+    Fixed in: net/http@go1.26.9
+    Example traces found:
+      #1: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #2: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #4: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #5: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #6: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #7: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #8: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #9: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #10: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #11: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #12: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #13: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #14: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #15: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #16: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #17: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #18: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+
+Vulnerability #6: GO-2026-6612
+    Double flow control refund on HTTP/2 server streams in net/http
+  More info: https://pkg.go.dev/vuln/GO-2026-6612
+  Module: golang.org/x/net
+    Found in: golang.org/x/net@v0.51.0
+    Fixed in: golang.org/x/net@v0.60.0
+    Example traces found:
+      #1: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ConnectionError.Error
+      #2: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ErrCode.String
+      #3: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameHeader.String
+      #4: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameType.String
+      #5: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameWriteRequest.String
+      #6: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls http2.Server.ServeConn
+      #7: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.Setting.String
+      #8: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.SettingID.String
+      #9: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.StreamError.Error
+      #10: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.bufferedWriterTimeoutWriter.Write
+      #11: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.chunkWriter.Write
+      #12: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.connError.Error
+      #13: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.duplicatePseudoHeaderError.Error
+      #14: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldNameError.Error
+      #15: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldValueError.Error
+      #16: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.pseudoHeaderError.Error
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.requestBody.Close
+      #18: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http2.requestBody.Read
+      #19: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http2.responseWriter.Write
+      #20: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.responseWriter.WriteHeader
+      #21: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http2.responseWriter.WriteString
+      #22: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.writeData.String
+
+  Standard library
+    Found in: net/http@go1.26
+    Fixed in: net/http@go1.26.9
+    Example traces found:
+      #1: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #2: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #4: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #5: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #6: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #7: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #8: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #9: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #10: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #11: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #12: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #13: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #14: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #15: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #16: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #18: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #19: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #20: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #21: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #22: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #23: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #24: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #25: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #26: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #27: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #28: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #29: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #30: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #31: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #32: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #33: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #34: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #35: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #36: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #37: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #38: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #39: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #40: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #41: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #42: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #43: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #44: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #45: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #46: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #47: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #48: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #49: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #50: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #51: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #52: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #53: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #54: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #55: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #56: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #57: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #58: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #59: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #60: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #61: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #62: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #63: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #64: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #65: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #66: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #67: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #68: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #69: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #70: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #71: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #72: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #73: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #74: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #75: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #76: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #77: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #78: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #79: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #80: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #81: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+      #82: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+
+Vulnerability #7: GO-2026-6611
+    Excessive CPU consumption from repeated initial window changes in net/http
+  More info: https://pkg.go.dev/vuln/GO-2026-6611
+  Module: golang.org/x/net
+    Found in: golang.org/x/net@v0.51.0
+    Fixed in: golang.org/x/net@v0.60.0
+    Example traces found:
+      #1: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ConnectionError.Error
+      #2: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ErrCode.String
+      #3: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameHeader.String
+      #4: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameType.String
+      #5: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameWriteRequest.String
+      #6: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls http2.Server.ServeConn
+      #7: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.Setting.String
+      #8: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.SettingID.String
+      #9: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.StreamError.Error
+      #10: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.bufferedWriterTimeoutWriter.Write
+      #11: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.chunkWriter.Write
+      #12: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.connError.Error
+      #13: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.duplicatePseudoHeaderError.Error
+      #14: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldNameError.Error
+      #15: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldValueError.Error
+      #16: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.pseudoHeaderError.Error
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.requestBody.Close
+      #18: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http2.requestBody.Read
+      #19: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http2.responseWriter.Write
+      #20: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.responseWriter.WriteHeader
+      #21: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http2.responseWriter.WriteString
+      #22: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.writeData.String
+
+  Standard library
+    Found in: net/http@go1.26
+    Fixed in: net/http@go1.26.9
+    Example traces found:
+      #1: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #2: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #4: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #5: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #6: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #7: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #8: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #9: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #10: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #11: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #12: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #13: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #14: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #15: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #16: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #18: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #19: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #20: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #21: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #22: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #23: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #24: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #25: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #26: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #27: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #28: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #29: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #30: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #31: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #32: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #33: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #34: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #35: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #36: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #37: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #38: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #39: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #40: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #41: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #42: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #43: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #44: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #45: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #46: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #47: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #48: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #49: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #50: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #51: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #52: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #53: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #54: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #55: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #56: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #57: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #58: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #59: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #60: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #61: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #62: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #63: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #64: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #65: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #66: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #67: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #68: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #69: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #70: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #71: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #72: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #73: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #74: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #75: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #76: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #77: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #78: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #79: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #80: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #81: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+      #82: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+
+Vulnerability #8: GO-2026-6609
+    Lack of limit on size of parsed Range headers in net/http
+  More info: https://pkg.go.dev/vuln/GO-2026-6609
+  Standard library
+    Found in: net/http@go1.26
+    Fixed in: net/http@go1.26.9
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls http.ServeFile
+
+Vulnerability #9: GO-2026-6608
+    Memory limit bypass when parsing MIME headers in net/textproto,
+    mime/multipart
+  More info: https://pkg.go.dev/vuln/GO-2026-6608
+  Standard library
+    Found in: net/textproto@go1.26
+    Fixed in: net/textproto@go1.26.9
+    Example traces found:
+      #1: pkg/server/execute.go:57:58: server.server.execute calls http.Request.FormFile, which eventually calls multipart.Reader.ReadForm
+      #2: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which eventually calls textproto.Reader.ReadMIMEHeader
+
+Vulnerability #10: GO-2026-6607
+    Reject malformed ECH outer extension references in crypto/tls
+  More info: https://pkg.go.dev/vuln/GO-2026-6607
+  Standard library
+    Found in: crypto/tls@go1.26
+    Fixed in: crypto/tls@go1.26.9
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls tls.Conn.HandshakeContext
+      #2: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls tls.Conn.Read
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls tls.Conn.Write
+
+Vulnerability #11: GO-2026-6603
+    HTTP/2 server memory exhaustion due to Trailer headers in net/http
+  More info: https://pkg.go.dev/vuln/GO-2026-6603
+  Module: golang.org/x/net
+    Found in: golang.org/x/net@v0.51.0
+    Fixed in: golang.org/x/net@v0.60.0
+    Example traces found:
+      #1: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ConnectionError.Error
+      #2: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.ErrCode.String
+      #3: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameHeader.String
+      #4: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameType.String
+      #5: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.FrameWriteRequest.String
+      #6: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls http2.Server.ServeConn
+      #7: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.Setting.String
+      #8: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.SettingID.String
+      #9: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.StreamError.Error
+      #10: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.bufferedWriterTimeoutWriter.Write
+      #11: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.chunkWriter.Write
+      #12: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.connError.Error
+      #13: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.duplicatePseudoHeaderError.Error
+      #14: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldNameError.Error
+      #15: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.headerFieldValueError.Error
+      #16: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http2.pseudoHeaderError.Error
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http2.requestBody.Close
+      #18: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http2.requestBody.Read
+      #19: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http2.responseWriter.Write
+      #20: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.responseWriter.WriteHeader
+      #21: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http2.responseWriter.WriteString
+      #22: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http2.writeData.String
+
+  Standard library
+    Found in: net/http@go1.26
+    Fixed in: net/http@go1.26.9
+    Example traces found:
+      #1: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #2: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.CanonicalHeaderKey
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #4: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Del
+      #5: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #6: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.Header.Get
+      #7: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #8: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+      #9: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #10: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.body.Read
+      #11: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #12: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyEOFSignal.Read
+      #13: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #14: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.bodyLocked.Read
+      #15: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #16: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.checkConnErrorWriter.Write
+      #17: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #18: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.chunkWriter.Write
+      #19: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #20: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.connReader.Read
+      #21: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #22: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.expectContinueReader.Read
+      #23: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #24: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ConnectionError.Error
+      #25: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #26: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2ErrCode.String
+      #27: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #28: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameHeader.String
+      #29: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #30: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameType.String
+      #31: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #32: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2FrameWriteRequest.String
+      #33: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #34: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2Setting.String
+      #35: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #36: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2SettingID.String
+      #37: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #38: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2StreamError.Error
+      #39: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #40: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2bufferedWriterTimeoutWriter.Write
+      #41: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #42: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2chunkWriter.Write
+      #43: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #44: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2connError.Error
+      #45: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #46: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2duplicatePseudoHeaderError.Error
+      #47: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #48: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2gzipReader.Read
+      #49: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #50: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldNameError.Error
+      #51: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #52: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2headerFieldValueError.Error
+      #53: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #54: pkg/report/adocReport.go:1321:132: report.adocReport.writeDataRiskMapping calls http.http2pseudoHeaderError.Error
+      #55: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #56: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which calls http.http2requestBody.Read
+      #57: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #58: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.http2responseWriter.Write
+      #59: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #60: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2responseWriter.WriteHeader
+      #61: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #62: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2responseWriter.WriteString
+      #63: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #64: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls http.http2stickyErrWriter.Write
+      #65: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #66: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.http2transportResponseBody.Read
+      #67: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #68: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.http2writeData.String
+      #69: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #70: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.loggingConn.Read
+      #71: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #72: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which calls http.loggingConn.Write
+      #73: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #74: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.maxBytesReader.Read
+      #75: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #76: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls http.onceCloseListener.Close
+      #77: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #78: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which calls http.response.Write
+      #79: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #80: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls http.response.WriteHeader
+      #81: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+      #82: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls http.response.WriteString
+
+Vulnerability #12: GO-2026-6600
+    Recognize yield as regexp preceder keyword in html/template
+  More info: https://pkg.go.dev/vuln/GO-2026-6600
+  Standard library
+    Found in: html/template@go1.26
+    Fixed in: html/template@go1.26.9
+    Example traces found:
+      #1: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.Execute
+      #2: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ExecuteTemplate
+
+Vulnerability #13: GO-2026-6599
+    Reset context tracking on consecutive template expressions in html/template
+  More info: https://pkg.go.dev/vuln/GO-2026-6599
+  Standard library
+    Found in: html/template@go1.26
+    Fixed in: html/template@go1.26.9
+    Example traces found:
+      #1: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.Execute
+      #2: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ExecuteTemplate
+
+Vulnerability #14: GO-2026-6452
+    Panic via negative shared-string index in github.com/xuri/excelize
+  More info: https://pkg.go.dev/vuln/GO-2026-6452
+  Module: github.com/xuri/excelize/v2
+    Found in: github.com/xuri/excelize/v2@v2.9.0
+    Fixed in: github.com/xuri/excelize/v2@v2.11.0
+    Example traces found:
+      #1: pkg/report/excel.go:154:34: report.WriteRisksExcelToFile calls excelize.File.GetCols
+
+Vulnerability #15: GO-2026-6091
+    Fix Javascript regexp context tracking in html/template
+  More info: https://pkg.go.dev/vuln/GO-2026-6091
+  Standard library
+    Found in: html/template@go1.26
+    Fixed in: html/template@go1.26.6
+    Example traces found:
+      #1: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.Execute
+      #2: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ExecuteTemplate
+
+Vulnerability #16: GO-2026-6090
+    Limit handshake messages we are willing to accept post-handshake in
+    crypto/tls
+  More info: https://pkg.go.dev/vuln/GO-2026-6090
+  Standard library
+    Found in: crypto/tls@go1.26
+    Fixed in: crypto/tls@go1.26.6
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls tls.Conn.HandshakeContext
+      #2: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls tls.Conn.Read
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls tls.Conn.Write
+
+Vulnerability #17: GO-2026-6089
+    Apply ReadHeaderTimeout when doing unencrypted HTTP/2 check in net/http
+  More info: https://pkg.go.dev/vuln/GO-2026-6089
+  Standard library
+    Found in: net/http@go1.26
+    Fixed in: net/http@go1.26.6
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which calls http.ListenAndServe
+
+Vulnerability #18: GO-2026-6088
+    Add recursion depth guard during decode in encoding/xml
+  More info: https://pkg.go.dev/vuln/GO-2026-6088
+  Standard library
+    Found in: encoding/xml@go1.26
+    Fixed in: encoding/xml@go1.26.6
+    Example traces found:
+      #1: pkg/report/excel.go:265:26: report.WriteTagsExcelToFile calls excelize.File.SetDocProps, which calls xml.Decoder.Decode
+      #2: pkg/report/excel.go:154:34: report.WriteRisksExcelToFile calls excelize.File.GetCols, which eventually calls xml.Decoder.DecodeElement
+      #3: pkg/server/execute.go:255:37: server.server.editModelAnalyze calls gin.Context.ShouldBindJSON, which eventually calls xml.Decoder.RawToken
+      #4: pkg/report/excel.go:154:34: report.WriteRisksExcelToFile calls excelize.File.GetCols, which eventually calls xml.Decoder.Token
+
+Vulnerability #19: GO-2026-5972
+    Enforce maximum recursion depth in encoding/asn1
+  More info: https://pkg.go.dev/vuln/GO-2026-5972
+  Standard library
+    Found in: encoding/asn1@go1.26
+    Fixed in: encoding/asn1@go1.26.6
+    Example traces found:
+      #1: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls asn1.Unmarshal
+
+Vulnerability #20: GO-2026-5970
+    Infinite loop on invalid input in golang.org/x/text
+  More info: https://pkg.go.dev/vuln/GO-2026-5970
+  Module: golang.org/x/text
+    Found in: golang.org/x/text@v0.34.0
+    Fixed in: golang.org/x/text@v0.39.0
+    Example traces found:
+      #1: pkg/report/adocReport.go:609:32: report.adocReport.impactAnalysis calls cases.Caser.String, which eventually calls norm.Form.Properties
+
+Vulnerability #21: GO-2026-5960
+    Excelize: Unbounded Row Index Allocation in Worksheet Parser (checkSheet
+    OOM/Panic DoS) in github.com/xuri/excelize
+  More info: https://pkg.go.dev/vuln/GO-2026-5960
+  Module: github.com/xuri/excelize/v2
+    Found in: github.com/xuri/excelize/v2@v2.9.0
+    Fixed in: github.com/xuri/excelize/v2@v2.11.0
+    Example traces found:
+      #1: pkg/report/excel.go:246:24: report.WriteRisksExcelToFile calls excelize.File.AutoFilter
+      #2: pkg/report/excel.go:284:23: report.WriteTagsExcelToFile calls excelize.File.DeleteSheet
+      #3: pkg/report/excel.go:173:46: report.WriteRisksExcelToFile calls excelize.File.GetCellStyle
+      #4: pkg/report/excel.go:283:33: report.WriteTagsExcelToFile calls excelize.File.NewSheet
+      #5: pkg/report/excel.go:384:22: report.WriteTagsExcelToFile calls excelize.File.SetActiveSheet
+      #6: pkg/report/excel.go:376:26: report.WriteTagsExcelToFile calls excelize.File.SetCellStyle
+      #7: pkg/report/excel.go:305:26: report.WriteTagsExcelToFile calls excelize.File.SetCellValue
+      #8: pkg/report/excel.go:217:43: report.WriteRisksExcelToFile calls excelize.File.SetColVisible
+      #9: pkg/report/excel.go:324:25: report.WriteTagsExcelToFile calls excelize.File.SetColWidth
+      #10: pkg/report/excel.go:292:29: report.WriteTagsExcelToFile calls excelize.File.SetHeaderFooter
+      #11: pkg/report/excel.go:287:27: report.WriteTagsExcelToFile calls excelize.File.SetPageLayout
+      #12: pkg/report/excel.go:226:31: report.WriteRisksExcelToFile calls excelize.File.SetPanes
+      #13: pkg/report/excel.go:263:27: report.WriteTagsExcelToFile calls excelize.NewFile
+
+Vulnerability #22: GO-2026-5856
+    Invoking Encrypted Client Hello privacy leak in crypto/tls
+  More info: https://pkg.go.dev/vuln/GO-2026-5856
+  Standard library
+    Found in: crypto/tls@go1.26
+    Fixed in: crypto/tls@go1.26.5
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls tls.Conn.HandshakeContext
+      #2: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls tls.Conn.Read
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls tls.Conn.Write
+
+Vulnerability #23: GO-2026-5039
+    Arbitrary inputs are included in errors without any escaping in
+    net/textproto
+  More info: https://pkg.go.dev/vuln/GO-2026-5039
+  Standard library
+    Found in: net/textproto@go1.26
+    Fixed in: net/textproto@go1.26.4
+    Example traces found:
+      #1: cmd/risk_demo/main.go:37:33: risk_demo.main calls io.ReadAll, which eventually calls textproto.Reader.ReadMIMEHeader
+
+Vulnerability #24: GO-2026-5037
+    Inefficient candidate hostname parsing in crypto/x509
+  More info: https://pkg.go.dev/vuln/GO-2026-5037
+  Standard library
+    Found in: crypto/x509@go1.26
+    Fixed in: crypto/x509@go1.26.4
+    Example traces found:
+      #1: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.Verify
+      #2: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.VerifyHostname
+      #3: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls x509.HostnameError.Error
+
+Vulnerability #25: GO-2026-4986
+    Quadratic string concatentation in consumeComment in net/mail
+  More info: https://pkg.go.dev/vuln/GO-2026-4986
+  Standard library
+    Found in: net/mail@go1.26
+    Fixed in: net/mail@go1.26.3
+    Example traces found:
+      #1: pkg/server/execute.go:255:37: server.server.editModelAnalyze calls gin.Context.ShouldBindJSON, which eventually calls mail.ParseAddress
+
+Vulnerability #26: GO-2026-4982
+    Bypass of meta content URL escaping causes XSS in html/template
+  More info: https://pkg.go.dev/vuln/GO-2026-4982
+  Standard library
+    Found in: html/template@go1.26
+    Fixed in: html/template@go1.26.3
+    Example traces found:
+      #1: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.Execute
+      #2: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ExecuteTemplate
+
+Vulnerability #27: GO-2026-4980
+    Escaper bypass leads to XSS in html/template
+  More info: https://pkg.go.dev/vuln/GO-2026-4980
+  Standard library
+    Found in: html/template@go1.26
+    Fixed in: html/template@go1.26.3
+    Example traces found:
+      #1: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.Execute
+      #2: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ExecuteTemplate
+
+Vulnerability #28: GO-2026-4977
+    Quadratic string concatenation in consumePhrase in net/mail
+  More info: https://pkg.go.dev/vuln/GO-2026-4977
+  Standard library
+    Found in: net/mail@go1.26
+    Fixed in: net/mail@go1.26.3
+    Example traces found:
+      #1: pkg/server/execute.go:255:37: server.server.editModelAnalyze calls gin.Context.ShouldBindJSON, which eventually calls mail.ParseAddress
+
+Vulnerability #29: GO-2026-4971
+    Panic in Dial and LookupPort when handling NUL byte on Windows in net
+  More info: https://pkg.go.dev/vuln/GO-2026-4971
+  Standard library
+    Found in: net@go1.26
+    Fixed in: net@go1.26.3
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls net.Listen
+      #2: pkg/server/execute.go:255:37: server.server.editModelAnalyze calls gin.Context.ShouldBindJSON, which eventually calls net.ResolveIPAddr
+      #3: pkg/server/execute.go:255:37: server.server.editModelAnalyze calls gin.Context.ShouldBindJSON, which eventually calls net.ResolveTCPAddr
+      #4: pkg/server/execute.go:255:37: server.server.editModelAnalyze calls gin.Context.ShouldBindJSON, which eventually calls net.ResolveUDPAddr
+
+Vulnerability #30: GO-2026-4947
+    Unexpected work during chain building in crypto/x509
+  More info: https://pkg.go.dev/vuln/GO-2026-4947
+  Standard library
+    Found in: crypto/x509@go1.26
+    Fixed in: crypto/x509@go1.26.2
+    Example traces found:
+      #1: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.Verify
+
+Vulnerability #31: GO-2026-4946
+    Inefficient policy validation in crypto/x509
+  More info: https://pkg.go.dev/vuln/GO-2026-4946
+  Standard library
+    Found in: crypto/x509@go1.26
+    Fixed in: crypto/x509@go1.26.2
+    Example traces found:
+      #1: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.Verify
+
+Vulnerability #32: GO-2026-4870
+    Unauthenticated TLS 1.3 KeyUpdate record can cause persistent connection
+    retention and DoS in crypto/tls
+  More info: https://pkg.go.dev/vuln/GO-2026-4870
+  Standard library
+    Found in: crypto/tls@go1.26
+    Fixed in: crypto/tls@go1.26.2
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls tls.Conn.HandshakeContext
+      #2: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls tls.Conn.Read
+      #3: cmd/risk_demo/main.go:27:22: risk_demo.main calls fmt.Fprintf, which eventually calls tls.Conn.Write
+
+Vulnerability #33: GO-2026-4866
+    Case-sensitive excludedSubtrees name constraints cause Auth Bypass in
+    crypto/x509
+  More info: https://pkg.go.dev/vuln/GO-2026-4866
+  Standard library
+    Found in: crypto/x509@go1.26
+    Fixed in: crypto/x509@go1.26.2
+    Example traces found:
+      #1: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.Verify
+
+Vulnerability #34: GO-2026-4865
+    JsBraceDepth Context Tracking Bugs (XSS) in html/template
+  More info: https://pkg.go.dev/vuln/GO-2026-4865
+  Standard library
+    Found in: html/template@go1.26
+    Fixed in: html/template@go1.26.2
+    Example traces found:
+      #1: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls template.Error.Error
+      #2: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.Execute
+      #3: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ExecuteTemplate
+      #4: pkg/server/server.go:95:21: server.RunServer calls gin.Engine.LoadHTMLGlob, which calls template.Template.Funcs
+      #5: pkg/server/execute.go:18:2: server.init calls gin.init, which eventually calls template.Template.Parse
+      #6: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ParseFiles
+      #7: pkg/server/server.go:95:21: server.RunServer calls gin.Engine.LoadHTMLGlob, which calls template.Template.ParseGlob
+      #8: pkg/report/graphviz.go:603:23: report.WriteDataAssetDiagramGraphvizDOT calls fmt.Fprintln, which eventually calls template.context.String
+
+Vulnerability #35: GO-2026-4603
+    URLs in meta content attribute actions are not escaped in html/template
+  More info: https://pkg.go.dev/vuln/GO-2026-4603
+  Standard library
+    Found in: html/template@go1.26
+    Fixed in: html/template@go1.26.1
+    Example traces found:
+      #1: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.Execute
+      #2: pkg/server/server.go:97:9: server.RunServer calls gin.Context.HTML, which eventually calls template.Template.ExecuteTemplate
+
+Vulnerability #36: GO-2026-4602
+    FileInfo can escape from a Root in os
+  More info: https://pkg.go.dev/vuln/GO-2026-4602
+  Standard library
+    Found in: os@go1.26
+    Fixed in: os@go1.26.1
+    Example traces found:
+      #1: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls os.File.ReadDir
+      #2: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls os.File.Readdir
+      #3: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls os.ReadDir
+
+Vulnerability #37: GO-2026-4601
+    Incorrect parsing of IPv6 host literals in net/url
+  More info: https://pkg.go.dev/vuln/GO-2026-4601
+  Standard library
+    Found in: net/url@go1.26
+    Fixed in: net/url@go1.26.1
+    Example traces found:
+      #1: pkg/report/graphviz.go:848:21: report.GenerateDataAssetDiagramGraphvizImage calls exec.Command, which eventually calls url.Parse
+      #2: pkg/server/server.go:231:16: server.RunServer calls gin.Engine.Run, which eventually calls url.ParseRequestURI
+
+Vulnerability #38: GO-2026-4600
+    Panic in name constraint checking for malformed certificates in crypto/x509
+  More info: https://pkg.go.dev/vuln/GO-2026-4600
+  Standard library
+    Found in: crypto/x509@go1.26
+    Fixed in: crypto/x509@go1.26.1
+    Example traces found:
+      #1: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.Verify
+
+Vulnerability #39: GO-2026-4599
+    Incorrect enforcement of email constraints in crypto/x509
+  More info: https://pkg.go.dev/vuln/GO-2026-4599
+  Standard library
+    Found in: crypto/x509@go1.26
+    Fixed in: crypto/x509@go1.26.1
+    Example traces found:
+      #1: pkg/report/generate.go:212:23: report.Generate calls io.Copy, which eventually calls x509.Certificate.Verify
+
+Your code is affected by 39 vulnerabilities from 2 modules and the Go standard library.
+This scan also found 24 vulnerabilities in packages you import and 29
+vulnerabilities in modules you require, but your code doesn't appear to call
+these vulnerabilities.
+Use '-show verbose' for more details.
