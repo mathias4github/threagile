@@ -1,16 +1,24 @@
 # Golden Baseline
 
-Referenzausgabe von `master` (Stand Phase 0a) für das Beispielmodell (`demo/example/threagile.yaml`).
+Referenzausgabe des Beispielmodells (`demo/example/threagile.yaml`) auf dem aktuellen `master`.
 Erzeugt mit `analyze-model --keep-diagram-source-files`, App-Dir wie im Docker-Image.
 
-Die Rohdateien sind zwischen Läufen NICHT byte-identisch (Reihenfolge von Array-Elementen und
-DOT-Zeilen schwankt). Vergleich daher immer normalisiert:
+Prüfen bzw. neu erzeugen (benötigt `go`, `jq`, `unzip`, Graphviz):
 
 ```bash
-scripts/golden-normalize.sh <ausgabeverzeichnis> /tmp/golden-new
-diff -r test/golden/baseline/normalized /tmp/golden-new
+scripts/golden-run.sh            # Vergleich, Exit-Code 1 bei Abweichung
+scripts/golden-run.sh --update   # Baseline neu schreiben (nur bei erklärter Abweichung)
 ```
 
-Zwei Läufe hintereinander ergeben normalisiert identische Ausgaben (geprüft).
-`normalized/` ist das maßgebliche Referenzergebnis. Erwartet: 63 Risiken (siehe stats.json).
-Benötigt `jq`, `unzip`.
+Die Rohdateien sind zwischen Läufen NICHT byte-identisch (Reihenfolge von Array-Elementen,
+DOT- und Excel-Zeilen schwankt). Maßgeblich ist daher `normalized/` (erzeugt von
+`scripts/golden-normalize.sh`); zwei Läufe hintereinander sind normalisiert identisch.
+
+## Historie
+| Stand | Risiken | Änderung |
+|---|---|---|
+| Phase 0a | 63 | Ausgangsstand |
+| Fix #130 | 65 | Custom-Risiken des Beispielmodells (`something-strange`) erscheinen |
+| Fix #96 | 65 | Feld `cwe` in `risks.json` |
+| Phase 2 (pytm-Regeln) | 68 | +2 `http-request-smuggling`, +1 `xml-entity-expansion-dos` |
+| Review-Fixes | 68 | Titel von `http-request-smuggling` ohne Forwarder-Namen |

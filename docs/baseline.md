@@ -80,10 +80,14 @@ tauchten erst nach `git fetch origin` auf (ebenso `test/builtin-rule-unit-tests`
 Zwei Läufe hintereinander sind normalisiert identisch (geprüft). PNG/PDF/AsciiDoc wurden nicht aufgenommen.
 
 ## Offen
-- `go.mod` nicht tidy → `master` baut nicht (siehe oben). Fix in 0b, Schritt 1.
-- Nicht-deterministische Reihenfolge in JSON/DOT/Excel-Ausgabe (nur dokumentiert, nicht gefixt).
+- ~~`go.mod` nicht tidy → `master` baut nicht~~ – behoben in Phase 0b.
+- ~~Dockerfile klont Upstream statt lokalem Stand~~ – behoben in Phase 0b; `docker build` weiterhin **nicht verifiziert** (kein Docker-Daemon in den Sessions).
+- Nicht-deterministische Reihenfolge in JSON/DOT/Excel-Ausgabe (Map-Iteration, z. B. `pkg/model/parse.go:233`) – nur dokumentiert; Golden-Vergleich daher normalisiert.
 - Lauf endet mit Log-Zeile `logo image path does not exist: report/threagile-logo.png` (Exit-Code 0; Pfad relativ zum Arbeitsverzeichnis) – nur beobachtet.
-- Dockerfile klont Upstream statt lokalem Stand; Docker-Build hier nicht verifizierbar.
+- `risks.json`: Risiken mit Severity `low` haben kein Feld `severity` (`omitempty` auf Enum-Wert 0 in `pkg/types/risk.go`); im Beispielmodell 5 Risiken. Kandidat für einen eigenen Fix (Verhaltensänderung des JSON-Formats).
+- Server-Modus (`pkg/server/model.go`, `readModel`) parst Modelle direkt per `yaml.Unmarshal`, nicht über `input.Model.Load`: der Legacy-Schlüssel `individual_risk_categories` bleibt beim Speichern erhalten, wird in den Server-Listen der Custom-Kategorien aber nicht angezeigt (Analyse über `Load` übernimmt ihn).
+- `server/static/js/edit-model.js` und `support/live-templates.txt` erzeugen noch `individual_risk_categories` (wird dank #130-Fix gelesen, erzeugt aber eine Deprecation-Warnung).
+- Script-Engine (`pkg/risks/script/script.go`) nutzt intern weiterhin den Schlüssel `individual_risk_categories` (eigenes Format, nicht vom #130-Fix betroffen).
 
 ---
 
