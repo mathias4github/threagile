@@ -326,6 +326,59 @@
     "title": "<b>Missing Two-Factor Authentication</b> covering communication link <b>Web Application Traffic</b> from <b>Customer Web Client</b> forwarded via <b>Load Balancer</b> to <b>Apache Webserver</b>"
   },
   {
+    "category": "missing-brute-force-protection",
+    "cwe": 307,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "jenkins-build-server"
+    ],
+    "exploitation_impact": "high",
+    "exploitation_likelihood": "likely",
+    "most_relevant_communication_link": "external-dev-client>jenkins-web-ui-access",
+    "most_relevant_technical_asset": "jenkins-build-server",
+    "severity": "elevated",
+    "synthetic_id": "missing-brute-force-protection@external-dev-client@jenkins-build-server@external-dev-client>jenkins-web-ui-access",
+    "title": "<b>Missing Brute-Force Protection</b> covering communication link <b>Jenkins Web-UI Access</b> from <b>External Development Client</b> to <b>Jenkins Build Server</b>"
+  },
+  {
+    "category": "missing-brute-force-protection",
+    "cwe": 307,
+    "data_breach_probability": "possible",
+    "data_breach_technical_assets": [
+      "ldap-auth-server"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_communication_link": "backend-admin-client>user-management-access",
+    "most_relevant_technical_asset": "ldap-auth-server",
+    "severity": "medium",
+    "synthetic_id": "missing-brute-force-protection@backend-admin-client@ldap-auth-server@backend-admin-client>user-management-access",
+    "title": "<b>Missing Brute-Force Protection</b> covering communication link <b>User Management Access</b> from <b>Backend Admin Client</b> to <b>LDAP Auth Server</b>"
+  },
+  {
+    "category": "missing-clickjacking-protection",
+    "cwe": 1021,
+    "data_breach_technical_assets": [
+      "erp-system"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "medium",
+    "synthetic_id": "missing-clickjacking-protection@erp-system",
+    "title": "<b>Missing Clickjacking Protection</b> risk at <b>Backoffice ERP System</b>"
+  },
+  {
+    "category": "missing-clickjacking-protection",
+    "cwe": 1021,
+    "data_breach_technical_assets": [
+      "marketing-cms"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "marketing-cms",
+    "severity": "medium",
+    "synthetic_id": "missing-clickjacking-protection@marketing-cms",
+    "title": "<b>Missing Clickjacking Protection</b> risk at <b>Marketing CMS</b>"
+  },
+  {
     "category": "missing-cloud-hardening",
     "cwe": 1008,
     "data_breach_probability": "probable",
@@ -523,6 +576,39 @@
     "title": "<b>Missing End User Identity Propagation</b> over communication link <b>ERP System Traffic</b> from <b>Apache Webserver</b> to <b>Backoffice ERP System</b>"
   },
   {
+    "category": "missing-monitoring",
+    "cwe": 778,
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "erp-system",
+    "severity": "medium",
+    "synthetic_id": "missing-monitoring@erp-system",
+    "title": "<b>Missing Security Monitoring</b> in the threat model (referencing asset <b>Backoffice ERP System</b> as an example)"
+  },
+  {
+    "category": "missing-redundancy",
+    "cwe": 1008,
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "sql-database",
+    "severity": "medium",
+    "synthetic_id": "missing-redundancy@sql-database",
+    "title": "<b>Missing Redundancy (Single Point of Failure)</b> risk at <b>Customer Contract Database</b>"
+  },
+  {
+    "category": "missing-redundancy",
+    "cwe": 1008,
+    "data_breach_technical_assets": [
+      "load-balancer"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "load-balancer",
+    "severity": "medium",
+    "synthetic_id": "missing-redundancy@load-balancer",
+    "title": "<b>Missing Redundancy (Single Point of Failure)</b> risk at <b>Load Balancer</b>"
+  },
+  {
     "category": "missing-vault",
     "cwe": 522,
     "exploitation_impact": "medium",
@@ -619,6 +705,30 @@
     "severity": "elevated",
     "synthetic_id": "server-side-request-forgery@apache-webserver@identity-provider@apache-webserver>auth-credential-check-traffic",
     "title": "<b>Server-Side Request Forgery (SSRF)</b> risk at <b>Apache Webserver</b> server-side web-requesting the target <b>Identity Provider</b> via <b>Auth Credential Check Traffic</b>"
+  },
+  {
+    "category": "shared-datastore-tampering",
+    "cwe": 345,
+    "data_breach_technical_assets": [
+      "sql-database"
+    ],
+    "exploitation_impact": "high",
+    "most_relevant_technical_asset": "sql-database",
+    "severity": "medium",
+    "synthetic_id": "shared-datastore-tampering@sql-database",
+    "title": "<b>Shared Datastore Tampering</b> risk at <b>Customer Contract Database</b>"
+  },
+  {
+    "category": "shared-datastore-tampering",
+    "cwe": 345,
+    "data_breach_technical_assets": [
+      "ldap-auth-server"
+    ],
+    "exploitation_impact": "medium",
+    "most_relevant_technical_asset": "ldap-auth-server",
+    "severity": "medium",
+    "synthetic_id": "shared-datastore-tampering@ldap-auth-server",
+    "title": "<b>Shared Datastore Tampering</b> risk at <b>LDAP Auth Server</b>"
   },
   {
     "category": "something-strange",

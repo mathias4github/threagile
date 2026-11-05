@@ -53,6 +53,6 @@ func newLinkRisk(ruleId string, title string, likelihood types.RiskExploitationL
 	target *types.TechnicalAsset, link *types.CommunicationLink, probability types.DataBreachProbability) *types.Risk {
 	risk := newAssetRisk(ruleId, title, likelihood, impact, target, probability)
 	risk.MostRelevantCommunicationLinkId = link.Id
-	risk.SyntheticId = ruleId + "@" + link.SourceId + "@" + target.Id + "@" + link.SourceId + ">" + link.Id
+	risk.SyntheticId = ruleId + "@" + link.SourceId + "@" + target.Id + "@" + link.Id // parsed link ids already read "source>name"
 	return risk
 }

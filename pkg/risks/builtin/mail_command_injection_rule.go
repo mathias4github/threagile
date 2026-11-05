@@ -62,8 +62,10 @@ func (r *MailCommandInjectionRule) GenerateRisks(input *types.Model) ([]*types.R
 			}
 			title := "<b>Mail Command Injection</b> risk at <b>" + source.Title + "</b> against mail server <b>" + technicalAsset.Title +
 				"</b> via <b>" + incomingFlow.Title + "</b>"
-			risks = append(risks, newLinkRisk(r.Category().ID, title, likelihood, impactByCIA(input, technicalAsset),
-				technicalAsset, incomingFlow, types.Possible))
+			risk := newLinkRisk(r.Category().ID, title, likelihood, impactByCIA(input, technicalAsset),
+				technicalAsset, incomingFlow, types.Possible)
+			risk.MostRelevantTechnicalAssetId = source.Id // the injectable code lives in the caller (like ldap-injection)
+			risks = append(risks, risk)
 		}
 	}
 	return risks, nil

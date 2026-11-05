@@ -55,8 +55,20 @@ There are a lot of built in rules.
 - Sensitive Data Exposure through AI Component;
 - Client Reverse Engineering;
 - Audit Log Manipulation;
-- XML Schema Poisoning.
+- XML Schema Poisoning;
+- Missing Brute-Force Protection;
+- Missing Authorization;
+- Missing Security Monitoring;
+- Sensitive Data in Logs;
+- Missing Redundancy (Single Point of Failure);
+- Internet-Exposed Datastore;
+- Weak Session Management (tag `session-tokens`);
+- OS Command Injection (tag `executes-os-commands`);
+- Hard-coded Credentials (tag `credentials-hardcoded` on a data asset);
+- Excessive Agency of AI Component (tags `ai-agent`, `executes-code`).
 
-The last ten rules are derived from threat patterns of [OWASP pytm](https://github.com/OWASP/pytm) (see `docs/pytm-mapping.md`).
+The rules from HTTP Request Smuggling to XML Schema Poisoning are derived from threat patterns of [OWASP pytm](https://github.com/OWASP/pytm)
+(see `docs/pytm-mapping.md`); the remaining ten close gaps found in a coverage review (see `docs/rule-proposals.md`).
+The four tag-based rules only fire when the modeler sets the given tag (list all rules with their tags via `threagile list-risk-rules`).
 
 Also there is available creation of [custom risk rules](./custom-risk-rules.md).

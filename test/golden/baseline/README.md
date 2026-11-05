@@ -23,3 +23,4 @@ DOT- und Excel-Zeilen schwankt). Maßgeblich ist daher `normalized/` (erzeugt vo
 | Phase 2 (pytm-Regeln) | 68 | +2 `http-request-smuggling`, +1 `xml-entity-expansion-dos` |
 | Review-Fixes | 68 | Titel von `http-request-smuggling` ohne Forwarder-Namen |
 | Regel-Review | 68 | `xml-entity-expansion-dos`: CWE 776 → 770 |
+| 10 weitere Regeln | 77 | Vorschläge aus `docs/rule-proposals.md`; Out-of-Scope-Aufrufer zählen (2× Clickjacking neu) |
