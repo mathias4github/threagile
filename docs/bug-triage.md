@@ -45,3 +45,9 @@ Golden-Diff gegen Baseline (normalisiert), alle Abweichungen folgen direkt aus d
 - `data-asset-diagram`: „Customer Contract Database“ wird wegen des critical-Risikos rot (`#FF2600`) statt grau (`#444444`) eingefärbt.
 - Alle übrigen Risiken (62), Technical Assets und das Data-Flow-Diagramm sind identisch.
 → `test/golden/baseline` wird mit diesem Stand neu erzeugt (siehe `test/golden/baseline/README.md`).
+
+### #96 – erledigt
+`risks.json` enthält jetzt `cwe` (aus der Risikokategorie, wie in `risks.xlsx`; nicht gesetzt, wenn die Kategorie keine CWE hat). Golden-Diff: ausschließlich das zusätzliche Feld `cwe` in `risks.json`; sonst identisch (geprüft mit `jq 'map(del(.cwe))'`). Baseline neu erzeugt.
+
+### Hinweis zur Baseline
+Der Phase-0a-Stand von `test/golden/baseline` ist durch #130 und #96 überholt. Bei Bedarf entspricht der 0a-Stand dem heutigen ohne die zwei `something-strange`-Risiken und ohne `cwe`. Außerdem fehlten in PR 1 die meisten Golden-Dateien wegen `.gitignore`-Mustern (jetzt behoben).

@@ -1,6 +1,7 @@
 [
   {
     "category": "accidental-secret-leak",
+    "cwe": 200,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "git-repo"
@@ -24,6 +25,7 @@
   },
   {
     "category": "code-backdooring",
+    "cwe": 912,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "git-repo"
@@ -36,6 +38,7 @@
   },
   {
     "category": "code-backdooring",
+    "cwe": 912,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "apache-webserver",
@@ -50,6 +53,7 @@
   },
   {
     "category": "container-baseimage-backdooring",
+    "cwe": 912,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "apache-webserver"
@@ -62,6 +66,7 @@
   },
   {
     "category": "container-baseimage-backdooring",
+    "cwe": 912,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "marketing-cms"
@@ -74,6 +79,7 @@
   },
   {
     "category": "dos-risky-access-across-trust-boundary",
+    "cwe": 400,
     "most_relevant_communication_link": "apache-webserver>erp-system-traffic",
     "most_relevant_technical_asset": "erp-system",
     "risk_status": "in-progress",
@@ -82,6 +88,7 @@
   },
   {
     "category": "dos-risky-access-across-trust-boundary",
+    "cwe": 400,
     "most_relevant_communication_link": "backoffice-client>erp-internal-access",
     "most_relevant_technical_asset": "erp-system",
     "risk_status": "in-progress",
@@ -90,6 +97,7 @@
   },
   {
     "category": "dos-risky-access-across-trust-boundary",
+    "cwe": 400,
     "most_relevant_communication_link": "backoffice-client>marketing-cms-editing",
     "most_relevant_technical_asset": "marketing-cms",
     "risk_status": "in-progress",
@@ -98,6 +106,7 @@
   },
   {
     "category": "ldap-injection",
+    "cwe": 90,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "ldap-auth-server"
@@ -113,6 +122,7 @@
   },
   {
     "category": "ldap-injection",
+    "cwe": 90,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "ldap-auth-server"
@@ -128,6 +138,7 @@
   },
   {
     "category": "missing-authentication",
+    "cwe": 306,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "marketing-cms"
@@ -142,6 +153,7 @@
   },
   {
     "category": "missing-authentication",
+    "cwe": 306,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "contract-file-server"
@@ -156,6 +168,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "marketing-cms"
@@ -170,6 +183,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "sql-database"
@@ -184,6 +198,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "erp-system"
@@ -198,6 +213,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "erp-system"
@@ -212,6 +228,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "git-repo"
@@ -226,6 +243,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "git-repo"
@@ -240,6 +258,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "jenkins-build-server"
@@ -254,6 +273,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "ldap-auth-server"
@@ -268,6 +288,7 @@
   },
   {
     "category": "missing-authentication-second-factor",
+    "cwe": 308,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "apache-webserver"
@@ -282,6 +303,7 @@
   },
   {
     "category": "missing-cloud-hardening",
+    "cwe": 1008,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "apache-webserver",
@@ -300,6 +322,7 @@
   },
   {
     "category": "missing-cloud-hardening",
+    "cwe": 1008,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "apache-webserver"
@@ -311,6 +334,7 @@
   },
   {
     "category": "missing-cloud-hardening",
+    "cwe": 1008,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "contract-file-server",
@@ -324,6 +348,7 @@
   },
   {
     "category": "missing-cloud-hardening",
+    "cwe": 1008,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "apache-webserver",
@@ -336,6 +361,7 @@
   },
   {
     "category": "missing-cloud-hardening",
+    "cwe": 1008,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "apache-webserver",
@@ -351,6 +377,7 @@
   },
   {
     "category": "missing-cloud-hardening",
+    "cwe": 1008,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "contract-file-server"
@@ -362,6 +389,7 @@
   },
   {
     "category": "missing-file-validation",
+    "cwe": 434,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "apache-webserver"
@@ -375,6 +403,7 @@
   },
   {
     "category": "missing-hardening",
+    "cwe": 16,
     "data_breach_technical_assets": [
       "apache-webserver"
     ],
@@ -388,6 +417,7 @@
   },
   {
     "category": "missing-hardening",
+    "cwe": 16,
     "data_breach_technical_assets": [
       "erp-system"
     ],
@@ -401,6 +431,7 @@
   },
   {
     "category": "missing-hardening",
+    "cwe": 16,
     "data_breach_technical_assets": [
       "sql-database"
     ],
@@ -414,6 +445,7 @@
   },
   {
     "category": "missing-hardening",
+    "cwe": 16,
     "data_breach_technical_assets": [
       "identity-provider"
     ],
@@ -427,6 +459,7 @@
   },
   {
     "category": "missing-hardening",
+    "cwe": 16,
     "data_breach_technical_assets": [
       "jenkins-build-server"
     ],
@@ -440,6 +473,7 @@
   },
   {
     "category": "missing-hardening",
+    "cwe": 16,
     "data_breach_technical_assets": [
       "ldap-auth-server"
     ],
@@ -453,6 +487,7 @@
   },
   {
     "category": "missing-identity-propagation",
+    "cwe": 284,
     "data_breach_technical_assets": [
       "erp-system"
     ],
@@ -465,6 +500,7 @@
   },
   {
     "category": "missing-vault",
+    "cwe": 522,
     "exploitation_impact": "medium",
     "most_relevant_technical_asset": "erp-system",
     "severity": "medium",
@@ -473,6 +509,7 @@
   },
   {
     "category": "mixed-targets-on-shared-runtime",
+    "cwe": 1008,
     "data_breach_technical_assets": [
       "apache-webserver",
       "contract-file-server",
@@ -488,6 +525,7 @@
   },
   {
     "category": "path-traversal",
+    "cwe": 22,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "contract-file-server"
@@ -502,6 +540,7 @@
   },
   {
     "category": "push-instead-of-pull-deployment",
+    "cwe": 1127,
     "data_breach_technical_assets": [
       "apache-webserver"
     ],
@@ -514,6 +553,7 @@
   },
   {
     "category": "push-instead-of-pull-deployment",
+    "cwe": 1127,
     "data_breach_technical_assets": [
       "marketing-cms"
     ],
@@ -526,6 +566,7 @@
   },
   {
     "category": "server-side-request-forgery",
+    "cwe": 918,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "apache-webserver",
@@ -541,6 +582,7 @@
   },
   {
     "category": "server-side-request-forgery",
+    "cwe": 918,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "apache-webserver",
@@ -556,6 +598,7 @@
   },
   {
     "category": "something-strange",
+    "cwe": 693,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "sql-database"
@@ -569,6 +612,7 @@
   },
   {
     "category": "something-strange",
+    "cwe": 693,
     "exploitation_impact": "very-high",
     "exploitation_likelihood": "frequent",
     "most_relevant_technical_asset": "contract-file-server",
@@ -578,6 +622,7 @@
   },
   {
     "category": "sql-nosql-injection",
+    "cwe": 89,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "sql-database"
@@ -592,6 +637,7 @@
   },
   {
     "category": "unchecked-deployment",
+    "cwe": 1127,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "external-dev-client",
@@ -606,6 +652,7 @@
   },
   {
     "category": "unchecked-deployment",
+    "cwe": 1127,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "apache-webserver",
@@ -620,6 +667,7 @@
   },
   {
     "category": "unchecked-deployment",
+    "cwe": 1127,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "git-repo"
@@ -630,6 +678,7 @@
   },
   {
     "category": "unencrypted-asset",
+    "cwe": 311,
     "data_breach_technical_assets": [
       "apache-webserver"
     ],
@@ -642,6 +691,7 @@
   },
   {
     "category": "unencrypted-asset",
+    "cwe": 311,
     "data_breach_technical_assets": [
       "erp-system"
     ],
@@ -654,6 +704,7 @@
   },
   {
     "category": "unencrypted-asset",
+    "cwe": 311,
     "data_breach_technical_assets": [
       "git-repo"
     ],
@@ -666,6 +717,7 @@
   },
   {
     "category": "unencrypted-asset",
+    "cwe": 311,
     "data_breach_technical_assets": [
       "jenkins-build-server"
     ],
@@ -678,6 +730,7 @@
   },
   {
     "category": "unencrypted-asset",
+    "cwe": 311,
     "data_breach_technical_assets": [
       "marketing-cms"
     ],
@@ -690,6 +743,7 @@
   },
   {
     "category": "unencrypted-asset",
+    "cwe": 311,
     "data_breach_technical_assets": [
       "contract-file-server"
     ],
@@ -702,6 +756,7 @@
   },
   {
     "category": "unencrypted-asset",
+    "cwe": 311,
     "data_breach_technical_assets": [
       "sql-database"
     ],
@@ -714,6 +769,7 @@
   },
   {
     "category": "unencrypted-communication",
+    "cwe": 319,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "apache-webserver"
@@ -728,6 +784,7 @@
   },
   {
     "category": "unencrypted-communication",
+    "cwe": 319,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "ldap-auth-server"
@@ -741,6 +798,7 @@
   },
   {
     "category": "unencrypted-communication",
+    "cwe": 319,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "sql-database"
@@ -754,6 +812,7 @@
   },
   {
     "category": "unencrypted-communication",
+    "cwe": 319,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "contract-file-server"
@@ -767,6 +826,7 @@
   },
   {
     "category": "unguarded-access-from-internet",
+    "cwe": 501,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "git-repo"
@@ -781,6 +841,7 @@
   },
   {
     "category": "unguarded-access-from-internet",
+    "cwe": 501,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "git-repo"
@@ -795,6 +856,7 @@
   },
   {
     "category": "unguarded-access-from-internet",
+    "cwe": 501,
     "data_breach_probability": "possible",
     "data_breach_technical_assets": [
       "jenkins-build-server"
@@ -809,6 +871,7 @@
   },
   {
     "category": "untrusted-deserialization",
+    "cwe": 502,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "erp-system"
@@ -823,6 +886,7 @@
   },
   {
     "category": "untrusted-deserialization",
+    "cwe": 502,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "jenkins-build-server"
@@ -836,6 +900,7 @@
   },
   {
     "category": "xml-external-entity",
+    "cwe": 611,
     "data_breach_probability": "probable",
     "data_breach_technical_assets": [
       "erp-system"
