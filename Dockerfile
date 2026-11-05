@@ -1,27 +1,17 @@
 
 
 ######
-## Stage 1: Clone the Git repository
+## Stage 1: Build application with Go's build tools
 ######
-FROM alpine/git AS clone
-WORKDIR /app
-
-RUN git clone https://github.com/threagile/threagile.git
-
-
-
-
-######
-## Stage 2: Build application with Go's build tools
-######
-FROM golang AS build
+FROM golang:1.27 AS build
 WORKDIR /app
 
 ENV GO111MODULE=on
 
 # https://stackoverflow.com/questions/36279253/go-compiled-binary-wont-run-in-an-alpine-docker-container-on-ubuntu-host
 #ENV CGO_ENABLED=0 # cannot be set as otherwise plugins don't run
-COPY --from=clone /app/threagile /app
+# build the local source tree (not a fresh clone of upstream)
+COPY . /app
 
 RUN go version
 RUN go test ./...
@@ -36,9 +26,9 @@ RUN cp /app/demo/stub/threagile.yaml /app/demo/stub/threagile-stub-model.yaml
 
 
 ######
-## Stage 3: Make final small image
+## Stage 2: Make final small image
 ######
-FROM alpine AS deploy
+FROM alpine:3.23 AS deploy
 WORKDIR /app
 
 # label used in other scripts to filter
